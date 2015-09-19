@@ -1,13 +1,7 @@
 Smalltalk
 ====
 
-Simple replacement of native Alert, Confirm and Prompt.
-
-# Benefits
-
-- `5kb` javascript
-- `4kb` css
-- [Promise](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise) based
+Simple [Promise](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise)-based replacement of native Alert, Confirm and Prompt.
 
 # Install
 With help of [bower](http://bower.io "Bower").
@@ -31,7 +25,7 @@ npm i smalltalk
 ```js
 smalltalk.alert('Error', 'There was an error!').then(function() {
     console.log('ok');
-})
+});
 ```
 
 ## smalltalk.confirm(title, message)
@@ -43,7 +37,7 @@ smalltalk.confirm('Question', 'Are you sure?').then(function() {
     console.log('yes');
 }, function() {
     console.log('no');
-})
+});
 ```
 
 ## smalltalk.prompt(title, message, value)
@@ -55,11 +49,8 @@ smalltalk.prompt('Question', 'How old are you?', '10').then(function(value) {
     console.log(value);
 }, function() {
     console.log('cancel');
-})
+});
 ```
-
-#How use?
-Create `html` page:
 
 #License
 MIT
