@@ -24,7 +24,8 @@
     "bower_components",
     "modules",
     "test",
-    "tests"
+    "tests",
+    "screen"
   ],
   "dependencies": {
     "promise-polyfill": "~2.1.0"
