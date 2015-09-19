@@ -1,7 +1,7 @@
 {
   "name": "smalltalk",
   "version": "1.0.0",
-  "description": "Promise-based Alert, Confirm and Prompt modal",
+  "description": "Promise-based Alert, Confirm and Prompt replacement",
   "homepage": "http://github.com/coderaiser/smalltalk",
   "repository": {
     "type": "git",

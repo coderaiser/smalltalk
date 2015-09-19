@@ -5,7 +5,7 @@
   "authors": [
     "coderaiser <mnemonic.enemy@gmail.com>"
   ],
-  "description": "Promise-based Alert, Confirm and Prompt modal",
+  "description": "Promise-based Alert, Confirm and Prompt replacement",
   "main": "dist/smalltalk.min.js",
   "moduleType": [
     "globals",
