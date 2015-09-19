@@ -1,0 +1,32 @@
+{
+  "name": "smalltalk",
+  "version": "1.0.0",
+  "homepage": "https://github.com/coderaiser/smalltalk",
+  "authors": [
+    "coderaiser <mnemonic.enemy@gmail.com>"
+  ],
+  "description": "Modal Alert, Confirm and Prompt",
+  "main": "dist/smalltalk.min.js",
+  "moduleType": [
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "modal",
+    "alert",
+    "prompt",
+    "confirm"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "modules",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "promise-polyfill": "~2.1.0"
+  }
+}

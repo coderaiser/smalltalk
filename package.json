@@ -1,0 +1,40 @@
+{
+  "name": "smalltalk",
+  "version": "1.0.0",
+  "description": "Modal Alert, Confirm and Prompt",
+  "homepage": "http://github.com/coderaiser/smalltalk",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/coderaiser/smalltalk.git"
+  },
+  "main": "dist/smalltalk.min.js",
+  "scripts": {
+    "watch": "watch 'npm run 6to5' dist",
+    "6to5": "babel -d dist src",
+    "build-css": "minify css/smalltalk.css > dist/smalltalk.min.css",
+    "build-js": "npm run 6to5 && minify dist/smalltalk.js > dist/smalltalk.min.js",
+    "build-poly": "cat modules/promise-polyfill/Promise.min.js dist/smalltalk.min.js > dist/smalltalk.poly.min.js",
+    "build": "npm run build-css && npm run build-js",
+    "cat": "node -e \"var p=process,fs=require('fs');p.argv.slice(1).map(n => p.stdout.write(fs.readFileSync(n, 'utf8')))\"",
+    "bower": "bower",
+    "babel": "babel",
+    "minify": "minify",
+    "wisdom": "npm run build"
+  },
+  "keywords": [
+    "modal",
+    "alert",
+    "confirm",
+    "prompt"
+  ],
+  "author": "coderaiser <mnemonic.enemy@gmail.com> (http://coderaiser.github.io/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/coderaiser/smalltalk/issues"
+  },
+  "devDependencies": {
+    "babel": "~5.8.23",
+    "minify": "~1.4.20",
+    "watch": "~0.16.0"
+  }
+}
