@@ -26,7 +26,7 @@ npm i smalltalk
 
 ## smalltalk.alert(title, message)
 ```js
-smalltalk.alert('Error', 'There was error!').then(function() {
+smalltalk.alert('Error', 'There was an error!').then(function() {
     console.log('ok');
 })
 ```
