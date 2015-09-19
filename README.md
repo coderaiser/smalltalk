@@ -52,19 +52,5 @@ smalltalk.prompt('Question', 'How old are you?', '10').then(function(value) {
 #How use?
 Create `html` page:
 
-```html
-<link rel="stylesheet" href="smalltalk.css">
-<script src="smalltalk.min.js"></script>
-<script>
-    window.addEventListener('DOMContentLoad', function() {
-        smalltalk.prompt('hello', 'world', '2+2').then(function() {
-            console.log(value);
-        }, function() {
-            console.log('close');
-        })
-    )
-</script>
-```
-
 #License
 MIT
