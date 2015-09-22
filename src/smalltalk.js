@@ -15,21 +15,19 @@
         const BUTTON_OK         = ['OK'];
         const BUTTON_OK_CANCEL  = ['Cancel', 'OK'];
         
-        this.alert = (title, msg) => {
-            let empty = () => {};
-            
-            return showDialog(title, msg, '', BUTTON_OK).catch(empty);
+        this.alert = (title, msg, options) => {
+            return showDialog(title, msg, '', BUTTON_OK, options);
         };
         
-        this.prompt = (title, msg, value) => {
+        this.prompt = (title, msg, value, options) => {
             let val         = value || '';
             let valueStr    = `<input type="text" value="${ val }" data-name="js-input">`;
             
-            return showDialog(title, msg, valueStr, BUTTON_OK_CANCEL);
+            return showDialog(title, msg, valueStr, BUTTON_OK_CANCEL, options);
         };
         
-        this.confirm = (title, msg) => {
-            return showDialog(title, msg, '', BUTTON_OK_CANCEL);
+        this.confirm = (title, msg, options) => {
+            return showDialog(title, msg, '', BUTTON_OK_CANCEL, options);
         };
         
         function getTemplate(title, msg, value, buttons) {
@@ -54,7 +52,7 @@
             </div>`;
         }
         
-        function showDialog(title, msg, value, buttons) {
+        function showDialog(title, msg, value, buttons, options) {
             let dialog  = document.createElement('div'),
                 
                 closeButtons    = [
@@ -66,8 +64,14 @@
                 ok, cancel,
                 
                 promise = new Promise((resolve, reject) => {
+                    let noCancel    = options && !options.cancel;
+                    let empty       = () => {};
+                    
                     ok      = resolve;
                     cancel  = reject;
+                    
+                    if (noCancel)
+                        cancel = empty;
                 }),
                 
                 tmpl    = getTemplate(title, msg, value, buttons);

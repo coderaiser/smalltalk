@@ -18,17 +18,28 @@ npm i smalltalk
 
 # API
 
-## smalltalk.alert(title, message)
+In every method of `smalltalk` last parameter *options* is optional and could be used
+for preventing of handling cancel event.
+
+```js
+{
+    cancel: true /* default */
+}
+```
+
+## smalltalk.alert(title, message [, options])
 
 ![Alert](https://raw.githubusercontent.com/coderaiser/smalltalk/master/screen/alert.png "Alert")
 
 ```js
 smalltalk.alert('Error', 'There was an error!').then(function() {
     console.log('ok');
+}, function() {
+    console.log('cancel');
 });
 ```
 
-## smalltalk.confirm(title, message)
+## smalltalk.confirm(title, message, [, options])
 
 ![Confirm](https://raw.githubusercontent.com/coderaiser/smalltalk/master/screen/confirm.png "Confirm")
 
@@ -40,7 +51,7 @@ smalltalk.confirm('Question', 'Are you sure?').then(function() {
 });
 ```
 
-## smalltalk.prompt(title, message, value)
+## smalltalk.prompt(title, message, value, [, options])
 
 ![Prompt](https://raw.githubusercontent.com/coderaiser/smalltalk/master/screen/prompt.png "Prompt")
 
