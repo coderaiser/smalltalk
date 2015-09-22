@@ -13,21 +13,19 @@
         var BUTTON_OK = ['OK'];
         var BUTTON_OK_CANCEL = ['Cancel', 'OK'];
 
-        this.alert = function (title, msg) {
-            var empty = function empty() {};
-
-            return showDialog(title, msg, '', BUTTON_OK)['catch'](empty);
+        this.alert = function (title, msg, options) {
+            return showDialog(title, msg, '', BUTTON_OK, options);
         };
 
-        this.prompt = function (title, msg, value) {
+        this.prompt = function (title, msg, value, options) {
             var val = value || '';
             var valueStr = '<input type="text" value="' + val + '" data-name="js-input">';
 
-            return showDialog(title, msg, valueStr, BUTTON_OK_CANCEL);
+            return showDialog(title, msg, valueStr, BUTTON_OK_CANCEL, options);
         };
 
-        this.confirm = function (title, msg) {
-            return showDialog(title, msg, '', BUTTON_OK_CANCEL);
+        this.confirm = function (title, msg, options) {
+            return showDialog(title, msg, '', BUTTON_OK_CANCEL, options);
         };
 
         function getTemplate(title, msg, value, buttons) {
@@ -38,14 +36,19 @@
             }).join('') + '\n                    </div>\n                </div>\n            </div>';
         }
 
-        function showDialog(title, msg, value, buttons) {
+        function showDialog(title, msg, value, buttons, options) {
             var dialog = document.createElement('div'),
                 closeButtons = ['cancel', 'close', 'ok'],
                 ok = undefined,
                 cancel = undefined,
                 promise = new Promise(function (resolve, reject) {
+                var noCancel = options && !options.cancel;
+                var empty = function empty() {};
+
                 ok = resolve;
                 cancel = reject;
+
+                if (noCancel) cancel = empty;
             }),
                 tmpl = getTemplate(title, msg, value, buttons);
 

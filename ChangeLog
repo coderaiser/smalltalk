@@ -1,0 +1,7 @@
+2015.09.22, v1.1.0
+
+feature:
+- (package) scripts build: add build-poly
+- (smalltalk) add options {cancel}
+- (screen) add
+
