@@ -14,7 +14,7 @@
     "build-css": "minify css/smalltalk.css > dist/smalltalk.min.css",
     "build-js": "npm run 6to5 && minify dist/smalltalk.js > dist/smalltalk.min.js",
     "build-poly": "cat modules/promise-polyfill/Promise.min.js dist/smalltalk.min.js > dist/smalltalk.poly.min.js",
-    "build": "npm run build-css && npm run build-js",
+    "build": "npm run build-css && npm run build-js && npm run build-poly",
     "cat": "node -e \"var p=process,fs=require('fs');p.argv.slice(1).map(n => p.stdout.write(fs.readFileSync(n, 'utf8')))\"",
     "bower": "bower",
     "babel": "babel",
