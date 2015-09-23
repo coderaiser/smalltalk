@@ -77,7 +77,13 @@
                 });
             });
 
-            dialog.addEventListener('keydown', function (event) {
+            dialog.addEventListener('keydown', keyDown(dialog, ok, cancel));
+
+            return promise;
+        }
+
+        function keyDown(dialog, ok, cancel) {
+            return function (event) {
                 var ENTER = 13;
                 var ESC = 27;
                 var TAB = 9;
@@ -107,9 +113,9 @@
                         event.preventDefault();
                         break;
                 }
-            });
 
-            return promise;
+                event.stopPropagation();
+            };
         }
 
         function tab(dialog, names) {

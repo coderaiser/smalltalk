@@ -1,3 +1,10 @@
+2015.09.23, v1.2.0
+
+feature:
+- (smalltalk) keyDown: add stopPropogation
+- (smalltalk) .smalltalk: rm background-color
+
+
 2015.09.22, v1.1.0
 
 feature:
