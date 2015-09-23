@@ -101,7 +101,13 @@
                 )
             );
             
-            dialog.addEventListener('keydown', event => {
+            dialog.addEventListener('keydown', keyDown(dialog, ok, cancel));
+            
+            return promise;
+        }
+        
+        function keyDown(dialog, ok, cancel) {
+            return event => {
                 const ENTER = 13;
                 const ESC   = 27;
                 const TAB   = 9;
@@ -132,9 +138,9 @@
                     event.preventDefault();
                     break;
                 }
-            });
-            
-            return promise;
+                
+                event.stopPropagation();
+            };
         }
         
         function tab(dialog, names) {
