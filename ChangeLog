@@ -1,3 +1,9 @@
+2015.09.23, v1.3.0
+
+feature:
+- (smalltalk) add handling of keys: left, right, up, down
+
+
 2015.09.23, v1.2.0
 
 feature:

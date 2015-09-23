@@ -84,33 +84,48 @@
 
         function keyDown(dialog, ok, cancel) {
             return function (event) {
-                var ENTER = 13;
-                var ESC = 27;
-                var TAB = 9;
+                var KEY = {
+                    ENTER: 13,
+                    ESC: 27,
+                    TAB: 9,
+                    LEFT: 37,
+                    UP: 38,
+                    RIGHT: 39,
+                    DOWN: 40
+                };
 
                 var keyCode = event.keyCode,
                     el = event.target;
 
+                var namesAll = ['cancel', 'ok', 'input'],
+                    names = find(dialog, namesAll).map(function (el) {
+                    return getDataName(el);
+                });
+
                 switch (keyCode) {
-                    case ENTER:
+                    case KEY.ENTER:
                         closeDialog(el, dialog, ok, cancel);
                         break;
 
-                    case ESC:
+                    case KEY.ESC:
                         remove();
                         cancel();
                         break;
 
-                    case TAB:
-                        var namesAll = ['cancel', 'ok', 'input'],
-                            names = find(dialog, namesAll).map(function (el) {
-                            return el.getAttribute('data-name').replace('js-', '');
-                        });
-
+                    case KEY.TAB:
                         if (event.shiftKey) tab(dialog, names);
 
                         tab(dialog, names);
                         event.preventDefault();
+                        break;
+
+                    default:
+                        var is = ['left', 'right', 'up', 'down'].some(function (name) {
+                            return keyCode === KEY[name.toUpperCase()];
+                        });
+
+                        if (is) changeButtonFocus(dialog, names);
+
                         break;
                 }
 
@@ -118,9 +133,29 @@
             };
         }
 
+        function getDataName(el) {
+            return el.getAttribute('data-name').replace('js-', '');
+        }
+
+        function changeButtonFocus(dialog, names) {
+            var name = '',
+                active = document.activeElement,
+                activeName = getDataName(active),
+                isButton = /ok|cancel/.test(activeName),
+                count = names.length - 1;
+
+            if (count === 2 && isButton) {
+                if (activeName === 'cancel') name = 'ok';else name = 'cancel';
+
+                find(dialog, [name]).forEach(function (el) {
+                    return el.focus();
+                });
+            }
+        }
+
         function tab(dialog, names) {
             var active = document.activeElement,
-                activeName = active.getAttribute('data-name').replace('js-', ''),
+                activeName = getDataName(active),
                 count = names.length - 1,
                 index = names.indexOf(activeName);
 
