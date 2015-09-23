@@ -39,7 +39,7 @@ smalltalk.alert('Error', 'There was an error!').then(function() {
 });
 ```
 
-## smalltalk.confirm(title, message, [, options])
+## smalltalk.confirm(title, message [, options])
 
 ![Confirm](https://raw.githubusercontent.com/coderaiser/smalltalk/master/screen/confirm.png "Confirm")
 
@@ -51,7 +51,7 @@ smalltalk.confirm('Question', 'Are you sure?').then(function() {
 });
 ```
 
-## smalltalk.prompt(title, message, value, [, options])
+## smalltalk.prompt(title, message, value [, options])
 
 ![Prompt](https://raw.githubusercontent.com/coderaiser/smalltalk/master/screen/prompt.png "Prompt")
 
