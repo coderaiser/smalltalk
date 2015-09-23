@@ -108,34 +108,50 @@
         
         function keyDown(dialog, ok, cancel) {
             return event => {
-                const ENTER = 13;
-                const ESC   = 27;
-                const TAB   = 9;
+                const KEY   = {
+                    ENTER : 13,
+                    ESC   : 27,
+                    TAB   : 9,
+                    LEFT  : 37,
+                    UP    : 38,
+                    RIGHT : 39,
+                    DOWN  : 40
+                };
                 
-                let keyCode = event.keyCode,
-                    el      = event.target;
+                let keyCode     = event.keyCode,
+                    el          = event.target;
+                
+                let namesAll    = ['cancel', 'ok', 'input'],
+                    names       = find(dialog, namesAll).map(el =>
+                        getDataName(el)
+                    );
                 
                 switch(keyCode) {
-                case ENTER:
+                case KEY.ENTER:
                     closeDialog(el, dialog, ok, cancel);
                     break;
                 
-                case ESC:
+                case KEY.ESC:
                     remove();
                     cancel();
                     break;
                 
-                case TAB:
-                    let namesAll    = ['cancel', 'ok', 'input'],
-                        names       = find(dialog, namesAll).map(el =>
-                            el.getAttribute('data-name').replace('js-', '')
-                        );
-                    
+                case KEY.TAB:
                     if (event.shiftKey)
                         tab(dialog, names);
                     
                     tab(dialog, names);
                     event.preventDefault();
+                    break;
+                
+                default:
+                    let is = ['left', 'right', 'up', 'down'].some(name =>
+                        keyCode === KEY[name.toUpperCase()]
+                    );
+                    
+                    if (is)
+                        changeButtonFocus(dialog, names);
+                    
                     break;
                 }
                 
@@ -143,10 +159,34 @@
             };
         }
         
+        function getDataName(el) {
+            return el
+                .getAttribute('data-name')
+                .replace('js-', '');
+        }
+        
+        function changeButtonFocus(dialog, names) {
+            let name        = '',
+                active      = document.activeElement,
+                activeName  = getDataName(active),
+                isButton    = /ok|cancel/.test(activeName),
+                count       = names.length - 1;
+            
+            if (count === 2 && isButton) {
+                if (activeName === 'cancel')
+                    name = 'ok';
+                else
+                    name = 'cancel';
+                    
+                find(dialog, [name]).forEach(el =>
+                    el.focus()
+                );
+            }
+        }
+        
         function tab(dialog, names) {
             let active      = document.activeElement,
-                activeName  = active.getAttribute('data-name')
-                    .replace('js-', ''),
+                activeName  = getDataName(active),
                 
                 count       = names.length - 1,
                 index       = names.indexOf(activeName);
