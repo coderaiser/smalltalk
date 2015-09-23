@@ -144,7 +144,7 @@
                 isButton = /ok|cancel/.test(activeName),
                 count = names.length - 1;
 
-            if (count === 2 && isButton) {
+            if (count && isButton) {
                 if (activeName === 'cancel') name = 'ok';else name = 'cancel';
 
                 find(dialog, [name]).forEach(function (el) {

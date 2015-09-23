@@ -1,3 +1,9 @@
+2015.09.23, v1.3.1
+
+fix:
+- (smalltalk) changeButtonFocus: left, right, up, down do not work with confirm
+
+
 2015.09.23, v1.3.0
 
 feature:
