@@ -36,7 +36,7 @@
             
             return `<div class="page">
                 <div data-name="js-close" class="close-button"></div>
-                <h1>${ title }</h1>
+                <header>${ title }</header>
                 <div class="content-area">
                     ${ msg }
                     ${ value }

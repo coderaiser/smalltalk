@@ -56,7 +56,7 @@
     background-image: url(../img/IDR_CLOSE_DIALOG_H.png);
 }
 
-.smalltalk .page h1 {
+.smalltalk .page header {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
