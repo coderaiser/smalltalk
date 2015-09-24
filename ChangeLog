@@ -1,3 +1,10 @@
+2015.09.24, v1.3.2
+
+feature:
+- (smalltalk) h1 -> header
+- (smalltalk) .content-area: add max-width
+
+
 2015.09.23, v1.3.1
 
 fix:

@@ -31,7 +31,7 @@
         function getTemplate(title, msg, value, buttons) {
             if (!Array.isArray(buttons)) throw Error('buttons should be array!');
 
-            return '<div class="page">\n                <div data-name="js-close" class="close-button"></div>\n                <h1>' + title + '</h1>\n                <div class="content-area">\n                    ' + msg + '\n                    ' + value + '\n                </div>\n                <div class="action-area">\n                    <div class="button-strip"> ' + buttons.map(function (name, i) {
+            return '<div class="page">\n                <div data-name="js-close" class="close-button"></div>\n                <header>' + title + '</header>\n                <div class="content-area">\n                    ' + msg + '\n                    ' + value + '\n                </div>\n                <div class="action-area">\n                    <div class="button-strip"> ' + buttons.map(function (name, i) {
                 return '<button tabindex=' + i + ' data-name="js-' + name.toLowerCase() + '">' + name + '</button>';
             }).join('') + '\n                    </div>\n                </div>\n            </div>';
         }
