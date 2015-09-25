@@ -94,7 +94,7 @@
             );
             
             ['click', 'contextmenu'].forEach(event =>
-                dialog.addEventListener(event, () => 
+                dialog.addEventListener(event, () =>
                     find(dialog, ['ok', 'input']).forEach(el =>
                         el.focus()
                     )
@@ -225,7 +225,7 @@
         function find(element, names) {
             let elements = names.map(name =>
                 element.querySelector(`[data-name="js-${ name }"]`)
-            ).filter(el => 
+            ).filter(el =>
                 el
             );
             
