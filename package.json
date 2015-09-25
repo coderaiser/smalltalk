@@ -20,7 +20,7 @@
     "babel": "babel",
     "minify": "minify",
     "wisdom": "npm run build",
-    "test": "jshint src"
+    "test": "jshint src && jscs --esnext src"
   },
   "keywords": [
     "modal",
@@ -35,6 +35,7 @@
   },
   "devDependencies": {
     "babel": "~5.8.23",
+    "jscs": "~2.1.1",
     "jshint": "~2.8.0",
     "minify": "~1.4.20",
     "watch": "~0.16.0"
