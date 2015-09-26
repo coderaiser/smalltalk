@@ -11,7 +11,7 @@
         var remove = bind(removeEl, '.smalltalk');
 
         var BUTTON_OK = ['OK'];
-        var BUTTON_OK_CANCEL = ['Cancel', 'OK'];
+        var BUTTON_OK_CANCEL = ['OK', 'Cancel'];
 
         this.alert = function (title, msg, options) {
             return showDialog(title, msg, '', BUTTON_OK, options);
@@ -97,7 +97,7 @@
                 var keyCode = event.keyCode,
                     el = event.target;
 
-                var namesAll = ['cancel', 'ok', 'input'],
+                var namesAll = ['ok', 'cancel', 'input'],
                     names = find(dialog, namesAll).map(function (el) {
                     return getDataName(el);
                 });
