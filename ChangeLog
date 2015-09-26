@@ -1,3 +1,9 @@
+2015.09.26, v1.4.1
+
+feature:
+- (bower) rm promise-polyfill
+
+
 2015.09.26, v1.4.0
 
 feature:
