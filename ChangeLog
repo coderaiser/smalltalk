@@ -1,3 +1,13 @@
+2015.09.26, v1.3.4
+
+fix:
+- (smalltalk) keyDown enter: prevent pass next
+
+feature:
+- (package) add jscs
+- (package) add jshint support
+
+
 2015.09.24, v1.3.3
 
 feature:

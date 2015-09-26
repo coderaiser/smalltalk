@@ -105,6 +105,7 @@
                 switch (keyCode) {
                     case KEY.ENTER:
                         closeDialog(el, dialog, ok, cancel);
+                        event.preventDefault();
                         break;
 
                     case KEY.ESC:
