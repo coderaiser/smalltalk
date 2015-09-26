@@ -13,7 +13,7 @@
         let remove              = bind(removeEl, '.smalltalk');
         
         const BUTTON_OK         = ['OK'];
-        const BUTTON_OK_CANCEL  = ['Cancel', 'OK'];
+        const BUTTON_OK_CANCEL  = [ 'OK', 'Cancel'];
         
         this.alert = (title, msg, options) => {
             return showDialog(title, msg, '', BUTTON_OK, options);
@@ -121,7 +121,7 @@
                 let keyCode     = event.keyCode,
                     el          = event.target;
                 
-                let namesAll    = ['cancel', 'ok', 'input'],
+                let namesAll    = ['ok', 'cancel', 'input'],
                     names       = find(dialog, namesAll).map(el =>
                         getDataName(el)
                     );
