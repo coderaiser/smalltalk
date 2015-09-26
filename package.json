@@ -13,7 +13,7 @@
     "6to5": "babel -d dist src",
     "build-css": "minify css/smalltalk.css > dist/smalltalk.min.css",
     "build-js": "npm run 6to5 && minify dist/smalltalk.js > dist/smalltalk.min.js",
-    "build-poly": "cat modules/promise-polyfill/Promise.min.js dist/smalltalk.min.js > dist/smalltalk.poly.min.js",
+    "build-poly": "cat node_modules/promise-polyfill/Promise.min.js dist/smalltalk.min.js > dist/smalltalk.poly.min.js",
     "build": "npm run build-css && npm run build-js && npm run build-poly",
     "cat": "node -e \"var p=process,fs=require('fs');p.argv.slice(1).map(n => p.stdout.write(fs.readFileSync(n, 'utf8')))\"",
     "bower": "bower",
@@ -38,6 +38,7 @@
     "jscs": "~2.1.1",
     "jshint": "~2.8.0",
     "minify": "~1.4.20",
+    "promise-polyfill": "^2.1.0",
     "watch": "~0.16.0"
   }
 }
