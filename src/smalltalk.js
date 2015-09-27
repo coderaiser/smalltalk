@@ -13,7 +13,7 @@
         let remove              = bind(removeEl, '.smalltalk');
         
         const BUTTON_OK         = ['OK'];
-        const BUTTON_OK_CANCEL  = [ 'OK', 'Cancel'];
+        const BUTTON_OK_CANCEL  = ['OK', 'Cancel'];
         
         this.alert = (title, msg, options) => {
             return showDialog(title, msg, '', BUTTON_OK, options);
