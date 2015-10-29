@@ -37,11 +37,11 @@
     "url": "https://github.com/coderaiser/smalltalk/issues"
   },
   "devDependencies": {
-    "babel": "~5.8.23",
-    "jscs": "~2.1.1",
-    "jshint": "~2.8.0",
-    "minify": "~2.0.0",
+    "babel": "^5.8.23",
+    "jscs": "^2.1.1",
+    "jshint": "^2.8.0",
+    "minify": "^2.0.0",
     "promise-polyfill": "^2.1.0",
-    "watch": "~0.16.0"
+    "watch": "^0.16.0"
   }
 }
