@@ -53,6 +53,6 @@
     "minify": "^2.0.0",
     "npm-run-all": "^1.2.12",
     "promise-polyfill": "^2.1.0",
-    "watch": "^0.16.0"
+    "watch": "^0.17.1"
   }
 }
