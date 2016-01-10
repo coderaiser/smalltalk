@@ -4,7 +4,7 @@ node_js:
     - 5
 
 script:
-  - npm codestyle
+  - npm test
 
 notifications:
     email:
