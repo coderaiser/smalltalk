@@ -1,13 +1,14 @@
 language: node_js
 node_js:
     - 4
+    - 5
 
 script:
-  - npm test
+  - npm codestyle
 
 notifications:
     email:
-        on_success: never
+        on_success: change 
         on_failure: change
 
 sudo: false
