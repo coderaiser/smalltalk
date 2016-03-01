@@ -7,8 +7,6 @@ script:
   - npm test
 
 notifications:
-    email:
-        on_success: change
-        on_failure: change
+    email: true
 
 sudo: false
