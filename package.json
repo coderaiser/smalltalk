@@ -1,6 +1,6 @@
 {
   "name": "smalltalk",
-  "version": "1.6.5",
+  "version": "1.6.6",
   "description": "Promise-based Alert, Confirm and Prompt replacement",
   "homepage": "http://github.com/coderaiser/smalltalk",
   "repository": {
@@ -35,7 +35,6 @@
     "lint:css": "stylelint css/*.css",
     "lint:js": "jshint src && jscs --esnext src",
     "test": "npm-run-all lint:*"
-
   },
   "keywords": [
     "modal",
