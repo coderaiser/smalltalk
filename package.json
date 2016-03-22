@@ -54,9 +54,9 @@
     "jshint": "^2.8.0",
     "minify": "^2.0.0",
     "npm-run-all": "^1.2.12",
-    "promise-polyfill": "~4.0.1",
-    "stylelint": "^4.4.0",
-    "stylelint-config-standard": "^3.0.0",
+    "promise-polyfill": "^4.0.1",
+    "stylelint": "^5.1.0",
+    "stylelint-config-standard": "^4.0.1",
     "watch": "^0.17.1"
   }
 }
