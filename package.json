@@ -33,7 +33,7 @@
     "minify": "minify",
     "wisdom": "npm run build",
     "lint:css": "stylelint css/*.css",
-    "lint:js": "jshint src && jscs --esnext src",
+    "lint:js": "jshint src && jscs src",
     "test": "npm-run-all lint:*"
   },
   "keywords": [
@@ -50,7 +50,7 @@
   "devDependencies": {
     "babel-cli": "^6.1.1",
     "babel-preset-es2015": "^6.0.15",
-    "jscs": "^2.1.1",
+    "jscs": "^3.0.3",
     "jshint": "^2.8.0",
     "minify": "^2.0.0",
     "npm-run-all": "^1.2.12",
