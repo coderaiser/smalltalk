@@ -54,7 +54,7 @@
     "jshint": "^2.8.0",
     "minify": "^2.0.0",
     "promise-polyfill": "^4.0.1",
-    "redrun": "^1.7.0",
+    "redrun": "^3.0.0",
     "stylelint": "^6.2.2",
     "stylelint-config-standard": "^6.0.0",
     "watch": "^0.17.1"
