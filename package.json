@@ -53,7 +53,7 @@
     "jscs": "^3.0.3",
     "jshint": "^2.8.0",
     "minify": "^2.0.0",
-    "promise-polyfill": "^4.0.1",
+    "promise-polyfill": "^5.1.0",
     "redrun": "^3.0.0",
     "stylelint": "^6.2.2",
     "stylelint-config-standard": "^6.0.0",
