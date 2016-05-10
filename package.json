@@ -57,6 +57,6 @@
     "redrun": "^3.0.0",
     "stylelint": "^6.2.2",
     "stylelint-config-standard": "^7.0.0",
-    "watch": "^0.17.1"
+    "watch": "^0.18.0"
   }
 }
