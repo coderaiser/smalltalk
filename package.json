@@ -34,6 +34,7 @@
     "wisdom": "npm run build",
     "lint:css": "stylelint css/*.css",
     "lint:js": "jshint src && jscs src",
+    "lint": "redrun lint:*",
     "test": "redrun lint:*"
   },
   "keywords": [
