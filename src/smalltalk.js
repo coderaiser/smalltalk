@@ -10,7 +10,7 @@
         if (!new.target)
             return new SmallTalk(callback);
         
-        let remove              = bind(removeEl, '.smalltalk');
+        const remove            = bind(removeEl, '.smalltalk');
         
         const BUTTON_OK         = ['OK'];
         const BUTTON_OK_CANCEL  = ['OK', 'Cancel'];
@@ -20,8 +20,8 @@
         };
         
         this.prompt = (title, msg, value, options) => {
-            let val         = value || '';
-            let valueStr    = `<input type="text" value="${ val }" data-name="js-input">`;
+            const val         = value || '';
+            const valueStr    = `<input type="text" value="${ val }" data-name="js-input">`;
             
             return showDialog(title, msg, valueStr, BUTTON_OK_CANCEL, options);
         };
@@ -53,7 +53,8 @@
         }
         
         function showDialog(title, msg, value, buttons, options) {
-            let dialog  = document.createElement('div'),
+            let ok, cancel;
+            const dialog  = document.createElement('div'),
                 
                 closeButtons    = [
                     'cancel',
@@ -61,11 +62,9 @@
                     'ok'
                 ],
                 
-                ok, cancel,
-                
                 promise = new Promise((resolve, reject) => {
-                    let noCancel    = options && !options.cancel;
-                    let empty       = () => {};
+                    const noCancel    = options && !options.cancel;
+                    const empty       = () => {};
                     
                     ok      = resolve;
                     cancel  = reject;
@@ -118,13 +117,13 @@
                     DOWN  : 40
                 };
                 
-                let keyCode     = event.keyCode,
-                    el          = event.target;
+                const keyCode     = event.keyCode;
+                const el          = event.target;
                 
-                let namesAll    = ['ok', 'cancel', 'input'],
-                    names       = find(dialog, namesAll).map(el =>
-                        getDataName(el)
-                    );
+                const namesAll    = ['ok', 'cancel', 'input'];
+                const names       = find(dialog, namesAll).map((el) => {
+                    return getDataName(el);
+                });
                 
                 switch(keyCode) {
                 case KEY.ENTER:
@@ -146,9 +145,9 @@
                     break;
                 
                 default:
-                    let is = ['left', 'right', 'up', 'down'].some(name =>
-                        keyCode === KEY[name.toUpperCase()]
-                    );
+                    const is = ['left', 'right', 'up', 'down'].some((name) => {
+                        return keyCode === KEY[name.toUpperCase()];
+                    });
                     
                     if (is)
                         changeButtonFocus(dialog, names);
@@ -167,8 +166,8 @@
         }
         
         function changeButtonFocus(dialog, names) {
-            let name        = '',
-                active      = document.activeElement,
+            let name        = '';
+            const active    = document.activeElement,
                 activeName  = getDataName(active),
                 isButton    = /ok|cancel/.test(activeName),
                 count       = names.length - 1;
@@ -179,25 +178,25 @@
                 else
                     name = 'cancel';
                     
-                find(dialog, [name]).forEach(el =>
-                    el.focus()
-                );
+                find(dialog, [name]).forEach(el => {
+                    el.focus();
+                });
             }
         }
         
         function tab(dialog, names) {
-            let active      = document.activeElement,
+            const active    = document.activeElement,
                 activeName  = getDataName(active),
                 
-                count       = names.length - 1,
-                index       = names.indexOf(activeName);
+                count       = names.length - 1;
+            let index       = names.indexOf(activeName);
             
             if (index === count)
                 index = 0;
             else if (index < count)
                 ++index;
             
-            let name = names[index];
+            const name = names[index];
             
             find(dialog, [name]).forEach(el =>
                 el.focus()
@@ -205,8 +204,8 @@
         }
         
         function closeDialog(el, dialog, ok, cancel) {
-            let value,
-                name = el
+            let value;
+            const name = el
                     .getAttribute('data-name')
                     .replace('js-', '');
             
@@ -224,7 +223,7 @@
         }
         
         function find(element, names) {
-            let elements = names.map(name =>
+            const elements = names.map(name =>
                 element.querySelector(`[data-name="js-${ name }"]`)
             ).filter(el =>
                 el
@@ -251,3 +250,4 @@
     }
     
 })(typeof window !== 'undefined' && window);
+
