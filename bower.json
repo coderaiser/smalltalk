@@ -20,12 +20,8 @@
   "license": "MIT",
   "ignore": [
     "**/.*",
-    "node_modules",
-    "bower_components",
-    "modules",
-    "test",
-    "tests",
-    "screen"
+    "screen",
+    "example"
   ],
   "dependencies": {}
 }
