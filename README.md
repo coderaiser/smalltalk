@@ -72,3 +72,4 @@ MIT
 [BuildStatusURL]:           https://travis-ci.org/coderaiser/smalltalk  "Build Status"
 [DependencyStatusURL]:      https://gemnasium.com/coderaiser/smalltalk "Dependency Status"
 [LicenseURL]:               https://tldrlegal.com/license/mit-license "MIT License"
+

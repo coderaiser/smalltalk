@@ -7,7 +7,7 @@
     "type": "git",
     "url": "git://github.com/coderaiser/smalltalk.git"
   },
-  "main": "dist/smalltalk.min.js",
+  "main": "lib/smalltalk.js",
   "config": {
     "poly": "node_modules/promise-polyfill/promise.min.js"
   },
@@ -26,10 +26,11 @@
     "build:js-poly-native": "cat $npm_package_config_poly dist/smalltalk.native.min.js > dist/smalltalk.native.poly.min.js",
     "build:js-full": "redrun bundle:js minify:js build:js-poly",
     "build:js-native-full": "redrun bundle:js:native minify:js-native build:js-poly-native",
-    "build": "redrun minify:css 6to5 build:js-full build:js-native-full clean",
+    "build": "redrun minify:css 6to5 build:js-full build:js-native-full legacy:index clean",
     "bundle:base": "browserify -s smalltalk --ng false",
     "bundle:js": "redrun bundle:base -- -r ./legacy/smalltalk.js:smalltalk ./legacy/smalltalk.js -o dist/smalltalk.js",
     "bundle:js:native": "redrun bundle:base -- -r ./legacy/smalltalk.native.js:smalltalk ./legacy/smalltalk.native.js -o dist/smalltalk.native.js",
+    "legacy:index": "echo \"module.exports = require('./smalltalk');\" > legacy/index.js",
     "clean": "rimraf dist/smalltalk.js dist/smalltalk.native.js",
     "bower": "bower",
     "babel": "babel",
