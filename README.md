@@ -27,15 +27,13 @@ for preventing of handling cancel event.
 }
 ```
 
-## smalltalk.alert(title, message [, options])
+## smalltalk.alert(title, message)
 
 ![Alert](https://raw.githubusercontent.com/coderaiser/smalltalk/master/screen/alert.png "Alert")
 
 ```js
 smalltalk.alert('Error', 'There was an error!').then(function() {
     console.log('ok');
-}, function() {
-    console.log('cancel');
 });
 ```
 
