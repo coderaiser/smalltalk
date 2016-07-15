@@ -7,7 +7,7 @@
         global.smalltalk    = SmallTalk();
     
     function SmallTalk(callback) {
-        if (!(this instanceof SmallTalk))
+        if (!new.target)
             return new SmallTalk(callback);
         
         let remove              = bind(removeEl, '.smalltalk');
