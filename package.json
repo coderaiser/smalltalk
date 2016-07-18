@@ -63,7 +63,7 @@
     "promise-polyfill": "^5.1.0",
     "redrun": "^5.0.1",
     "rimraf": "^2.5.3",
-    "stylelint": "^6.2.2",
+    "stylelint": "^7.0.2",
     "stylelint-config-standard": "^10.0.0",
     "systemjs": "^0.19.31",
     "watch": "^0.19.1"
