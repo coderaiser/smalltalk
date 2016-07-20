@@ -92,7 +92,7 @@
 }
 
 .smalltalk .page .button-strip > button {
-    margin-left: 10px
+    margin-left: 10px;
 }
 
 .smalltalk button:enabled:focus, .smalltalk input:enabled:focus {
