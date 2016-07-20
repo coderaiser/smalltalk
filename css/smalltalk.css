@@ -18,7 +18,7 @@
     z-index: 100;
 }
 
-.smalltalk + .smalltalk {
+.smalltalk:not(:first-of-type) {
     transition: ease 1s;
     display: none;
 }
