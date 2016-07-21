@@ -66,7 +66,7 @@
     "jshint": "^2.8.0",
     "minify": "^2.0.0",
     "postcss-cli": "^2.5.2",
-    "promise-polyfill": "^5.1.0",
+    "promise-polyfill": "^6.0.0",
     "redrun": "^5.0.1",
     "rimraf": "^2.5.3",
     "stylelint": "^7.0.2",
