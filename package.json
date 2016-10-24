@@ -78,7 +78,7 @@
     "rimraf": "^2.5.3",
     "sinon": "^1.17.4",
     "stylelint": "^7.0.2",
-    "stylelint-config-standard": "^13.0.0",
+    "stylelint-config-standard": "^14.0.0",
     "systemjs": "^0.19.31",
     "tape": "^4.6.0"
   }
