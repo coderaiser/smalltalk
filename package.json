@@ -71,7 +71,7 @@
     "jshint": "^2.8.0",
     "minify": "^2.0.0",
     "nodemon": "^1.9.2",
-    "nyc": "^8.1.0",
+    "nyc": "^9.0.1",
     "postcss-cli": "^2.5.2",
     "promise-polyfill": "^6.0.0",
     "redrun": "^5.0.1",
