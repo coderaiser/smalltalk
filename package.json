@@ -79,7 +79,7 @@
     "sinon": "^1.17.4",
     "stylelint": "^7.0.2",
     "stylelint-config-standard": "^15.0.0",
-    "systemjs": "^0.19.31",
+    "systemjs": "^0.20.2",
     "tape": "^4.6.0"
   }
 }
