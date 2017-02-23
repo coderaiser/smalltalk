@@ -5,15 +5,19 @@
 <script src="../node_modules/systemjs/dist/system.js"></script>
 <script>
   SystemJS.config({
-      baseURL: '../lib'
+      baseURL: '../lib',
+       meta: {
+           '*': {
+             authorization: true
+           }
+       }
   });
   
   SystemJS.import('smalltalk.js').then((smalltalk) => {
-        smalltalk.prompt('hello', 'world', '2+2').then((value) => {
+        smalltalk.prompt('hello', 'world', '"2+2"').then((value) => {
             console.log(value);
         }, () => {
             console.log('close');
         })
   });
 </script>
-

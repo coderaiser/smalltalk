@@ -16,5 +16,8 @@
     "evil"  : true,
     "expr" : true,
     "quotmark": "single",
-    "validthis": true
+    "validthis": true,
+    // Regular parameters should not come after default parameters
+    "-W138": true
 }
+
