@@ -252,7 +252,7 @@ test('smalltalk: alert: keydown: tab: preventDefault', (t) => {
     t.end();
 });
 
-test('smalltalk: alert: keydown: tab: active element', (t) => {
+test('smalltalk: alert: keydown: tab: active name', (t) => {
     before();
     
     const parentElement = {
@@ -412,7 +412,7 @@ test('smalltalk: confirm: click on close', (t) => {
     });
 });
 
-test('smalltalk: confirm: keydown: left: activeElement', (t) => {
+test('smalltalk: confirm: keydown: left: active name', (t) => {
     before();
     
     const parentElement = {
@@ -440,7 +440,7 @@ test('smalltalk: confirm: keydown: left: activeElement', (t) => {
     
     const cancel = {
         focus,
-        getAttribute: () => 'js-ok',
+        getAttribute: () => 'js-cancel',
         addEventListener: sinon.stub(),
     };
     
@@ -450,6 +450,68 @@ test('smalltalk: confirm: keydown: left: activeElement', (t) => {
     const querySelector = sinon.stub().returns(el);
     document.querySelector = querySelector;
     document.activeElement = ok;
+    
+    smalltalk.confirm('title', 'message');
+    
+    const [, keydown] = el.addEventListener.args
+        .filter(([event]) => event === 'keydown')
+        .pop();
+    
+    const LEFT = 37;
+    
+    const event = {
+        keyCode: LEFT,
+        preventDefault: sinon.stub(),
+        stopPropagation: sinon.stub(),
+        target: el,
+    };
+    
+    keydown(event);
+    
+    t.ok(focus.called, 'should call focus');
+    
+    after();
+    t.end();
+});
+
+test('smalltalk: confirm: keydown: left: active name: cancel', (t) => {
+    before();
+    
+    const parentElement = {
+        removeChild: sinon.stub()
+    };
+    
+    const el = {
+        parentElement,
+        querySelector: (a) => {
+            if (a === '[data-name="js-cancel"]')
+                return cancel;
+            
+            if (a === '[data-name="js-ok"]')
+                return ok;
+        },
+        getAttribute: () => 'js-ok'
+    };
+    
+    const focus = sinon.stub();
+    const ok = {
+        focus,
+        getAttribute: () => 'js-ok',
+        addEventListener: sinon.stub(),
+    };
+    
+    const cancel = {
+        focus,
+        getAttribute: () => 'js-cancel',
+        addEventListener: sinon.stub(),
+    };
+    
+    const createElement = getCreateElement(el);
+    document.createElement = createElement;
+    
+    const querySelector = sinon.stub().returns(el);
+    document.querySelector = querySelector;
+    document.activeElement = cancel;
     
     smalltalk.confirm('title', 'message');
     
