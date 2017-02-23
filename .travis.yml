@@ -4,7 +4,7 @@ node_js:
     - 7
 
 script:
-  - npm lint
+  - npm run lint
   - npm run coverage && npm run report
 
 notifications:
