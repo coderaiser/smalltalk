@@ -291,6 +291,7 @@ test('smalltalk: alert: keydown: tab: active name', (t) => {
     
     const event = {
         keyCode: TAB,
+        shiftKey: true,
         preventDefault: sinon.stub(),
         stopPropagation: sinon.stub(),
         target: el,
@@ -535,6 +536,61 @@ test('smalltalk: confirm: keydown: left: active name: cancel', (t) => {
     after();
     t.end();
 });
+
+test('smalltalk: confirm: keydown: esc: reject', (t) => {
+    before();
+    
+    const parentElement = {
+        removeChild: sinon.stub()
+    };
+    
+    const el = {
+        parentElement,
+        querySelector: (a) => {
+            if (a === '[data-name="js-ok"]')
+                return ok;
+        },
+        getAttribute: () => 'js-ok'
+    };
+    
+    const ok = {
+        getAttribute: () => 'js-ok',
+        focus: sinon.stub(),
+        addEventListener: sinon.stub(),
+    };
+    
+    const createElement = getCreateElement(el);
+    document.createElement = createElement;
+    
+    const querySelector = sinon.stub().returns(el);
+    document.querySelector = querySelector;
+    
+    smalltalk.confirm('title', 'message')
+        .then(() => {
+            console.log('s');
+        })
+        .catch(() => {
+            t.pass('should reject');
+            after();
+            t.end();
+        });
+    
+    const [, keydown] = el.addEventListener.args
+        .filter(([event]) => event === 'keydown')
+        .pop();
+    
+    const ESC = 27;
+    
+    const event = {
+        keyCode: ESC,
+        preventDefault: sinon.stub(),
+        stopPropagation: sinon.stub(),
+        target: el,
+    };
+    
+    keydown(event);
+});
+
 
 test('smalltalk: prompt: innerHTML', (t) => {
     before();
