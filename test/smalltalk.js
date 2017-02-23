@@ -155,18 +155,6 @@ test('smalltalk: alert: close: remove', (t) => {
     after();
     t.end();
 });
-function getCreateElement(el = {}) {
-    const querySelector = sinon.stub();
-    const addEventListener = sinon.stub();
-    
-    if (!el.querySelector)
-        el.querySelector = querySelector;
-    
-    if (!el.addEventListener)
-        el.addEventListener = addEventListener;
-
-    return sinon.stub().returns(el);
-}
 
 test('smalltalk: confirm: innerHTML', (t) => {
     before();
@@ -185,6 +173,46 @@ test('smalltalk: confirm: innerHTML', (t) => {
     t.end();
 });
 
+test('smalltalk: confirm: click on close', (t) => {
+    before();
+    
+    const el = {
+        parentElement: {
+            removeChild: () => {}
+        },
+        querySelector: (a) => {
+            if (a === '[data-name="js-close"]')
+                return closeButton;
+        }
+    };
+    
+    const closeButton= {
+        getAttribute: () => 'js-close',
+        focus: sinon.stub(),
+        addEventListener: sinon.stub(),
+    };
+    
+    const createElement = getCreateElement(el);
+    document.createElement = createElement;
+    
+    const querySelector = sinon.stub().returns(el);
+    document.querySelector = querySelector;
+    
+    smalltalk.confirm('title', 'message')
+        .catch(() => {
+            t.pass('should reject');
+            after();
+            t.end();
+        });
+    
+    const [, close] = closeButton.addEventListener.args.pop();
+    
+    close({
+        target: closeButton
+    });
+});
+
+
 test('smalltalk: prompt: innerHTML', (t) => {
     before();
     
@@ -201,6 +229,20 @@ test('smalltalk: prompt: innerHTML', (t) => {
     after();
     t.end();
 });
+
+function getCreateElement(el = {}) {
+    const querySelector = sinon.stub();
+    const addEventListener = sinon.stub();
+    
+    if (!el.querySelector)
+        el.querySelector = querySelector;
+    
+    if (!el.addEventListener)
+        el.addEventListener = addEventListener;
+
+    return sinon.stub().returns(el);
+}
+
 
 function before() {
     global.document = {
