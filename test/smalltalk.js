@@ -566,9 +566,6 @@ test('smalltalk: confirm: keydown: esc: reject', (t) => {
     document.querySelector = querySelector;
     
     smalltalk.confirm('title', 'message')
-        .then(() => {
-            console.log('s');
-        })
         .catch(() => {
             t.pass('should reject');
             after();
