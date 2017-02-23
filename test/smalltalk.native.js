@@ -31,9 +31,11 @@ test('smalltalk.native: confirm', (t) => {
     const confirm = sinon.stub();
     global.confirm = confirm;
     
-    smalltalk.confirm('title', 'message');
-    t.ok(confirm.calledWith('message'), 'confirm should have been called with message');
-    t.end();
+    smalltalk.confirm('title', 'message')
+    .catch(() => {
+        t.ok(confirm.calledWith('message'), 'confirm should have been called with message');
+        t.end();
+    });
 });
 
 test('smalltalk.native: confirm: result: ok', (t) => {
