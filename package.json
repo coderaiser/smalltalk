@@ -23,7 +23,7 @@
     "coverage": "nyc npm test",
     "report": "nyc report --reporter=text-lcov | coveralls",
     "compile:js": "babel -d legacy lib",
-    "compile:css": "postcss --use autoprefixer css/*.css -d dist",
+    "compile:css": "postcss css/*.css -d dist --use autoprefixer",
     "minify:css": "minify dist/smalltalk.css > dist/smalltalk.min.css",
     "minify:js": "minify dist/smalltalk.js > dist/smalltalk.min.js",
     "minify:js-native": "minify dist/smalltalk.native.js > dist/smalltalk.native.min.js",
