@@ -412,6 +412,67 @@ test('smalltalk: confirm: click on close', (t) => {
     });
 });
 
+test('smalltalk: confirm: keydown: left: activeElement', (t) => {
+    before();
+    
+    const parentElement = {
+        removeChild: sinon.stub()
+    };
+    
+    const el = {
+        parentElement,
+        querySelector: (a) => {
+            if (a === '[data-name="js-cancel"]')
+                return cancel;
+            
+            if (a === '[data-name="js-ok"]')
+                return ok;
+        },
+        getAttribute: () => 'js-ok'
+    };
+    
+    const focus = sinon.stub();
+    const ok = {
+        focus,
+        getAttribute: () => 'js-ok',
+        addEventListener: sinon.stub(),
+    };
+    
+    const cancel = {
+        focus,
+        getAttribute: () => 'js-ok',
+        addEventListener: sinon.stub(),
+    };
+    
+    const createElement = getCreateElement(el);
+    document.createElement = createElement;
+    
+    const querySelector = sinon.stub().returns(el);
+    document.querySelector = querySelector;
+    document.activeElement = ok;
+    
+    smalltalk.confirm('title', 'message');
+    
+    const [, keydown] = el.addEventListener.args
+        .filter(([event]) => event === 'keydown')
+        .pop();
+    
+    const LEFT = 37;
+    
+    const event = {
+        keyCode: LEFT,
+        preventDefault: sinon.stub(),
+        stopPropagation: sinon.stub(),
+        target: el,
+    };
+    
+    keydown(event);
+    
+    t.ok(focus.called, 'should call focus');
+    
+    after();
+    t.end();
+});
 
 test('smalltalk: prompt: innerHTML', (t) => {
     before();
