@@ -156,6 +156,102 @@ test('smalltalk: alert: close: remove', (t) => {
     t.end();
 });
 
+test('smalltalk: alert: keydown: stopPropagation', (t) => {
+    before();
+    
+    const parentElement = {
+        removeChild: sinon.stub()
+    };
+    
+    const el = {
+        parentElement,
+        querySelector: (a) => {
+            if (a === '[data-name="js-ok"]')
+                return ok;
+        }
+    };
+    
+    const ok = {
+        getAttribute: () => 'js-ok',
+        focus: sinon.stub(),
+        addEventListener: sinon.stub(),
+    };
+    
+    const createElement = getCreateElement(el);
+    document.createElement = createElement;
+    
+    const querySelector = sinon.stub().returns(el);
+    document.querySelector = querySelector;
+    
+    smalltalk.alert('title', 'message');
+    
+    const [, keydown] = el.addEventListener.args.filter(([event]) => {
+        return event === 'keydown';
+    }).pop();
+    
+    const event = {
+        stopPropagation: sinon.stub()
+    };
+    
+    keydown(event);
+    
+    t.ok(event.stopPropagation.called, 'should call stopPropagation');
+    
+    after();
+    t.end();
+});
+
+test('smalltalk: alert: keydown: tab: preventDefault', (t) => {
+    before();
+    
+    const parentElement = {
+        removeChild: sinon.stub()
+    };
+    
+    const el = {
+        parentElement,
+        querySelector: (a) => {
+            if (a === '[data-name="js-ok"]')
+                return ok;
+        },
+        getAttribute: () => 'js-ok'
+    };
+    
+    const ok = {
+        getAttribute: () => 'js-ok',
+        focus: sinon.stub(),
+        addEventListener: sinon.stub(),
+    };
+    
+    const createElement = getCreateElement(el);
+    document.createElement = createElement;
+    
+    const querySelector = sinon.stub().returns(el);
+    document.querySelector = querySelector;
+    
+    smalltalk.alert('title', 'message');
+    
+    const [, keydown] = el.addEventListener.args
+        .filter(([event]) => event === 'keydown')
+        .pop();
+    
+    const TAB = 9;
+    
+    const event = {
+        keyCode: TAB,
+        preventDefault: sinon.stub(),
+        stopPropagation: sinon.stub(),
+        target: el,
+    };
+    
+    keydown(event);
+    
+    t.ok(event.preventDefault.called, 'should call preventDefault');
+    
+    after();
+    t.end();
+});
+
 test('smalltalk: confirm: innerHTML', (t) => {
     before();
     
@@ -299,6 +395,9 @@ function getCreateElement(el = {}) {
 
 function before() {
     global.document = {
+        activeElement: {
+            getAttribute: () => ''
+        },
         createElement: getCreateElement(),
         body: {
             appendChild: sinon.stub()
