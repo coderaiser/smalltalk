@@ -8,8 +8,14 @@ const sinon = require('sinon');
 
 const smalltalk = require('..');
 const fixtureDir = path.join(__dirname, 'fixture');
+const readFixture = (name) => {
+    return fs.readFileSync(`${fixtureDir}/${name}.html`, 'utf8');
+};
+
 const fixture = {
-    alert: fs.readFileSync(`${fixtureDir}/alert.html`, 'utf8')
+    alert: readFixture('alert'),
+    confirm: readFixture('confirm'),
+    prompt: readFixture('prompt'),
 };
 
 test('smalltalk: alert: innerHTML', (t) => {
@@ -22,7 +28,7 @@ test('smalltalk: alert: innerHTML', (t) => {
     const createElement = getCreateElement(el);
     global.document.createElement = createElement;
     
-    smalltalk.alert('title', 'message')
+    smalltalk.alert('title', 'message');
     t.equal(fixture.alert, el.innerHTML, 'should be equal');
     
     after();
@@ -38,7 +44,7 @@ test('smalltalk: alert: appendChild', (t) => {
     const createElement = getCreateElement(el);
     global.document.createElement = createElement;
     
-    smalltalk.alert('title', 'message')
+    smalltalk.alert('title', 'message');
     t.ok(document.body.appendChild.calledWith(el), 'should append el');
     
     after();
@@ -63,7 +69,7 @@ test('smalltalk: alert: click', (t) => {
     const createElement = getCreateElement(el);
     global.document.createElement = createElement;
     
-    smalltalk.alert('title', 'message')
+    smalltalk.alert('title', 'message');
     t.equal(ok.addEventListener.args.pop()[0], 'click', 'should set click listener');
     
     after();
@@ -95,7 +101,7 @@ test('smalltalk: alert: close: querySelector', (t) => {
     const querySelector = sinon.stub().returns(el);
     document.querySelector = querySelector;
     
-    smalltalk.alert('title', 'message')
+    smalltalk.alert('title', 'message');
     
     const [, close] = ok.addEventListener.args.pop();
     
@@ -136,7 +142,7 @@ test('smalltalk: alert: close: remove', (t) => {
     const querySelector = sinon.stub().returns(el);
     document.querySelector = querySelector;
     
-    smalltalk.alert('title', 'message')
+    smalltalk.alert('title', 'message');
     
     const [, close] = ok.addEventListener.args.pop();
     
@@ -161,6 +167,40 @@ function getCreateElement(el = {}) {
 
     return sinon.stub().returns(el);
 }
+
+test('smalltalk: confirm: innerHTML', (t) => {
+    before();
+    
+    const el = {
+        innerHTML: ''
+    };
+    
+    const createElement = getCreateElement(el);
+    global.document.createElement = createElement;
+    
+    smalltalk.confirm('title', 'message');
+    t.equal(fixture.confirm, el.innerHTML, 'should be equal');
+    
+    after();
+    t.end();
+});
+
+test('smalltalk: prompt: innerHTML', (t) => {
+    before();
+    
+    const el = {
+        innerHTML: ''
+    };
+    
+    const createElement = getCreateElement(el);
+    global.document.createElement = createElement;
+    
+    smalltalk.prompt('title', 'message');
+    t.equal(fixture.prompt, el.innerHTML, 'should be equal');
+    
+    after();
+    t.end();
+});
 
 function before() {
     global.document = {
