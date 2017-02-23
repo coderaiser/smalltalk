@@ -186,7 +186,7 @@ test('smalltalk: confirm: click on close', (t) => {
         }
     };
     
-    const closeButton= {
+    const closeButton = {
         getAttribute: () => 'js-close',
         focus: sinon.stub(),
         addEventListener: sinon.stub(),
@@ -228,6 +228,59 @@ test('smalltalk: prompt: innerHTML', (t) => {
     
     after();
     t.end();
+});
+
+test('smalltalk: prompt: click on ok', (t) => {
+    before();
+    
+    const dataName = (a) => `[data-name="js-${a}"]`;
+    const noop = () => {};
+    
+    const value = 'hello';
+    const input = {
+        value,
+        focus: noop,
+        setSelectionRange: noop,
+    };
+    
+    const ok = {
+        getAttribute: () => 'js-ok',
+        focus: sinon.stub(),
+        addEventListener: sinon.stub(),
+    };
+    
+    const querySelector = (a) => {
+        if (a === dataName('input'))
+            return input;
+        
+        if (a === dataName('ok'))
+            return ok;
+    };
+    
+    const el = {
+        querySelector,
+        parentElement: {
+            removeChild: () => {}
+        },
+    };
+    
+    const createElement = getCreateElement(el);
+    document.createElement = createElement;
+    
+    document.querySelector = () => el;
+    
+    smalltalk.prompt('title', 'message', value)
+        .then((result) => {
+            t.equal(result, value, 'should return value');
+            after();
+            t.end();
+        });
+    
+    const [, close] = ok.addEventListener.args.pop();
+    
+    close({
+        target: ok
+    });
 });
 
 function getCreateElement(el = {}) {
