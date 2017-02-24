@@ -4,13 +4,19 @@
 
 <script src="../node_modules/systemjs/dist/system.js"></script>
 <script>
-  SystemJS.config({
-      baseURL: '../lib',
-       meta: {
-           '*': {
-             authorization: true
-           }
-       }
+    SystemJS.config({
+        baseURL: '../lib',
+        packageConfigPaths: [
+            '../node_modules/*/package.json'
+        ],
+        meta: {
+            '*': {
+                authorization: true
+             }
+        },
+        map: {
+            'currify/legacy': '../node_modules/currify/legacy/index.js'
+        }
   });
   
   SystemJS.import('smalltalk.js').then((smalltalk) => {
@@ -21,3 +27,4 @@
         })
   });
 </script>
+
