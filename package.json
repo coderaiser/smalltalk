@@ -74,7 +74,7 @@
     "minify": "^2.0.0",
     "nodemon": "^1.9.2",
     "nyc": "^10.0.0",
-    "postcss-cli": "^2.5.2",
+    "postcss-cli": "^3.0.0",
     "promise-polyfill": "^6.0.0",
     "redrun": "^5.0.1",
     "rimraf": "^2.5.3",
