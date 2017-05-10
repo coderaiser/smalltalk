@@ -63,7 +63,7 @@
     "url": "https://github.com/coderaiser/smalltalk/issues"
   },
   "devDependencies": {
-    "autoprefixer": "^6.3.7",
+    "autoprefixer": "^7.0.1",
     "babel-cli": "^6.1.1",
     "babel-preset-es2015": "^6.0.15",
     "browserify": "^14.0.0",
