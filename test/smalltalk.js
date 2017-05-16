@@ -698,7 +698,7 @@ test('smalltalk: prompt: innerHTML', (t) => {
     const createElement = getCreateElement(el);
     global.document.createElement = createElement;
     
-    smalltalk.prompt('title', 'message');
+    smalltalk.prompt('title', 'message', 2);
     t.equal(fixture.prompt, el.innerHTML, 'should be equal');
     
     after();
@@ -770,7 +770,6 @@ function getCreateElement(el = {}) {
     
     return sinon.stub().returns(el);
 }
-
 
 function before() {
     global.document = {
