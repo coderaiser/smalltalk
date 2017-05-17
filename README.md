@@ -68,7 +68,7 @@ When `webpack` `rollup` or `browserify` used, you can import `es5` version with:
 import smalltalk from 'smalltalk/legacy';
 ```
 
-#License
+# License
 MIT
 
 [NPMIMGURL]:                https://img.shields.io/npm/v/smalltalk.svg?style=flat
