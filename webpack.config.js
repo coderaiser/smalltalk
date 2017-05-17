@@ -1,7 +1,6 @@
 'use strict';
 
 const path = require('path');
-const glob = require('glob');
 const webpack = require('webpack');
 const {optimize} = webpack;
 const {UglifyJsPlugin} = optimize;
