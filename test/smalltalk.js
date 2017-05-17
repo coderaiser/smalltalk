@@ -6,6 +6,8 @@ const fs = require('fs');
 const test = require('tape');
 const sinon = require('sinon');
 
+global.window = {};
+
 const smalltalk = require('..');
 const fixtureDir = path.join(__dirname, 'fixture');
 const readFixture = (name) => {

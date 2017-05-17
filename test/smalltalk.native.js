@@ -5,6 +5,8 @@ const sinon = require('sinon');
 
 const smalltalk = require('../lib/smalltalk.native');
 
+global.window = {};
+
 test('smalltalk.native: alert', (t) => {
     const alert = sinon.stub();
     global.alert = alert;
