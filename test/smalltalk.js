@@ -30,7 +30,7 @@ test('smalltalk: alert: innerHTML', (t) => {
     const createElement = getCreateElement(el);
     global.document.createElement = createElement;
     
-    smalltalk.alert('title', 'message');
+    smalltalk.alert('title', 'hello\nworld');
     t.equal(fixture.alert, el.innerHTML, 'should be equal');
     
     after();
