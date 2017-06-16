@@ -57,7 +57,7 @@
     "jscs": "^3.0.3",
     "jshint": "^2.8.0",
     "nodemon": "^1.9.2",
-    "nyc": "^10.0.0",
+    "nyc": "^11.0.2",
     "postcss-clean": "^1.0.2",
     "postcss-cli": "^4.0.0",
     "redrun": "^5.0.1",
