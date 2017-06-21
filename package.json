@@ -67,7 +67,7 @@
     "stylelint-config-standard": "^16.0.0",
     "systemjs": "^0.20.2",
     "tape": "^4.6.0",
-    "webpack": "^2.5.1"
+    "webpack": "^3.0.0"
   },
   "dependencies": {
     "currify": "^2.0.3",
