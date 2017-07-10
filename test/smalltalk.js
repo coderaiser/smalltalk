@@ -18,6 +18,7 @@ const fixture = {
     alert: readFixture('alert'),
     confirm: readFixture('confirm'),
     prompt: readFixture('prompt'),
+    promptNoValue: readFixture('prompt.no-value'),
 };
 
 test('smalltalk: alert: innerHTML', (t) => {
@@ -702,6 +703,23 @@ test('smalltalk: prompt: innerHTML', (t) => {
     
     smalltalk.prompt('title', 'message', 2);
     t.equal(fixture.prompt, el.innerHTML, 'should be equal');
+    
+    after();
+    t.end();
+});
+
+test('smalltalk: prompt: no value', (t) => {
+    before();
+    
+    const el = {
+        innerHTML: ''
+    };
+    
+    const createElement = getCreateElement(el);
+    global.document.createElement = createElement;
+    
+    smalltalk.prompt('title', 'message');
+    t.equal(fixture.promptNoValue, el.innerHTML, 'should be equal');
     
     after();
     t.end();
