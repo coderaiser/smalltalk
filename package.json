@@ -71,7 +71,7 @@
   },
   "dependencies": {
     "currify": "^2.0.3",
-    "es6-promise": "^4.1.0",
+    "es6-promise": "^4.1.1",
     "fullstore": "^1.0.0"
   }
 }
