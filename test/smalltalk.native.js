@@ -30,14 +30,14 @@ test('smalltalk.native: alert: result', (t) => {
 });
 
 test('smalltalk.native: confirm', (t) => {
-    const confirm = sinon.stub();
+    const confirm = sinon.stub().returns(false);
     global.confirm = confirm;
     
     smalltalk.confirm('title', 'message')
-    .catch(() => {
-        t.ok(confirm.calledWith('message'), 'confirm should have been called with message');
-        t.end();
-    });
+        .catch(() => {
+            t.ok(confirm.calledWith('message'), 'confirm should have been called with message');
+            t.end();
+        });
 });
 
 test('smalltalk.native: confirm: result: ok', (t) => {
@@ -70,13 +70,19 @@ test('smalltalk.native: confirm: options: cancel', (t) => {
     const confirm = sinon.stub().returns(false);
     global.confirm = confirm;
     
-    smalltalk.confirm('title', 'message', {cancel: false}).then(() => {
-        t.pass('should resolve');
+    const cancel = false;
+    
+    smalltalk.confirm('title', 'message', {cancel}).then(() => {
+        t.fail('should not resolve');
         t.end();
     }).catch(() => {
         t.fail('should not reject');
         t.end();
     });
+    
+    t.pass('should do nothing');
+    
+    t.end();
 });
 
 test('smalltalk.native: prompt', (t) => {
@@ -121,11 +127,14 @@ test('smalltalk.native: prompt: options: cancel', (t) => {
     smalltalk.prompt('title', 'message', 'value', {
         cancel: false
     }).then(() => {
-        t.pass('should resolve');
+        t.fail('should not resolve');
         t.end();
     }).catch((e) => {
         t.fail(`should not reject ${e.message}`);
         t.end();
     });
+    
+    t.pass('should do nothing');
+    t.end();
 });
 
