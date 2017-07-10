@@ -7,6 +7,13 @@ const smalltalk = require('../lib/smalltalk.native');
 
 global.window = {};
 
+test('smalltalk.native: Promise', (t) => {
+    global.window.Promise = null;
+    reload();
+    t.pass('load with no Promise support');
+    t.end();
+});
+
 test('smalltalk.native: alert', (t) => {
     const alert = sinon.stub();
     global.alert = alert;
@@ -138,3 +145,11 @@ test('smalltalk.native: prompt: options: cancel', (t) => {
     t.end();
 });
 
+function reload() {
+    clean();
+    return require('../lib/smalltalk.native');
+}
+
+function clean() {
+    delete require.cache[require.resolve('../lib/smalltalk.native')];
+}
