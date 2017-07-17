@@ -10,4 +10,5 @@ rules:
     string-quotes: single
     function-url-quotes: never
     no-eol-whitespace: null
+    declaration-empty-line-before: null
 
