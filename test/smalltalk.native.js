@@ -128,7 +128,7 @@ test('smalltalk.native: prompt: result: cancel', (t) => {
 });
 
 test('smalltalk.native: prompt: options: cancel', (t) => {
-    const prompt = sinon.stub().returns();
+    const prompt = sinon.stub().returns(null);
     global.prompt = prompt;
     
     smalltalk.prompt('title', 'message', 'value', {
