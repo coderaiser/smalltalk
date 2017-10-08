@@ -66,6 +66,20 @@ smalltalk
     });
 ```
 
+Use `type='password'` for `password` fields:
+
+```js
+smalltalk
+    .prompt('Question', 'How old are you?', '10', {
+        type: 'password',
+    })
+    .then((value) => {
+        console.log(value);
+    .catch(() => {
+        console.log('cancel');
+    });
+```
+
 ## Bundlers
 
 When `webpack` `rollup` or `browserify` used, you can import `es5` version with:
