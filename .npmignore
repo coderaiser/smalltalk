@@ -3,4 +3,5 @@ example
 screen
 .*
 test
+yarn-error.log
 
