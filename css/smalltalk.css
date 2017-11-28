@@ -83,36 +83,13 @@
     padding: 14px 17px;
 }
 
-.smalltalk .page .button-strip {
-    display: flex;
-    
-    flex-direction: row;
-    justify-content: flex-end;
-}
-
-.smalltalk .page .button-strip > button {
-    margin-left: 10px;
-}
-
-.smalltalk button:enabled:focus, .smalltalk input:enabled:focus {
-    transition: border-color 200ms;
-    border-color: rgb(77, 144, 254);
-    outline: none;
-}
-
-.smalltalk button:enabled:active {
-    background-image: linear-gradient(#e7e7e7, #e7e7e7 38%, #d7d7d7);
-    box-shadow: none;
-    text-shadow: none;
+button {
+    font-family: Ubuntu, Arial, sans-serif;
 }
 
 .smalltalk button, .smalltalk .smalltalk {
     min-height: 2em;
     min-width: 4em;
-}
-
-.smalltalk button::-moz-focus-inner {
-    border: 0;
 }
 
 .smalltalk button {
@@ -129,10 +106,25 @@
     text-shadow: 0 1px 0 rgb(240, 240, 240);
 }
 
-.smalltalk button:enabled:focus, .smalltalk input:enabled:focus {
-    transition: border-color 200ms;
-    border-color: rgb(77, 144, 254);
-    outline: none;
+.smalltalk button::-moz-focus-inner {
+    border: 0;
+}
+
+.smalltalk button:enabled:active {
+    background-image: linear-gradient(#e7e7e7, #e7e7e7 38%, #d7d7d7);
+    box-shadow: none;
+    text-shadow: none;
+}
+
+.smalltalk .page .button-strip {
+    display: flex;
+    
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.smalltalk .page .button-strip > button {
+    margin-left: 10px;
 }
 
 .smalltalk input {
@@ -148,6 +140,9 @@
     outline: none;
 }
 
-button {
-    font-family: Ubuntu, Arial, sans-serif;
+.smalltalk button:enabled:focus, .smalltalk input:enabled:focus {
+    transition: border-color 200ms;
+    border-color: rgb(77, 144, 254);
+    outline: none;
 }
+
