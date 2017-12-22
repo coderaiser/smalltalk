@@ -15,6 +15,10 @@ Or npm:
 npm i smalltalk
 ```
 
+Then in your application HTML file add the CSS:
+
+    <link rel="stylesheet" href="node_modules/smalltalk/css/smalltalk.css">
+
 # API
 
 In every method of `smalltalk` last parameter *options* is optional and could be used
