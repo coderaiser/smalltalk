@@ -59,7 +59,7 @@
     "nodemon": "^1.9.2",
     "nyc": "^11.0.2",
     "postcss-clean": "^1.0.2",
-    "postcss-cli": "^4.0.0",
+    "postcss-cli": "^5.0.0",
     "redrun": "^5.0.1",
     "rimraf": "^2.5.3",
     "sinon": "^4.0.0",
