@@ -23,8 +23,8 @@
     "coverage": "nyc npm test",
     "report": "nyc report --reporter=text-lcov | coveralls",
     "compile:server": "babel -d legacy lib",
-    "compile:client": "webpack --progress",
-    "compile:client:poly": "BUILD_TYPE=poly webpack --progress",
+    "compile:client": "webpack --progress --mode production",
+    "compile:client:poly": "BUILD_TYPE=poly npm run compile:client",
     "build": "redrun clean build:js build:css",
     "build:js": "redrun compile:* legacy:index",
     "build:css": "postcss css/*.css -o dist/smalltalk.min.css -m --use autoprefixer postcss-clean",
@@ -67,11 +67,12 @@
     "stylelint-config-standard": "^18.0.0",
     "systemjs": "^0.21.0",
     "tape": "^4.6.0",
-    "webpack": "^3.0.0"
+    "webpack": "^4.1.0"
   },
   "dependencies": {
     "currify": "^2.0.3",
     "es6-promise": "^4.1.1",
-    "fullstore": "^1.0.0"
+    "fullstore": "^1.0.0",
+    "webpack-cli": "^2.0.10"
   }
 }
