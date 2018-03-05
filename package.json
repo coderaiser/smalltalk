@@ -63,7 +63,7 @@
     "redrun": "^5.0.1",
     "rimraf": "^2.5.3",
     "sinon": "^4.0.0",
-    "stylelint": "^8.0.0",
+    "stylelint": "^9.1.1",
     "stylelint-config-standard": "^18.0.0",
     "systemjs": "^0.21.0",
     "tape": "^4.6.0",
