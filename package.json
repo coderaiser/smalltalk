@@ -32,7 +32,7 @@
     "clean": "rimraf dist",
     "wisdom": "npm run build",
     "lint:css": "stylelint css/*.css",
-    "lint:js": "jshint lib test && jscs lib test && eslint lib test webpack.config.js",
+    "lint:js": "eslint lib test webpack.config.js",
     "lint": "redrun lint:*",
     "test": "tape 'test/**/*.js'"
   },
@@ -54,8 +54,6 @@
     "babel-preset-env": "^1.6.0",
     "coveralls": "^3.0.0",
     "eslint": "^4.0.0",
-    "jscs": "^3.0.3",
-    "jshint": "^2.8.0",
     "nodemon": "^1.9.2",
     "nyc": "^11.0.2",
     "postcss-clean": "^1.0.2",
