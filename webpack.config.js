@@ -4,7 +4,6 @@ const path = require('path');
 const dir = './lib';
 
 const {env} = process;
-const isPoly = env.BUILD_TYPE === 'poly';
 
 const dist = path.resolve(__dirname, 'dist');
 const devtool = 'source-map';
@@ -13,9 +12,15 @@ const rules = [{
     test: /\.js$/,
     exclude: /node_modules/,
     loader: 'babel-loader',
+}, {
+    test: /\.css$/,
+    loader: 'style-loader!css-loader!clean-css-loader',
+}, {
+    test: /\.(png|gif|svg|woff|woff2|eot|ttf)$/,
+    loader: 'url-loader?limit=50000',
 }];
 
-const filename = `[name]${isPoly ? '.poly' : ''}.min.js`;
+const filename = `[name].min.js`;
 
 module.exports = {
     devtool,
@@ -31,27 +36,10 @@ module.exports = {
         libraryTarget: 'var',
         devtoolModuleFilenameTemplate,
     },
-    externals: [
-        externals
-    ],
     module: {
         rules,
     },
 };
-
-function externals(context, request, fn) {
-    if (isPoly)
-        return fn();
-    
-    const list = [
-        'es6-promise',
-    ];
-    
-    if (list.includes(request))
-        return fn(null, request);
-    
-    fn();
-}
 
 function devtoolModuleFilenameTemplate(info) {
     const resource = info.absoluteResourcePath.replace(__dirname + path.sep, '');

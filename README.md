@@ -3,26 +3,27 @@
 Simple [Promise](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise)-based replacement of native Alert, Confirm and Prompt.
 
 # Install
-With help of [bower](http://bower.io "Bower").
-
-```
-bower install smalltalk
-```
-
-Or npm:
 
 ```
 npm i smalltalk
 ```
 
-Then in your application HTML file add the CSS:
-
-    <link rel="stylesheet" href="node_modules/smalltalk/dist/smalltalk.min.css">
-
 # API
 
+First things first, require `smalltalk` with:
+
+```js
+const smalltalk = require('smalltalk');
+```
+
+You can also use native version with:
+
+```js
+const smalltalk = require('smalltalk/native');
+```
+
 In every method of `smalltalk` last parameter *options* is optional and could be used
-for preventing of handling cancel event.
+to prevent handling of cancel event.
 
 ```js
 {

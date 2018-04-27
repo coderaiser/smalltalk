@@ -5,4 +5,6 @@ legacy
 .nyc_output
 *.swp
 yarn-error.log
+dist
+native
 
