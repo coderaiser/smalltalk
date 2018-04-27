@@ -59,7 +59,6 @@
     "style-loader": "^0.21.0",
     "stylelint": "^9.1.1",
     "stylelint-config-standard": "^18.0.0",
-    "systemjs": "^0.21.0",
     "tape": "^4.6.0",
     "url-loader": "^1.0.1",
     "webpack": "^4.1.0",
