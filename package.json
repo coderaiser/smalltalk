@@ -50,6 +50,7 @@
     "clean-css-loader": "^0.1.4",
     "coveralls": "^3.0.0",
     "css-loader": "^0.28.11",
+    "css-modules-require-hook": "^4.2.3",
     "eslint": "^4.0.0",
     "nodemon": "^1.9.2",
     "nyc": "^11.0.2",

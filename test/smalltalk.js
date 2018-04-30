@@ -3,12 +3,14 @@
 const path = require('path');
 const fs = require('fs');
 
+require('css-modules-require-hook/preset');
+
 const test = require('tape');
 const sinon = require('sinon');
 
 global.window = {};
 
-const smalltalk = require('..');
+const smalltalk = require('../lib/smalltalk');
 const fixtureDir = path.join(__dirname, 'fixture');
 const readFixture = (name) => {
     return fs.readFileSync(`${fixtureDir}/${name}.html`, 'utf8');
