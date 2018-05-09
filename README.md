@@ -52,6 +52,7 @@ smalltalk
     .confirm('Question', 'Are you sure?')
     .then(() => {
         console.log('yes');
+    })
     .catch(() => {
         console.log('no');
     });
@@ -66,6 +67,7 @@ smalltalk
     .prompt('Question', 'How old are you?', '10')
     .then((value) => {
         console.log(value);
+    })
     .catch(() => {
         console.log('cancel');
     });
@@ -80,6 +82,7 @@ smalltalk
     })
     .then((value) => {
         console.log(value);
+    })
     .catch(() => {
         console.log('cancel');
     });
