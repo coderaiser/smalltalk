@@ -23,7 +23,7 @@ const smalltalk = require('smalltalk/native');
 ```
 
 In every method of `smalltalk` last parameter *options* is optional and could be used
-to prevent handling of cancel event.
+to prevent handling of cancel event and to specify custom button label.
 
 ```js
 {
@@ -31,7 +31,7 @@ to prevent handling of cancel event.
 }
 ```
 
-## smalltalk.alert(title, message)
+## smalltalk.alert(title, message [, options])
 
 ![Alert](https://raw.githubusercontent.com/coderaiser/smalltalk/master/screen/alert.png "Alert")
 
@@ -86,6 +86,25 @@ smalltalk
     .catch(() => {
         console.log('cancel');
     });
+```
+
+## Custom label 
+
+You can use custom label passing into options param the buttons specification. For example :
+```js
+const tryToCatch = require('try-to-catch');
+const OK = 2;
+const result = await tryToCatch(smalltalk.confirm, 'Question', 'Are you sure?', {
+    buttons: {
+        ok: 'Ok Label',
+        cancel: 'Cancel Label',
+    }
+});
+
+if (result.length === OK)
+    console.log('yes');
+else
+    console.log('no');
 ```
 
 ## Bundlers

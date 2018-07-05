@@ -16,12 +16,19 @@ const readFixture = (name) => {
     return fs.readFileSync(`${fixtureDir}/${name}.html`, 'utf8');
 };
 
+const writeFixture = (name, data) => {
+    return fs.writeFileSync(`${fixtureDir}/${name}.html`, data);
+};
+
 const fixture = {
     alert: readFixture('alert'),
     confirm: readFixture('confirm'),
     prompt: readFixture('prompt'),
-    promptPassword: readFixture('prompt.password'),
-    promptNoValue: readFixture('prompt.no-value'),
+    promptPassword: readFixture('prompt-password'),
+    promptNoValue: readFixture('prompt-no-value'),
+    alertCustomLabel: readFixture('alert-custom-label'),
+    confirmCustomLabel: readFixture('confirm-custom-label'),
+    promptCustomLabel: readFixture('prompt-custom-label')
 };
 
 test('smalltalk: alert: innerHTML', (t) => {
@@ -36,6 +43,7 @@ test('smalltalk: alert: innerHTML', (t) => {
     
     smalltalk.alert('title', 'hello\nworld');
     t.equal(fixture.alert, el.innerHTML, 'should be equal');
+    writeFixture('alert', el.innerHTML);
     
     after();
     t.end();
@@ -412,6 +420,30 @@ test('smalltalk: alert: click', (t) => {
     t.end();
 });
 
+test('smalltalk: alert: custom label', (t) => {
+    before();
+    
+    const el = {
+        innerHTML: ''
+    };
+    
+    const createElement = getCreateElement(el);
+    global.document.createElement = createElement;
+    
+    const options = {
+        buttons: {
+            ok: 'Ok'
+        }
+    };
+    
+    smalltalk.alert('title', 'hello\nworld', options);
+    
+    t.equal(fixture.alertCustomLabel, el.innerHTML, 'should be equal');
+    
+    after();
+    t.end();
+});
+
 test('smalltalk: confirm: innerHTML', (t) => {
     before();
     
@@ -424,6 +456,7 @@ test('smalltalk: confirm: innerHTML', (t) => {
     
     smalltalk.confirm('title', 'message');
     t.equal(fixture.confirm, el.innerHTML, 'should be equal');
+    writeFixture('confirm', el.innerHTML);
     
     after();
     t.end();
@@ -694,6 +727,30 @@ test('smalltalk: confirm: keydown: enter', (t) => {
     keydown(event);
 });
 
+test('smalltalk: confirm: custom label', (t) => {
+    before();
+    
+    const el = {
+        innerHTML: ''
+    };
+    
+    const createElement = getCreateElement(el);
+    global.document.createElement = createElement;
+    
+    const options = {
+        buttons: {
+            ok: 'Ok',
+            cancel: 'Logout',
+        }
+    };
+    
+    smalltalk.confirm('title', 'message', options);
+    after();
+    
+    t.equal(fixture.confirmCustomLabel, el.innerHTML, 'should be equal');
+    t.end();
+});
+
 test('smalltalk: prompt: innerHTML', (t) => {
     before();
     
@@ -706,6 +763,7 @@ test('smalltalk: prompt: innerHTML', (t) => {
     
     smalltalk.prompt('title', 'message', 2);
     t.equal(fixture.prompt, el.innerHTML, 'should be equal');
+    writeFixture('prompt', el.innerHTML);
     
     after();
     t.end();
@@ -799,6 +857,30 @@ test('smalltalk: prompt: click on ok', (t) => {
     close({
         target: ok
     });
+});
+
+test('smalltalk: prompt: custom label', (t) => {
+    before();
+    
+    const el = {
+        innerHTML: ''
+    };
+    
+    const createElement = getCreateElement(el);
+    global.document.createElement = createElement;
+    
+    const options = {
+        buttons :{
+            ok: 'Ok',
+            cancel: 'Logout',
+        },
+    };
+    
+    smalltalk.prompt('title', 'message', 2, options);
+    after();
+    
+    t.equal(fixture.promptCustomLabel, el.innerHTML, 'should be equal');
+    t.end();
 });
 
 function getCreateElement(el = {}) {
