@@ -22,7 +22,17 @@ const fixture = {
     prompt: readFixture('prompt'),
     promptPassword: readFixture('prompt.password'),
     promptNoValue: readFixture('prompt.no-value'),
+    alertCustomLabel: readFixture('alert-custom-label'),
+    confirmCustomLabel: readFixture('confirm-custom-label'),
+    promptCustomLabel: readFixture('prompt-custom-label')
 };
+
+test('Remove new line from text', (t) => {
+    before();
+    t.equal(cleanNewLine('<div class=\'test\'>\n</div>'),'<div class=\'test\'></div>', 'should be equal');
+    after();
+    t.end();
+});
 
 test('smalltalk: alert: innerHTML', (t) => {
     before();
@@ -412,6 +422,24 @@ test('smalltalk: alert: click', (t) => {
     t.end();
 });
 
+test('smalltalk: alert: custom label', (t) => {
+    before();
+    
+    const el = {
+        innerHTML: ''
+    };
+    
+    const createElement = getCreateElement(el);
+    global.document.createElement = createElement;
+    
+    var options = {'buttons' : {'ok':'Ok'}};
+    smalltalk.alert('title', 'hello\nworld', options);
+    t.equal(cleanNewLine(fixture.alertCustomLabel), cleanNewLine(el.innerHTML), 'should be equal');
+    
+    after();
+    t.end();
+});
+
 test('smalltalk: confirm: innerHTML', (t) => {
     before();
     
@@ -694,6 +722,26 @@ test('smalltalk: confirm: keydown: enter', (t) => {
     keydown(event);
 });
 
+test('smalltalk: confirm: custom label', (t) => {
+    before();
+    
+    const el = {
+        innerHTML: ''
+    };
+    
+    const createElement = getCreateElement(el);
+    global.document.createElement = createElement;
+    
+    var options = {'buttons' : {'ok':'Ok','cancel':'Logout'}};
+    smalltalk.confirm('title', 'message', options);
+
+    t.equal(cleanNewLine(fixture.confirmCustomLabel), cleanNewLine(el.innerHTML), 'should be equal');
+    
+    after();
+    t.end();
+});
+
+
 test('smalltalk: prompt: innerHTML', (t) => {
     before();
     
@@ -801,6 +849,25 @@ test('smalltalk: prompt: click on ok', (t) => {
     });
 });
 
+test('smalltalk: prompt: custom label', (t) => {
+    before();
+    
+    const el = {
+        innerHTML: ''
+    };
+    
+    const createElement = getCreateElement(el);
+    global.document.createElement = createElement;
+    
+    var options = {'buttons' : {'ok':'Ok','cancel':'Logout'}};
+    smalltalk.prompt('title', 'message', 2, options);
+    
+    t.equal(cleanNewLine(fixture.promptCustomLabel), cleanNewLine(el.innerHTML), 'should be equal');
+    
+    after();
+    t.end();
+});
+
 function getCreateElement(el = {}) {
     const querySelector = sinon.stub();
     const addEventListener = sinon.stub();
@@ -828,5 +895,9 @@ function before() {
 
 function after() {
     delete global.document;
+}
+
+function cleanNewLine(text) {
+  return text.replace(/\r?\n|\r/g,"");
 }
 
