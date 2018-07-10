@@ -1,3 +1,21 @@
+2018.07.10, v3.1.0
+
+fix:
+- test(smalltalk) add ability to update fixtures
+
+feature:
+- (smalltalk) add custom label buttons
+- (package) css-loader v1.0.0
+- (package) webpack-cli v3.0.8
+- (package) nyc v12.0.2
+- (package) eslint v5.0.0
+- (package) sinon v6.0.0
+- (package) clean-css-loader v1.0.1
+- (package) sinon v5.0.3
+- (package) sinon v5.0.1
+- (package) rm systemjs
+
+
 2018.04.27, v3.0.0
 
 fix:
