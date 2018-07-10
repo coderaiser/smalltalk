@@ -7,17 +7,25 @@ require('css-modules-require-hook/preset');
 
 const test = require('tape');
 const sinon = require('sinon');
+const currify = require('currify');
 
 global.window = {};
 
+const {UPDATE_FIXTURE} = process.env;
+const isUpdateFixtures = UPDATE_FIXTURE === 'true' || UPDATE_FIXTURE === '1';
+const noop = () => {};
+
 const smalltalk = require('../lib/smalltalk');
 const fixtureDir = path.join(__dirname, 'fixture');
-const readFixture = (name) => {
-    return fs.readFileSync(`${fixtureDir}/${name}.html`, 'utf8');
-};
 
 const writeFixture = (name, data) => {
     return fs.writeFileSync(`${fixtureDir}/${name}.html`, data);
+};
+
+const readFixture = (name) => {
+    const fn = () => fs.readFileSync(`${fixtureDir}/${name}.html`, 'utf8');
+    fn.update = !isUpdateFixtures  ? noop : currify(writeFixture, name);
+    return fn;
 };
 
 const fixture = {
@@ -42,8 +50,8 @@ test('smalltalk: alert: innerHTML', (t) => {
     global.document.createElement = createElement;
     
     smalltalk.alert('title', 'hello\nworld');
-    t.equal(fixture.alert, el.innerHTML, 'should be equal');
-    writeFixture('alert', el.innerHTML);
+    t.equal(fixture.alert(), el.innerHTML, 'should be equal');
+    fixture.alert.update(el.innerHTML);
     
     after();
     t.end();
@@ -123,9 +131,9 @@ test('smalltalk: alert: close: querySelector', (t) => {
         target: ok
     });
     
-    t.equal(querySelector.args.pop().pop(), '.smalltalk', 'should find smalltalk');
-    
     after();
+    
+    t.equal(querySelector.args.pop().pop(), '.smalltalk', 'should find smalltalk');
     t.end();
 });
 
@@ -164,9 +172,9 @@ test('smalltalk: alert: close: remove', (t) => {
         target: ok
     });
     
-    t.equal(parentElement.removeChild.args.pop().pop(), el, 'should find smalltalk');
-    
     after();
+    
+    t.equal(parentElement.removeChild.args.pop().pop(), el, 'should find smalltalk');
     t.end();
 });
 
@@ -208,10 +216,9 @@ test('smalltalk: alert: keydown: stopPropagation', (t) => {
     };
     
     keydown(event);
+    after();
     
     t.ok(event.stopPropagation.called, 'should call stopPropagation');
-    
-    after();
     t.end();
 });
 
@@ -259,10 +266,9 @@ test('smalltalk: alert: keydown: tab: preventDefault', (t) => {
     };
     
     keydown(event);
+    after();
     
     t.ok(event.preventDefault.called, 'should call preventDefault');
-    
-    after();
     t.end();
 });
 
@@ -312,10 +318,9 @@ test('smalltalk: alert: keydown: tab: active name', (t) => {
     };
     
     keydown(event);
+    after();
     
     t.ok(event.preventDefault.called, 'should call preventDefault');
-    
-    after();
     t.end();
 });
 
@@ -365,9 +370,9 @@ test('smalltalk: alert: keydown: left: focus', (t) => {
     
     keydown(event);
     
-    t.ok(focus.called, 'should call focus');
-    
     after();
+    
+    t.ok(focus.called, 'should call focus');
     t.end();
 });
 
@@ -413,10 +418,9 @@ test('smalltalk: alert: click', (t) => {
     };
     
     keydown(event);
+    after();
     
     t.ok(focus.called, 'should call focus');
-    
-    after();
     t.end();
 });
 
@@ -437,10 +441,11 @@ test('smalltalk: alert: custom label', (t) => {
     };
     
     smalltalk.alert('title', 'hello\nworld', options);
-    
-    t.equal(fixture.alertCustomLabel, el.innerHTML, 'should be equal');
-    
     after();
+    
+    fixture.alertCustomLabel.update(el.innerHTML);
+    
+    t.equal(fixture.alertCustomLabel(), el.innerHTML, 'should be equal');
     t.end();
 });
 
@@ -455,8 +460,9 @@ test('smalltalk: confirm: innerHTML', (t) => {
     global.document.createElement = createElement;
     
     smalltalk.confirm('title', 'message');
-    t.equal(fixture.confirm, el.innerHTML, 'should be equal');
-    writeFixture('confirm', el.innerHTML);
+    t.equal(fixture.confirm(), el.innerHTML, 'should be equal');
+    
+    fixture.confirm.update(el.innerHTML);
     
     after();
     t.end();
@@ -489,8 +495,8 @@ test('smalltalk: confirm: click on close', (t) => {
     
     smalltalk.confirm('title', 'message')
         .catch(() => {
-            t.pass('should reject');
             after();
+            t.pass('should reject');
             t.end();
         });
     
@@ -556,10 +562,9 @@ test('smalltalk: confirm: keydown: left: active name', (t) => {
     };
     
     keydown(event);
+    after();
     
     t.ok(focus.called, 'should call focus');
-    
-    after();
     t.end();
 });
 
@@ -618,10 +623,9 @@ test('smalltalk: confirm: keydown: left: active name: cancel', (t) => {
     };
     
     keydown(event);
+    after();
     
     t.ok(focus.called, 'should call focus');
-    
-    after();
     t.end();
 });
 
@@ -655,8 +659,8 @@ test('smalltalk: confirm: keydown: esc: reject', (t) => {
     
     smalltalk.confirm('title', 'message')
         .catch(() => {
-            t.pass('should reject');
             after();
+            t.pass('should reject');
             t.end();
         });
     
@@ -746,8 +750,9 @@ test('smalltalk: confirm: custom label', (t) => {
     
     smalltalk.confirm('title', 'message', options);
     after();
+    fixture.confirmCustomLabel.update(el.innerHTML);
     
-    t.equal(fixture.confirmCustomLabel, el.innerHTML, 'should be equal');
+    t.equal(fixture.confirmCustomLabel(), el.innerHTML, 'should be equal');
     t.end();
 });
 
@@ -762,8 +767,8 @@ test('smalltalk: prompt: innerHTML', (t) => {
     global.document.createElement = createElement;
     
     smalltalk.prompt('title', 'message', 2);
-    t.equal(fixture.prompt, el.innerHTML, 'should be equal');
-    writeFixture('prompt', el.innerHTML);
+    t.equal(fixture.prompt(), el.innerHTML, 'should be equal');
+    fixture.prompt.update(el.innerHTML);
     
     after();
     t.end();
@@ -783,9 +788,10 @@ test('smalltalk: prompt: password', (t) => {
         type: 'password'
     });
     
-    t.equal(fixture.promptPassword, el.innerHTML, 'should be equal');
-    
+    fixture.promptPassword.update(el.innerHTML);
     after();
+    
+    t.equal(fixture.promptPassword(), el.innerHTML, 'should be equal');
     t.end();
 });
 
@@ -800,9 +806,10 @@ test('smalltalk: prompt: no value', (t) => {
     global.document.createElement = createElement;
     
     smalltalk.prompt('title', 'message');
-    t.equal(fixture.promptNoValue, el.innerHTML, 'should be equal');
-    
     after();
+    fixture.promptNoValue.update(el.innerHTML);
+    
+    t.equal(fixture.promptNoValue(), el.innerHTML, 'should be equal');
     t.end();
 });
 
@@ -847,8 +854,8 @@ test('smalltalk: prompt: click on ok', (t) => {
     
     smalltalk.prompt('title', 'message', value)
         .then((result) => {
-            t.equal(result, value, 'should return value');
             after();
+            t.equal(result, value, 'should return value');
             t.end();
         });
     
@@ -878,8 +885,9 @@ test('smalltalk: prompt: custom label', (t) => {
     
     smalltalk.prompt('title', 'message', 2, options);
     after();
+    fixture.promptCustomLabel.update();
     
-    t.equal(fixture.promptCustomLabel, el.innerHTML, 'should be equal');
+    t.equal(fixture.promptCustomLabel(), el.innerHTML, 'should be equal');
     t.end();
 });
 

@@ -29,6 +29,7 @@
     "lint:js": "eslint lib test webpack.config.js",
     "lint": "redrun lint:*",
     "test": "tape 'test/**/*.js'",
+    "test:update": "UPDATE_FIXTURE=1 redrun test",
     "init": "mkdirp native"
   },
   "keywords": [
