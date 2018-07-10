@@ -118,10 +118,11 @@ import smalltalk from 'smalltalk/legacy';
 # License
 MIT
 
-[NPMIMGURL]:                https://img.shields.io/npm/v/smalltalk.svg?style=flat
-[BuildStatusIMGURL]:        https://img.shields.io/travis/coderaiser/smalltalk/master.svg?style=flat
-[DependencyStatusIMGURL]:   https://img.shields.io/david/coderaiser/smalltalk.svg?style=flat
-[LicenseIMGURL]:            https://img.shields.io/badge/license-MIT-317BF9.svg?style=flat
+[NPMIMGURL]:                https://img.shields.io/npm/v/smalltalk.svg?style=flat&longCache=true
+[BuildStatusIMGURL]:        https://img.shields.io/travis/coderaiser/smalltalk/master.svg?style=flat&longCache=true
+[DependencyStatusIMGURL]:   https://img.shields.io/david/coderaiser/smalltalk.svg?style=flat&longCache=true
+[LicenseIMGURL]:            https://img.shields.io/badge/license-MIT-317BF9.svg?style=flat&longCache=true
+
 [NPMURL]:                   https://npmjs.org/package/smalltalk "npm"
 [BuildStatusURL]:           https://travis-ci.org/coderaiser/smalltalk  "Build Status"
 [DependencyStatusURL]:      https://david-dm.org/coderaiser/smalltalk "Dependency Status"
