@@ -8,6 +8,7 @@ require('css-modules-require-hook/preset');
 const test = require('tape');
 const sinon = require('sinon');
 const currify = require('currify');
+const wraptile = require('wraptile');
 
 global.window = {};
 
@@ -460,11 +461,12 @@ test('smalltalk: confirm: innerHTML', (t) => {
     global.document.createElement = createElement;
     
     smalltalk.confirm('title', 'message');
-    t.equal(fixture.confirm(), el.innerHTML, 'should be equal');
     
     fixture.confirm.update(el.innerHTML);
     
     after();
+    
+    t.equal(fixture.confirm(), el.innerHTML, 'should be equal');
     t.end();
 });
 
@@ -849,7 +851,6 @@ test('smalltalk: prompt: click on ok', (t) => {
     
     const createElement = getCreateElement(el);
     document.createElement = createElement;
-    
     document.querySelector = () => el;
     
     smalltalk.prompt('title', 'message', value)
@@ -866,6 +867,168 @@ test('smalltalk: prompt: click on ok', (t) => {
     });
 });
 
+test('smalltalk: prompt: click on cancel', (t) => {
+    before();
+    
+    const dataName = (a) => `[data-name="js-${a}"]`;
+    const noop = () => {};
+    
+    const value = 'hello';
+    const input = {
+        value,
+        focus: noop,
+        setSelectionRange: noop,
+    };
+    
+    const cancel = {
+        getAttribute: () => 'js-cancel',
+        focus: sinon.stub(),
+        addEventListener: sinon.stub(),
+    };
+    
+    const querySelector = (a) => {
+        if (a === dataName('input'))
+            return input;
+        
+        if (a === dataName('cancel'))
+            return cancel;
+    };
+    
+    const el = {
+        querySelector,
+        parentElement: {
+            removeChild: () => {}
+        },
+    };
+    
+    const createElement = getCreateElement(el);
+    document.createElement = createElement;
+    document.querySelector = () => el;
+    
+    smalltalk.prompt('title', 'message', value)
+        .catch(() => {
+            after();
+            t.pass('should reject');
+            t.end();
+        });
+    
+    const [, close] = cancel.addEventListener.args.pop();
+    
+    close({
+        target: cancel
+    });
+});
+
+test('smalltalk: prompt: click on cancel: cancel false', (t) => {
+    before();
+    
+    const dataName = (a) => `[data-name="js-${a}"]`;
+    const noop = () => {};
+    
+    const value = 'hello';
+    const input = {
+        value,
+        focus: noop,
+        setSelectionRange: noop,
+    };
+    
+    const cancel = {
+        getAttribute: () => 'js-cancel',
+        focus: sinon.stub(),
+        addEventListener: sinon.stub(),
+    };
+    
+    const querySelector = (a) => {
+        if (a === dataName('input'))
+            return input;
+        
+        if (a === dataName('cancel'))
+            return cancel;
+    };
+    
+    const el = {
+        querySelector,
+        parentElement: {
+            removeChild: () => {}
+        },
+    };
+    
+    const createElement = getCreateElement(el);
+    document.createElement = createElement;
+    document.querySelector = () => el;
+    
+    const fail = t.fail.bind(t);
+    const end = t.end.bind(t);
+    
+    smalltalk.prompt('title', 'message', value, {cancel: false})
+        .then(wraptile(fail, 'should not pass'))
+        .catch(wraptile(fail, 'should not reject'))
+        .then(end);
+     
+    const [, close] = cancel.addEventListener.args.pop();
+    
+    close({
+        target: cancel
+    });
+     
+     t.pass('should do nothing');
+     t.end();
+     
+     after();
+});
+
+test('smalltalk: prompt: click on cancel: options: no cancel', (t) => {
+    before();
+    
+    const dataName = (a) => `[data-name="js-${a}"]`;
+    const noop = () => {};
+    
+    const value = 'hello';
+    const input = {
+        value,
+        focus: noop,
+        setSelectionRange: noop,
+    };
+    
+    const cancel = {
+        getAttribute: () => 'js-cancel',
+        focus: sinon.stub(),
+        addEventListener: sinon.stub(),
+    };
+    
+    const querySelector = (a) => {
+        if (a === dataName('input'))
+            return input;
+        
+        if (a === dataName('cancel'))
+            return cancel;
+    };
+    
+    const el = {
+        querySelector,
+        parentElement: {
+            removeChild: () => {}
+        },
+    };
+    
+    const createElement = getCreateElement(el);
+    document.createElement = createElement;
+    document.querySelector = () => el;
+    
+    smalltalk.prompt('title', 'message', value, {})
+        .catch(() => {
+            after();
+            t.pass('should reject');
+            t.end();
+        });
+    
+    const [, close] = cancel.addEventListener.args.pop();
+    
+    close({
+        target: cancel
+    });
+});
+
 test('smalltalk: prompt: custom label', (t) => {
     before();
     
@@ -877,7 +1040,7 @@ test('smalltalk: prompt: custom label', (t) => {
     global.document.createElement = createElement;
     
     const options = {
-        buttons :{
+        buttons: {
             ok: 'Ok',
             cancel: 'Logout',
         },
