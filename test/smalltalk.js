@@ -1058,6 +1058,8 @@ function getCreateElement(el = {}) {
     const querySelector = sinon.stub();
     const addEventListener = sinon.stub();
     
+    el.dataset = {};
+    
     if (!el.querySelector)
         el.querySelector = querySelector;
     

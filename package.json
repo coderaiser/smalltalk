@@ -69,6 +69,7 @@
     "wraptile": "^2.0.0"
   },
   "dependencies": {
+    "@cloudcmd/create-element": "^1.0.0",
     "currify": "^2.0.3",
     "fullstore": "^1.0.0"
   }
