@@ -1,3 +1,17 @@
+2018.09.18, v3.2.0
+
+fix:
+- feature(package) autoprefixer v9.1.0
+
+feature:
+- (package) add @cloudcmd/create-element
+- (package) babel v7.0.0
+- (package) style-loader v0.23.0
+- (package) nyc v13.0.1
+- (package) autoprefixer v9.1.0
+- (package) style-loader v0.22.0
+
+
 2018.07.11, v3.1.1
 
 fix:
