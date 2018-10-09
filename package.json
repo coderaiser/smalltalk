@@ -70,7 +70,7 @@
   },
   "dependencies": {
     "@cloudcmd/create-element": "^1.0.0",
-    "currify": "^2.0.3",
+    "currify": "^3.0.0",
     "fullstore": "^1.0.0"
   }
 }
