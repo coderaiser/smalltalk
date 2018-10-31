@@ -273,6 +273,101 @@ test('smalltalk: alert: keydown: tab: preventDefault', (t) => {
     t.end();
 });
 
+test.only('smalltalk: alert: click: stopPropagation: called', (t) => {
+    before();
+    
+    const parentElement = {
+        addEventListener: sinon.stub(),
+        removeChild: sinon.stub()
+    };
+    
+    const el = {
+        parentElement,
+        querySelector: (a) => {
+            if (a === '[data-name="js-ok"]')
+                return ok;
+        }
+    };
+    
+    const ok = {
+        getAttribute: () => 'js-ok',
+        focus: sinon.stub(),
+        addEventListener: sinon.stub(),
+    };
+    
+    const createElement = getCreateElement(el);
+    document.createElement = createElement;
+    
+    const querySelector = sinon.stub().returns(el);
+    document.querySelector = querySelector;
+    
+    smalltalk.alert('title', 'message');
+    
+    const [, click] = el.addEventListener.args.filter(([event]) => {
+        return event === 'click';
+    }).pop();
+    
+    const event = {
+        stopPropagation: sinon.stub()
+    };
+    
+    click(event);
+    after();
+    
+    t.ok(event.stopPropagation.called, 'should call stopPropagation');
+    t.end();
+});
+
+test('smalltalk: alert: keydown: tab: preventDefault', (t) => {
+    before();
+    
+    const parentElement = {
+        removeChild: sinon.stub()
+    };
+    
+    const el = {
+        parentElement,
+        querySelector: (a) => {
+            if (a === '[data-name="js-ok"]')
+                return ok;
+        },
+        getAttribute: () => 'js-ok'
+    };
+    
+    const ok = {
+        getAttribute: () => 'js-ok',
+        focus: sinon.stub(),
+        addEventListener: sinon.stub(),
+    };
+    
+    const createElement = getCreateElement(el);
+    document.createElement = createElement;
+    
+    const querySelector = sinon.stub().returns(el);
+    document.querySelector = querySelector;
+    
+    smalltalk.alert('title', 'message');
+    
+    const [, keydown] = el.addEventListener.args
+        .filter(([event]) => event === 'keydown')
+        .pop();
+    
+    const TAB = 9;
+    
+    const event = {
+        keyCode: TAB,
+        preventDefault: sinon.stub(),
+        stopPropagation: sinon.stub(),
+        target: el,
+    };
+    
+    keydown(event);
+    after();
+    
+    t.ok(event.preventDefault.called, 'should call preventDefault');
+    t.end();
+});
+
 test('smalltalk: alert: keydown: tab: active name', (t) => {
     before();
     
