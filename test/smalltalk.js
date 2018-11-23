@@ -6,7 +6,7 @@ const fs = require('fs');
 require('css-modules-require-hook/preset');
 
 const test = require('tape');
-const sinon = require('sinon');
+const stub = require('@cloudcmd/stub');
 const currify = require('currify');
 const wraptile = require('wraptile');
 
@@ -85,8 +85,8 @@ test('smalltalk: alert: click', (t) => {
     };
     
     const ok = {
-        focus: sinon.stub(),
-        addEventListener: sinon.stub(),
+        focus: stub(),
+        addEventListener: stub(),
     };
     
     const createElement = getCreateElement(el);
@@ -114,14 +114,14 @@ test('smalltalk: alert: close: querySelector', (t) => {
     
     const ok = {
         getAttribute: () => 'js-ok',
-        focus: sinon.stub(),
-        addEventListener: sinon.stub(),
+        focus: stub(),
+        addEventListener: stub(),
     };
     
     const createElement = getCreateElement(el);
     document.createElement = createElement;
     
-    const querySelector = sinon.stub().returns(el);
+    const querySelector = stub().returns(el);
     document.querySelector = querySelector;
     
     smalltalk.alert('title', 'message');
@@ -142,7 +142,7 @@ test('smalltalk: alert: close: remove', (t) => {
     before();
     
     const parentElement = {
-        removeChild: sinon.stub()
+        removeChild: stub(),
     };
     
     const el = {
@@ -155,14 +155,14 @@ test('smalltalk: alert: close: remove', (t) => {
     
     const ok = {
         getAttribute: () => 'js-ok',
-        focus: sinon.stub(),
-        addEventListener: sinon.stub(),
+        focus: stub(),
+        addEventListener: stub(),
     };
     
     const createElement = getCreateElement(el);
     document.createElement = createElement;
     
-    const querySelector = sinon.stub().returns(el);
+    const querySelector = stub().returns(el);
     document.querySelector = querySelector;
     
     smalltalk.alert('title', 'message');
@@ -183,7 +183,7 @@ test('smalltalk: alert: keydown: stopPropagation', (t) => {
     before();
     
     const parentElement = {
-        removeChild: sinon.stub()
+        removeChild: stub(),
     };
     
     const el = {
@@ -196,14 +196,14 @@ test('smalltalk: alert: keydown: stopPropagation', (t) => {
     
     const ok = {
         getAttribute: () => 'js-ok',
-        focus: sinon.stub(),
-        addEventListener: sinon.stub(),
+        focus: stub(),
+        addEventListener: stub(),
     };
     
     const createElement = getCreateElement(el);
     document.createElement = createElement;
     
-    const querySelector = sinon.stub().returns(el);
+    const querySelector = stub().returns(el);
     document.querySelector = querySelector;
     
     smalltalk.alert('title', 'message');
@@ -213,7 +213,7 @@ test('smalltalk: alert: keydown: stopPropagation', (t) => {
     }).pop();
     
     const event = {
-        stopPropagation: sinon.stub()
+        stopPropagation: stub()
     };
     
     keydown(event);
@@ -227,7 +227,7 @@ test('smalltalk: alert: keydown: tab: preventDefault', (t) => {
     before();
     
     const parentElement = {
-        removeChild: sinon.stub()
+        removeChild: stub(),
     };
     
     const el = {
@@ -241,14 +241,14 @@ test('smalltalk: alert: keydown: tab: preventDefault', (t) => {
     
     const ok = {
         getAttribute: () => 'js-ok',
-        focus: sinon.stub(),
-        addEventListener: sinon.stub(),
+        focus: stub(),
+        addEventListener: stub(),
     };
     
     const createElement = getCreateElement(el);
     document.createElement = createElement;
     
-    const querySelector = sinon.stub().returns(el);
+    const querySelector = stub().returns(el);
     document.querySelector = querySelector;
     
     smalltalk.alert('title', 'message');
@@ -261,8 +261,8 @@ test('smalltalk: alert: keydown: tab: preventDefault', (t) => {
     
     const event = {
         keyCode: TAB,
-        preventDefault: sinon.stub(),
-        stopPropagation: sinon.stub(),
+        preventDefault: stub(),
+        stopPropagation: stub(),
         target: el,
     };
     
@@ -273,12 +273,12 @@ test('smalltalk: alert: keydown: tab: preventDefault', (t) => {
     t.end();
 });
 
-test.only('smalltalk: alert: click: stopPropagation: called', (t) => {
+test('smalltalk: alert: click: stopPropagation: called', (t) => {
     before();
     
     const parentElement = {
-        addEventListener: sinon.stub(),
-        removeChild: sinon.stub()
+        addEventListener: stub(),
+        removeChild: stub(),
     };
     
     const el = {
@@ -291,24 +291,27 @@ test.only('smalltalk: alert: click: stopPropagation: called', (t) => {
     
     const ok = {
         getAttribute: () => 'js-ok',
-        focus: sinon.stub(),
-        addEventListener: sinon.stub(),
+        focus: stub(),
+        addEventListener: stub(),
     };
     
     const createElement = getCreateElement(el);
     document.createElement = createElement;
     
-    const querySelector = sinon.stub().returns(el);
+    const querySelector = stub().returns(el);
     document.querySelector = querySelector;
     
     smalltalk.alert('title', 'message');
     
-    const [, click] = el.addEventListener.args.filter(([event]) => {
+    console.log(typeof el.addEventListener.args.filter);
+    const [, click] = el.addEventListener.args.filter((a) => {
+        console.log(a);
+        const [event] = a;
         return event === 'click';
     }).pop();
     
     const event = {
-        stopPropagation: sinon.stub()
+        stopPropagation: stub(),
     };
     
     click(event);
@@ -322,7 +325,7 @@ test('smalltalk: alert: keydown: tab: preventDefault', (t) => {
     before();
     
     const parentElement = {
-        removeChild: sinon.stub()
+        removeChild: stub(),
     };
     
     const el = {
@@ -336,14 +339,14 @@ test('smalltalk: alert: keydown: tab: preventDefault', (t) => {
     
     const ok = {
         getAttribute: () => 'js-ok',
-        focus: sinon.stub(),
-        addEventListener: sinon.stub(),
+        focus: stub(),
+        addEventListener: stub(),
     };
     
     const createElement = getCreateElement(el);
     document.createElement = createElement;
     
-    const querySelector = sinon.stub().returns(el);
+    const querySelector = stub().returns(el);
     document.querySelector = querySelector;
     
     smalltalk.alert('title', 'message');
@@ -356,8 +359,8 @@ test('smalltalk: alert: keydown: tab: preventDefault', (t) => {
     
     const event = {
         keyCode: TAB,
-        preventDefault: sinon.stub(),
-        stopPropagation: sinon.stub(),
+        preventDefault: stub(),
+        stopPropagation: stub(),
         target: el,
     };
     
@@ -372,7 +375,7 @@ test('smalltalk: alert: keydown: tab: active name', (t) => {
     before();
     
     const parentElement = {
-        removeChild: sinon.stub()
+        removeChild: stub(),
     };
     
     const el = {
@@ -386,14 +389,14 @@ test('smalltalk: alert: keydown: tab: active name', (t) => {
     
     const ok = {
         getAttribute: () => 'js-ok',
-        focus: sinon.stub(),
-        addEventListener: sinon.stub(),
+        focus: stub(),
+        addEventListener: stub(),
     };
     
     const createElement = getCreateElement(el);
     document.createElement = createElement;
     
-    const querySelector = sinon.stub().returns(el);
+    const querySelector = stub().returns(el);
     document.querySelector = querySelector;
     document.activeElement = ok;
     
@@ -408,8 +411,8 @@ test('smalltalk: alert: keydown: tab: active name', (t) => {
     const event = {
         keyCode: TAB,
         shiftKey: true,
-        preventDefault: sinon.stub(),
-        stopPropagation: sinon.stub(),
+        preventDefault: stub(),
+        stopPropagation: stub(),
         target: el,
     };
     
@@ -424,7 +427,7 @@ test('smalltalk: alert: keydown: left: focus', (t) => {
     before();
     
     const parentElement = {
-        removeChild: sinon.stub()
+        removeChild: stub(),
     };
     
     const el = {
@@ -436,17 +439,17 @@ test('smalltalk: alert: keydown: left: focus', (t) => {
         getAttribute: () => 'js-ok'
     };
     
-    const focus = sinon.stub();
+    const focus = stub();
     const ok = {
         focus,
         getAttribute: () => 'js-ok',
-        addEventListener: sinon.stub(),
+        addEventListener: stub(),
     };
     
     const createElement = getCreateElement(el);
     document.createElement = createElement;
     
-    const querySelector = sinon.stub().returns(el);
+    const querySelector = stub().returns(el);
     document.querySelector = querySelector;
     
     smalltalk.alert('title', 'message');
@@ -459,8 +462,8 @@ test('smalltalk: alert: keydown: left: focus', (t) => {
     
     const event = {
         keyCode: LEFT,
-        preventDefault: sinon.stub(),
-        stopPropagation: sinon.stub(),
+        preventDefault: stub(),
+        stopPropagation: stub(),
         target: el,
     };
     
@@ -476,7 +479,7 @@ test('smalltalk: alert: click', (t) => {
     before();
     
     const parentElement = {
-        removeChild: sinon.stub()
+        removeChild: stub(),
     };
     
     const el = {
@@ -488,17 +491,17 @@ test('smalltalk: alert: click', (t) => {
         getAttribute: () => 'js-ok'
     };
     
-    const focus = sinon.stub();
+    const focus = stub();
     const ok = {
         focus,
         getAttribute: () => 'js-ok',
-        addEventListener: sinon.stub(),
+        addEventListener: stub(),
     };
     
     const createElement = getCreateElement(el);
     document.createElement = createElement;
     
-    const querySelector = sinon.stub().returns(el);
+    const querySelector = stub().returns(el);
     document.querySelector = querySelector;
     
     smalltalk.alert('title', 'message');
@@ -508,8 +511,8 @@ test('smalltalk: alert: click', (t) => {
         .pop();
     
     const event = {
-        preventDefault: sinon.stub(),
-        stopPropagation: sinon.stub(),
+        preventDefault: stub(),
+        stopPropagation: stub(),
         target: el,
     };
     
@@ -580,14 +583,14 @@ test('smalltalk: confirm: click on close', (t) => {
     
     const closeButton = {
         getAttribute: () => 'js-close',
-        focus: sinon.stub(),
-        addEventListener: sinon.stub(),
+        focus: stub(),
+        addEventListener: stub(),
     };
     
     const createElement = getCreateElement(el);
     document.createElement = createElement;
     
-    const querySelector = sinon.stub().returns(el);
+    const querySelector = stub().returns(el);
     document.querySelector = querySelector;
     
     smalltalk.confirm('title', 'message')
@@ -608,7 +611,7 @@ test('smalltalk: confirm: keydown: left: active name', (t) => {
     before();
     
     const parentElement = {
-        removeChild: sinon.stub()
+        removeChild: stub(),
     };
     
     const el = {
@@ -623,23 +626,23 @@ test('smalltalk: confirm: keydown: left: active name', (t) => {
         getAttribute: () => 'js-ok'
     };
     
-    const focus = sinon.stub();
+    const focus = stub();
     const ok = {
         focus,
         getAttribute: () => 'js-ok',
-        addEventListener: sinon.stub(),
+        addEventListener: stub(),
     };
     
     const cancel = {
         focus,
         getAttribute: () => 'js-cancel',
-        addEventListener: sinon.stub(),
+        addEventListener: stub(),
     };
     
     const createElement = getCreateElement(el);
     document.createElement = createElement;
     
-    const querySelector = sinon.stub().returns(el);
+    const querySelector = stub().returns(el);
     document.querySelector = querySelector;
     document.activeElement = ok;
     
@@ -653,8 +656,8 @@ test('smalltalk: confirm: keydown: left: active name', (t) => {
     
     const event = {
         keyCode: LEFT,
-        preventDefault: sinon.stub(),
-        stopPropagation: sinon.stub(),
+        preventDefault: stub(),
+        stopPropagation: stub(),
         target: el,
     };
     
@@ -669,7 +672,7 @@ test('smalltalk: confirm: keydown: left: active name: cancel', (t) => {
     before();
     
     const parentElement = {
-        removeChild: sinon.stub()
+        removeChild: stub()
     };
     
     const el = {
@@ -684,23 +687,23 @@ test('smalltalk: confirm: keydown: left: active name: cancel', (t) => {
         getAttribute: () => 'js-ok'
     };
     
-    const focus = sinon.stub();
+    const focus = stub();
     const ok = {
         focus,
         getAttribute: () => 'js-ok',
-        addEventListener: sinon.stub(),
+        addEventListener: stub(),
     };
     
     const cancel = {
         focus,
         getAttribute: () => 'js-cancel',
-        addEventListener: sinon.stub(),
+        addEventListener: stub(),
     };
     
     const createElement = getCreateElement(el);
     document.createElement = createElement;
     
-    const querySelector = sinon.stub().returns(el);
+    const querySelector = stub().returns(el);
     document.querySelector = querySelector;
     document.activeElement = cancel;
     
@@ -714,8 +717,8 @@ test('smalltalk: confirm: keydown: left: active name: cancel', (t) => {
     
     const event = {
         keyCode: LEFT,
-        preventDefault: sinon.stub(),
-        stopPropagation: sinon.stub(),
+        preventDefault: stub(),
+        stopPropagation: stub(),
         target: el,
     };
     
@@ -730,7 +733,7 @@ test('smalltalk: confirm: keydown: esc: reject', (t) => {
     before();
     
     const parentElement = {
-        removeChild: sinon.stub()
+        removeChild: stub(),
     };
     
     const el = {
@@ -744,14 +747,14 @@ test('smalltalk: confirm: keydown: esc: reject', (t) => {
     
     const ok = {
         getAttribute: () => 'js-ok',
-        focus: sinon.stub(),
-        addEventListener: sinon.stub(),
+        focus: stub(),
+        addEventListener: stub(),
     };
     
     const createElement = getCreateElement(el);
     document.createElement = createElement;
     
-    const querySelector = sinon.stub().returns(el);
+    const querySelector = stub().returns(el);
     document.querySelector = querySelector;
     
     smalltalk.confirm('title', 'message')
@@ -769,8 +772,8 @@ test('smalltalk: confirm: keydown: esc: reject', (t) => {
     
     const event = {
         keyCode: ESC,
-        preventDefault: sinon.stub(),
-        stopPropagation: sinon.stub(),
+        preventDefault: stub(),
+        stopPropagation: stub(),
         target: el,
     };
     
@@ -781,7 +784,7 @@ test('smalltalk: confirm: keydown: enter', (t) => {
     before();
     
     const parentElement = {
-        removeChild: sinon.stub()
+        removeChild: stub()
     };
     
     const el = {
@@ -795,14 +798,14 @@ test('smalltalk: confirm: keydown: enter', (t) => {
     
     const ok = {
         getAttribute: () => 'js-ok',
-        focus: sinon.stub(),
-        addEventListener: sinon.stub(),
+        focus: stub(),
+        addEventListener: stub(),
     };
     
     const createElement = getCreateElement(el);
     document.createElement = createElement;
     
-    const querySelector = sinon.stub().returns(el);
+    const querySelector = stub().returns(el);
     document.querySelector = querySelector;
     
     smalltalk.confirm('title', 'message')
@@ -820,8 +823,8 @@ test('smalltalk: confirm: keydown: enter', (t) => {
     
     const event = {
         keyCode: ENTER,
-        preventDefault: sinon.stub(),
-        stopPropagation: sinon.stub(),
+        preventDefault: stub(),
+        stopPropagation: stub(),
         target: el,
     };
     
@@ -925,8 +928,8 @@ test('smalltalk: prompt: click on ok', (t) => {
     
     const ok = {
         getAttribute: () => 'js-ok',
-        focus: sinon.stub(),
-        addEventListener: sinon.stub(),
+        focus: stub(),
+        addEventListener: stub(),
     };
     
     const querySelector = (a) => {
@@ -977,8 +980,8 @@ test('smalltalk: prompt: click on cancel', (t) => {
     
     const cancel = {
         getAttribute: () => 'js-cancel',
-        focus: sinon.stub(),
-        addEventListener: sinon.stub(),
+        focus: stub(),
+        addEventListener: stub(),
     };
     
     const querySelector = (a) => {
@@ -1029,8 +1032,8 @@ test('smalltalk: prompt: click on cancel: cancel false', (t) => {
     
     const cancel = {
         getAttribute: () => 'js-cancel',
-        focus: sinon.stub(),
-        addEventListener: sinon.stub(),
+        focus: stub(),
+        addEventListener: stub(),
     };
     
     const querySelector = (a) => {
@@ -1087,8 +1090,8 @@ test('smalltalk: prompt: click on cancel: options: no cancel', (t) => {
     
     const cancel = {
         getAttribute: () => 'js-cancel',
-        focus: sinon.stub(),
-        addEventListener: sinon.stub(),
+        focus: stub(),
+        addEventListener: stub(),
     };
     
     const querySelector = (a) => {
@@ -1150,8 +1153,8 @@ test('smalltalk: prompt: custom label', (t) => {
 });
 
 function getCreateElement(el = {}) {
-    const querySelector = sinon.stub();
-    const addEventListener = sinon.stub();
+    const querySelector = stub();
+    const addEventListener = stub();
     
     el.dataset = {};
     
@@ -1161,7 +1164,7 @@ function getCreateElement(el = {}) {
     if (!el.addEventListener)
         el.addEventListener = addEventListener;
     
-    return sinon.stub().returns(el);
+    return stub().returns(el);
 }
 
 function before() {
@@ -1171,7 +1174,7 @@ function before() {
         },
         createElement: getCreateElement(),
         body: {
-            appendChild: sinon.stub()
+            appendChild: stub()
         }
     };
 }

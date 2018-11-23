@@ -1,7 +1,7 @@
 'use strict';
 
 const test = require('tape');
-const sinon = require('sinon');
+const stub = require('@cloudcmd/stub');
 
 const smalltalk = require('../lib/smalltalk.native');
 
@@ -15,7 +15,7 @@ test('smalltalk.native: Promise', (t) => {
 });
 
 test('smalltalk.native: alert', (t) => {
-    const alert = sinon.stub();
+    const alert = stub();
     global.alert = alert;
     
     smalltalk.alert('title', 'message');
@@ -24,7 +24,7 @@ test('smalltalk.native: alert', (t) => {
 });
 
 test('smalltalk.native: alert: result', (t) => {
-    const alert = sinon.stub();
+    const alert = stub();
     global.alert = alert;
     
     smalltalk.alert('title', 'message').then(() => {
@@ -37,7 +37,7 @@ test('smalltalk.native: alert: result', (t) => {
 });
 
 test('smalltalk.native: confirm', (t) => {
-    const confirm = sinon.stub().returns(false);
+    const confirm = stub().returns(false);
     global.confirm = confirm;
     
     smalltalk.confirm('title', 'message')
@@ -48,7 +48,7 @@ test('smalltalk.native: confirm', (t) => {
 });
 
 test('smalltalk.native: confirm: result: ok', (t) => {
-    const confirm = sinon.stub().returns(true);
+    const confirm = stub().returns(true);
     global.confirm = confirm;
     
     smalltalk.confirm('title', 'message').then(() => {
@@ -61,7 +61,7 @@ test('smalltalk.native: confirm: result: ok', (t) => {
 });
 
 test('smalltalk.native: confirm: result: cancel', (t) => {
-    const confirm = sinon.stub().returns(false);
+    const confirm = stub().returns(false);
     global.confirm = confirm;
     
     smalltalk.confirm('title', 'message').then(() => {
@@ -74,7 +74,7 @@ test('smalltalk.native: confirm: result: cancel', (t) => {
 });
 
 test('smalltalk.native: confirm: options: cancel', (t) => {
-    const confirm = sinon.stub().returns(false);
+    const confirm = stub().returns(false);
     global.confirm = confirm;
     
     const cancel = false;
@@ -93,7 +93,7 @@ test('smalltalk.native: confirm: options: cancel', (t) => {
 });
 
 test('smalltalk.native: prompt', (t) => {
-    const prompt = sinon.stub();
+    const prompt = stub();
     global.prompt = prompt;
     
     smalltalk.prompt('title', 'message', 'value');
@@ -102,7 +102,7 @@ test('smalltalk.native: prompt', (t) => {
 });
 
 test('smalltalk.native: prompt: result: ok', (t) => {
-    const prompt = sinon.stub().returns('hello');
+    const prompt = stub().returns('hello');
     global.prompt = prompt;
     
     smalltalk.prompt('title', 'message', 'value').then((value) => {
@@ -115,7 +115,7 @@ test('smalltalk.native: prompt: result: ok', (t) => {
 });
 
 test('smalltalk.native: prompt: result: cancel', (t) => {
-    const prompt = sinon.stub().returns(null);
+    const prompt = stub().returns(null);
     global.prompt = prompt;
     
     smalltalk.prompt('title', 'message', 'value').then(() => {
@@ -128,7 +128,7 @@ test('smalltalk.native: prompt: result: cancel', (t) => {
 });
 
 test('smalltalk.native: prompt: options: cancel', (t) => {
-    const prompt = sinon.stub().returns(null);
+    const prompt = stub().returns(null);
     global.prompt = prompt;
     
     smalltalk.prompt('title', 'message', 'value', {
