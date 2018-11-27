@@ -253,15 +253,15 @@ test('smalltalk: alert: keydown: tab: preventDefault', (t, {document}) => {
     t.end();
 });
 
-test('smalltalk: alert: click: stopPropagation: called', (t) => {
-    before();
+test('smalltalk: alert: click: stopPropagation: called', (t, {document}) => {
+    const {
+        createElement,
+        querySelector,
+    } = document;
     
-    const parentElement = {
-        addEventListener: stub(),
-        removeChild: stub(),
-    };
-    
+    const parentElement = create();
     const el = {
+        ...create(),
         parentElement,
         querySelector: (a) => {
             if (a === '[data-name="js-ok"]')
@@ -275,11 +275,8 @@ test('smalltalk: alert: click: stopPropagation: called', (t) => {
         addEventListener: stub(),
     };
     
-    const createElement = getCreateElement(el);
-    document.createElement = createElement;
-    
-    const querySelector = stub().returns(el);
-    document.querySelector = querySelector;
+    createElement.returns(el);
+    querySelector.returns(el);
     
     smalltalk.alert('title', 'message');
     
@@ -293,39 +290,40 @@ test('smalltalk: alert: click: stopPropagation: called', (t) => {
     };
     
     click(event);
-    after();
     
     t.ok(event.stopPropagation.called, 'should call stopPropagation');
     t.end();
 });
 
-test('smalltalk: alert: keydown: tab: preventDefault', (t) => {
-    before();
+test('smalltalk: alert: keydown: tab: preventDefault', (t, {document}) => {
+    const {
+        createElement,
+        querySelector,
+        activeElement,
+    } = document;
     
-    const parentElement = {
-        removeChild: stub(),
-    };
+    const parentElement = create();
     
     const el = {
+        ...create(),
         parentElement,
         querySelector: (a) => {
             if (a === '[data-name="js-ok"]')
                 return ok;
         },
-        getAttribute: () => 'js-ok'
     };
     
+    activeElement.getAttribute.returns('');
+    
     const ok = {
+        ...create(),
         getAttribute: () => 'js-ok',
         focus: stub(),
         addEventListener: stub(),
     };
     
-    const createElement = getCreateElement(el);
-    document.createElement = createElement;
-    
-    const querySelector = stub().returns(el);
-    document.querySelector = querySelector;
+    createElement.returns(el);
+    querySelector.returns(el);
     
     smalltalk.alert('title', 'message');
     
@@ -343,40 +341,32 @@ test('smalltalk: alert: keydown: tab: preventDefault', (t) => {
     };
     
     keydown(event);
-    after();
     
     t.ok(event.preventDefault.called, 'should call preventDefault');
     t.end();
 });
 
-test('smalltalk: alert: keydown: tab: active name', (t) => {
-    before();
+test('smalltalk: alert: keydown: tab: active name', (t, {document}) => {
+    const {
+        createElement,
+        querySelector,
+        activeElement,
+    } = document;
     
-    const parentElement = {
-        removeChild: stub(),
-    };
-    
+    const parentElement = create();
     const el = {
+        ...create(),
         parentElement,
         querySelector: (a) => {
             if (a === '[data-name="js-ok"]')
-                return ok;
+                return activeElement;
         },
         getAttribute: () => 'js-ok'
     };
     
-    const ok = {
-        getAttribute: () => 'js-ok',
-        focus: stub(),
-        addEventListener: stub(),
-    };
-    
-    const createElement = getCreateElement(el);
-    document.createElement = createElement;
-    
-    const querySelector = stub().returns(el);
-    document.querySelector = querySelector;
-    document.activeElement = ok;
+    createElement.returns(el);
+    querySelector.returns(el);
+    activeElement.getAttribute.returns('js-ok');
     
     smalltalk.alert('title', 'message');
     
@@ -395,20 +385,21 @@ test('smalltalk: alert: keydown: tab: active name', (t) => {
     };
     
     keydown(event);
-    after();
     
     t.ok(event.preventDefault.called, 'should call preventDefault');
     t.end();
 });
 
 test('smalltalk: alert: keydown: left: focus', (t) => {
-    before();
+    const {
+        createElement,
+        querySelector,
+        activeElement,
+    } = document;
     
-    const parentElement = {
-        removeChild: stub(),
-    };
-    
+    const parentElement = create();
     const el = {
+        ...create(),
         parentElement,
         querySelector: (a) => {
             if (a === '[data-name="js-ok"]')
@@ -417,18 +408,14 @@ test('smalltalk: alert: keydown: left: focus', (t) => {
         getAttribute: () => 'js-ok'
     };
     
-    const focus = stub();
     const ok = {
-        focus,
+        ...create(),
         getAttribute: () => 'js-ok',
-        addEventListener: stub(),
     };
     
-    const createElement = getCreateElement(el);
-    document.createElement = createElement;
-    
-    const querySelector = stub().returns(el);
-    document.querySelector = querySelector;
+    createElement.returns(el);
+    querySelector.returns(el);
+    activeElement.getAttribute.returns('');
     
     smalltalk.alert('title', 'message');
     
@@ -447,20 +434,19 @@ test('smalltalk: alert: keydown: left: focus', (t) => {
     
     keydown(event);
     
-    after();
-    
-    t.ok(focus.called, 'should call focus');
+    t.ok(ok.focus.called, 'should call focus');
     t.end();
 });
 
-test('smalltalk: alert: click', (t) => {
-    before();
+test('smalltalk: alert: click', (t, {document}) => {
+    const {
+        createElement,
+        querySelector,
+    } = document;
     
-    const parentElement = {
-        removeChild: stub(),
-    };
-    
+    const parentElement = create();
     const el = {
+        ...create(),
         parentElement,
         querySelector: (a) => {
             if (a === '[data-name="js-ok"]')
@@ -469,18 +455,13 @@ test('smalltalk: alert: click', (t) => {
         getAttribute: () => 'js-ok'
     };
     
-    const focus = stub();
     const ok = {
-        focus,
+        ...create(),
         getAttribute: () => 'js-ok',
-        addEventListener: stub(),
     };
     
-    const createElement = getCreateElement(el);
-    document.createElement = createElement;
-    
-    const querySelector = stub().returns(el);
-    document.querySelector = querySelector;
+    createElement.returns(el);
+    querySelector.returns(el);
     
     smalltalk.alert('title', 'message');
     
@@ -495,21 +476,22 @@ test('smalltalk: alert: click', (t) => {
     };
     
     keydown(event);
-    after();
     
-    t.ok(focus.called, 'should call focus');
+    t.ok(ok.focus.called, 'should call focus');
     t.end();
 });
 
 test('smalltalk: alert: custom label', (t) => {
-    before();
+    const {
+        createElement,
+    } = document;
     
     const el = {
+        ...create(),
         innerHTML: ''
     };
     
-    const createElement = getCreateElement(el);
-    global.document.createElement = createElement;
+    createElement.returns(el);
     
     const options = {
         buttons: {
@@ -518,7 +500,6 @@ test('smalltalk: alert: custom label', (t) => {
     };
     
     smalltalk.alert('title', 'hello\nworld', options);
-    after();
     
     fixture.alertCustomLabel.update(el.innerHTML);
     
@@ -527,32 +508,26 @@ test('smalltalk: alert: custom label', (t) => {
 });
 
 test('smalltalk: confirm: innerHTML', (t) => {
-    before();
+    const {
+        createElement,
+    } = document;
     
-    const el = {
-        innerHTML: ''
-    };
+    const el = create();
     
-    const createElement = getCreateElement(el);
-    global.document.createElement = createElement;
+    createElement.returns(el);
     
     smalltalk.confirm('title', 'message');
     
     fixture.confirm.update(el.innerHTML);
-    
-    after();
     
     t.equal(fixture.confirm(), el.innerHTML, 'should be equal');
     t.end();
 });
 
 test('smalltalk: confirm: click on close', (t) => {
-    before();
-    
     const el = {
-        parentElement: {
-            removeChild: () => {}
-        },
+        ...create(),
+        parentElement: create(),
         querySelector: (a) => {
             if (a === '[data-name="js-close"]')
                 return closeButton;
@@ -560,20 +535,15 @@ test('smalltalk: confirm: click on close', (t) => {
     };
     
     const closeButton = {
+        ...create(),
         getAttribute: () => 'js-close',
-        focus: stub(),
-        addEventListener: stub(),
     };
     
-    const createElement = getCreateElement(el);
-    document.createElement = createElement;
-    
-    const querySelector = stub().returns(el);
-    document.querySelector = querySelector;
+    document.createElement.returns(el);
+    document.querySelector.returns(el);
     
     smalltalk.confirm('title', 'message')
         .catch(() => {
-            after();
             t.pass('should reject');
             t.end();
         });
@@ -585,44 +555,36 @@ test('smalltalk: confirm: click on close', (t) => {
     });
 });
 
-test('smalltalk: confirm: keydown: left: active name', (t) => {
-    before();
-    
-    const parentElement = {
-        removeChild: stub(),
-    };
+test('smalltalk: confirm: keydown: left: active name', (t, {document}) => {
+    const parentElement = create();
+    const {
+        activeElement,
+        createElement,
+        querySelector,
+    } = document;
     
     const el = {
+        ...create(),
         parentElement,
         querySelector: (a) => {
             if (a === '[data-name="js-cancel"]')
                 return cancel;
             
             if (a === '[data-name="js-ok"]')
-                return ok;
+                return activeElement;
         },
         getAttribute: () => 'js-ok'
     };
     
-    const focus = stub();
-    const ok = {
-        focus,
-        getAttribute: () => 'js-ok',
-        addEventListener: stub(),
-    };
+    activeElement.getAttribute.returns('js-ok');
     
     const cancel = {
-        focus,
+        ...create(),
         getAttribute: () => 'js-cancel',
-        addEventListener: stub(),
     };
     
-    const createElement = getCreateElement(el);
-    document.createElement = createElement;
-    
-    const querySelector = stub().returns(el);
-    document.querySelector = querySelector;
-    document.activeElement = ok;
+    createElement.returns(el);
+    querySelector.returns(el);
     
     smalltalk.confirm('title', 'message');
     
@@ -640,20 +602,23 @@ test('smalltalk: confirm: keydown: left: active name', (t) => {
     };
     
     keydown(event);
-    after();
     
-    t.ok(focus.called, 'should call focus');
+    t.ok(cancel.focus.called, 'should call focus');
     t.end();
 });
 
-test('smalltalk: confirm: keydown: left: active name: cancel', (t) => {
-    before();
+test('smalltalk: confirm: keydown: left: active name: cancel', (t, {document}) => {
+    const parentElement = create();
+    const {
+        createElement,
+        querySelector,
+        activeElement,
+    } = document;
     
-    const parentElement = {
-        removeChild: stub()
-    };
+    activeElement.getAttribute.returns('js-cancel');
     
     const el = {
+        ...create(),
         parentElement,
         querySelector: (a) => {
             if (a === '[data-name="js-cancel"]')
@@ -665,25 +630,20 @@ test('smalltalk: confirm: keydown: left: active name: cancel', (t) => {
         getAttribute: () => 'js-ok'
     };
     
-    const focus = stub();
     const ok = {
-        focus,
+        ...create(),
         getAttribute: () => 'js-ok',
         addEventListener: stub(),
     };
     
     const cancel = {
-        focus,
+        ...create(),
         getAttribute: () => 'js-cancel',
         addEventListener: stub(),
     };
     
-    const createElement = getCreateElement(el);
-    document.createElement = createElement;
-    
-    const querySelector = stub().returns(el);
-    document.querySelector = querySelector;
-    document.activeElement = cancel;
+    createElement.returns(el);
+    querySelector.returns(el);
     
     smalltalk.confirm('title', 'message');
     
@@ -701,20 +661,20 @@ test('smalltalk: confirm: keydown: left: active name: cancel', (t) => {
     };
     
     keydown(event);
-    after();
     
-    t.ok(focus.called, 'should call focus');
+    t.ok(ok.focus.called, 'should call focus');
     t.end();
 });
 
-test('smalltalk: confirm: keydown: esc: reject', (t) => {
-    before();
-    
-    const parentElement = {
-        removeChild: stub(),
-    };
+test('smalltalk: confirm: keydown: esc: reject', (t, {document}) => {
+    const parentElement = create();
+    const {
+        createElement,
+        querySelector,
+    } = document;
     
     const el = {
+        ...create(),
         parentElement,
         querySelector: (a) => {
             if (a === '[data-name="js-ok"]')
@@ -724,20 +684,15 @@ test('smalltalk: confirm: keydown: esc: reject', (t) => {
     };
     
     const ok = {
+        ...create(),
         getAttribute: () => 'js-ok',
-        focus: stub(),
-        addEventListener: stub(),
     };
     
-    const createElement = getCreateElement(el);
-    document.createElement = createElement;
-    
-    const querySelector = stub().returns(el);
-    document.querySelector = querySelector;
+    createElement.returns(el);
+    querySelector.returns(el);
     
     smalltalk.confirm('title', 'message')
         .catch(() => {
-            after();
             t.pass('should reject');
             t.end();
         });
@@ -758,14 +713,15 @@ test('smalltalk: confirm: keydown: esc: reject', (t) => {
     keydown(event);
 });
 
-test('smalltalk: confirm: keydown: enter', (t) => {
-    before();
-    
-    const parentElement = {
-        removeChild: stub()
-    };
+test('smalltalk: confirm: keydown: enter', (t, {document}) => {
+    const parentElement = create();
+    const {
+        createElement,
+        querySelector,
+    } = document;
     
     const el = {
+        ...create(),
         parentElement,
         querySelector: (a) => {
             if (a === '[data-name="js-ok"]')
@@ -775,21 +731,16 @@ test('smalltalk: confirm: keydown: enter', (t) => {
     };
     
     const ok = {
+        ...create(),
         getAttribute: () => 'js-ok',
-        focus: stub(),
-        addEventListener: stub(),
     };
     
-    const createElement = getCreateElement(el);
-    document.createElement = createElement;
-    
-    const querySelector = stub().returns(el);
-    document.querySelector = querySelector;
+    createElement.returns(el);
+    querySelector.returns(el);
     
     smalltalk.confirm('title', 'message')
         .then(() => {
             t.pass('should resolve');
-            after();
             t.end();
         });
     
@@ -809,15 +760,14 @@ test('smalltalk: confirm: keydown: enter', (t) => {
     keydown(event);
 });
 
-test('smalltalk: confirm: custom label', (t) => {
-    before();
+test('smalltalk: confirm: custom label', (t, {document}) => {
+    const {
+        createElement,
+    } = document;
     
-    const el = {
-        innerHTML: ''
-    };
+    const el = create();
     
-    const createElement = getCreateElement(el);
-    global.document.createElement = createElement;
+    createElement.returns(el);
     
     const options = {
         buttons: {
@@ -827,111 +777,94 @@ test('smalltalk: confirm: custom label', (t) => {
     };
     
     smalltalk.confirm('title', 'message', options);
-    after();
     fixture.confirmCustomLabel.update(el.innerHTML);
     
     t.equal(fixture.confirmCustomLabel(), el.innerHTML, 'should be equal');
     t.end();
 });
 
-test('smalltalk: prompt: innerHTML', (t) => {
-    before();
+test('smalltalk: prompt: innerHTML', (t, {document}) => {
+    const el = create();
+    const {
+        createElement,
+    } = document;
     
-    const el = {
-        innerHTML: ''
-    };
-    
-    const createElement = getCreateElement(el);
-    global.document.createElement = createElement;
+    createElement.returns(el);
     
     smalltalk.prompt('title', 'message', 2);
-    t.equal(fixture.prompt(), el.innerHTML, 'should be equal');
     fixture.prompt.update(el.innerHTML);
     
-    after();
+    t.equal(fixture.prompt(), el.innerHTML, 'should be equal');
     t.end();
 });
 
-test('smalltalk: prompt: password', (t) => {
-    before();
+test('smalltalk: prompt: password', (t, {document}) => {
+    const el = create();
+    const {
+        createElement,
+    } = document;
     
-    const el = {
-        innerHTML: ''
-    };
-    
-    const createElement = getCreateElement(el);
-    global.document.createElement = createElement;
+    createElement.returns(el);
     
     smalltalk.prompt('title', 'message', '', {
         type: 'password'
     });
     
     fixture.promptPassword.update(el.innerHTML);
-    after();
     
     t.equal(fixture.promptPassword(), el.innerHTML, 'should be equal');
     t.end();
 });
 
-test('smalltalk: prompt: no value', (t) => {
-    before();
+test('smalltalk: prompt: no value', (t, {document}) => {
+    const el = create();
+    const {createElement} = document;
     
-    const el = {
-        innerHTML: ''
-    };
-    
-    const createElement = getCreateElement(el);
-    global.document.createElement = createElement;
+    createElement.returns(el);
     
     smalltalk.prompt('title', 'message');
-    after();
     fixture.promptNoValue.update(el.innerHTML);
     
     t.equal(fixture.promptNoValue(), el.innerHTML, 'should be equal');
     t.end();
 });
 
-test('smalltalk: prompt: click on ok', (t) => {
-    before();
+test('smalltalk: prompt: click on ok', (t, {document}) => {
+    const {
+        createElement,
+        querySelector,
+    } = document;
     
     const dataName = (a) => `[data-name="js-${a}"]`;
-    const noop = () => {};
     
     const value = 'hello';
     const input = {
+        ...create(),
         value,
-        focus: noop,
-        setSelectionRange: noop,
-    };
+    }
     
     const ok = {
+        ...create(),
         getAttribute: () => 'js-ok',
-        focus: stub(),
-        addEventListener: stub(),
-    };
-    
-    const querySelector = (a) => {
-        if (a === dataName('input'))
-            return input;
-        
-        if (a === dataName('ok'))
-            return ok;
     };
     
     const el = {
-        querySelector,
-        parentElement: {
-            removeChild: () => {}
+        ...create(),
+        parentElement: create(),
+        querySelector: (a) => {
+            if (a === dataName('input'))
+                return input;
+            
+            if (a === dataName('ok'))
+                return ok;
         },
     };
     
-    const createElement = getCreateElement(el);
-    document.createElement = createElement;
-    document.querySelector = () => el;
+    createElement.returns(el);
+    querySelector.returns(el);
     
     smalltalk.prompt('title', 'message', value)
         .then((result) => {
-            after();
             t.equal(result, value, 'should return value');
             t.end();
         });
@@ -943,47 +876,41 @@ test('smalltalk: prompt: click on ok', (t) => {
     });
 });
 
-test('smalltalk: prompt: click on cancel', (t) => {
-    before();
-    
+test('smalltalk: prompt: click on cancel', (t, {document}) => {
     const dataName = (a) => `[data-name="js-${a}"]`;
-    const noop = () => {};
+    const {
+        createElement,
+        querySelector,
+    } = document;
     
     const value = 'hello';
     const input = {
+        ...create(),
         value,
-        focus: noop,
-        setSelectionRange: noop,
     };
     
     const cancel = {
+        ...create(),
         getAttribute: () => 'js-cancel',
-        focus: stub(),
-        addEventListener: stub(),
-    };
-    
-    const querySelector = (a) => {
-        if (a === dataName('input'))
-            return input;
-        
-        if (a === dataName('cancel'))
-            return cancel;
     };
     
     const el = {
-        querySelector,
-        parentElement: {
-            removeChild: () => {}
+        ...create(),
+        parentElement: create(),
+        querySelector: (a) => {
+            if (a === dataName('input'))
+                return input;
+            
+            if (a === dataName('cancel'))
+                return cancel;
         },
     };
     
-    const createElement = getCreateElement(el);
-    document.createElement = createElement;
-    document.querySelector = () => el;
+    createElement.returns(el);
+    querySelector.returns(el);
     
     smalltalk.prompt('title', 'message', value)
         .catch(() => {
-            after();
             t.pass('should reject');
             t.end();
         });
@@ -995,43 +922,38 @@ test('smalltalk: prompt: click on cancel', (t) => {
     });
 });
 
-test('smalltalk: prompt: click on cancel: cancel false', (t) => {
-    before();
-    
+test('smalltalk: prompt: click on cancel: cancel false', (t, {document}) => {
     const dataName = (a) => `[data-name="js-${a}"]`;
-    const noop = () => {};
+    const {
+        createElement,
+        querySelector,
+    } = document;
     
     const value = 'hello';
     const input = {
+        ...create(),
         value,
-        focus: noop,
-        setSelectionRange: noop,
     };
     
     const cancel = {
+        ...create(),
         getAttribute: () => 'js-cancel',
-        focus: stub(),
-        addEventListener: stub(),
-    };
-    
-    const querySelector = (a) => {
-        if (a === dataName('input'))
-            return input;
-        
-        if (a === dataName('cancel'))
-            return cancel;
     };
     
     const el = {
-        querySelector,
-        parentElement: {
-            removeChild: () => {}
-        },
+        ...create(),
+        parentElement: create(),
+        querySelector: (a) => {
+            if (a === dataName('input'))
+                return input;
+            
+            if (a === dataName('cancel'))
+                return cancel;
+        }
     };
     
-    const createElement = getCreateElement(el);
-    document.createElement = createElement;
-    document.querySelector = () => el;
+    createElement.returns(el);
+    querySelector.returns(el);
     
     const fail = t.fail.bind(t);
     const end = t.end.bind(t);
@@ -1049,51 +971,43 @@ test('smalltalk: prompt: click on cancel: cancel false', (t) => {
      
      t.pass('should do nothing');
      t.end();
-     
-     after();
 });
 
-test('smalltalk: prompt: click on cancel: options: no cancel', (t) => {
-    before();
-    
+test('smalltalk: prompt: click on cancel: options: no cancel', (t, {document}) => {
     const dataName = (a) => `[data-name="js-${a}"]`;
-    const noop = () => {};
+    const {
+        createElement,
+        querySelector,
+    } = document;
     
     const value = 'hello';
     const input = {
+        ...create(),
         value,
-        focus: noop,
-        setSelectionRange: noop,
     };
     
     const cancel = {
+        ...create(),
         getAttribute: () => 'js-cancel',
-        focus: stub(),
-        addEventListener: stub(),
-    };
-    
-    const querySelector = (a) => {
-        if (a === dataName('input'))
-            return input;
-        
-        if (a === dataName('cancel'))
-            return cancel;
     };
     
     const el = {
-        querySelector,
-        parentElement: {
-            removeChild: () => {}
-        },
+        ...create(),
+        parentElement: create(),
+        querySelector: (a) => {
+            if (a === dataName('input'))
+                return input;
+            
+            if (a === dataName('cancel'))
+                return cancel;
+        }
     };
     
-    const createElement = getCreateElement(el);
-    document.createElement = createElement;
-    document.querySelector = () => el;
+    createElement.returns(el);
+    querySelector.returns(el);
     
     smalltalk.prompt('title', 'message', value, {})
         .catch(() => {
-            after();
             t.pass('should reject');
             t.end();
         });
@@ -1105,15 +1019,10 @@ test('smalltalk: prompt: click on cancel: options: no cancel', (t) => {
     });
 });
 
-test('smalltalk: prompt: custom label', (t) => {
-    before();
+test('smalltalk: prompt: custom label', (t, {document}) => {
+    const el = create();
     
-    const el = {
-        innerHTML: ''
-    };
-    
-    const createElement = getCreateElement(el);
-    global.document.createElement = createElement;
+    document.createElement.returns(el);
     
     const options = {
         buttons: {
@@ -1123,41 +1032,9 @@ test('smalltalk: prompt: custom label', (t) => {
     };
     
     smalltalk.prompt('title', 'message', 2, options);
-    after();
     fixture.promptCustomLabel.update();
     
     t.equal(fixture.promptCustomLabel(), el.innerHTML, 'should be equal');
     t.end();
 });
-
-function getCreateElement(el = {}) {
-    const querySelector = stub();
-    const addEventListener = stub();
-    
-    el.dataset = {};
-    
-    if (!el.querySelector)
-        el.querySelector = querySelector;
-    
-    if (!el.addEventListener)
-        el.addEventListener = addEventListener;
-    
-    return stub().returns(el);
-}
-
-function before() {
-    global.document = {
-        activeElement: {
-            getAttribute: () => ''
-        },
-        createElement: getCreateElement(),
-        body: {
-            appendChild: stub()
-        }
-    };
-}
-
-function after() {
-    delete global.document;
-}
 
