@@ -3,10 +3,10 @@
 
 <script src="../dist/smalltalk.min.js"></script>
 <script>
-    window.addEventListener('DOMContentLoaded', function() {
-        smalltalk.prompt('hello', 'world', '2+2').then(function(value) {
+    window.addEventListener('DOMContentLoaded', () => {
+        smalltalk.progress('Title').then((value) => {
             console.log(value);
-        }, function() {
+        }, () => {
             console.log('close');
         })
     });

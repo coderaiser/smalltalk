@@ -6,11 +6,11 @@ const dir = './lib';
 const dist = path.resolve(__dirname, 'dist');
 const devtool = 'source-map';
 
-const rules = [{
+const rules = [/*{
     test: /\.js$/,
     exclude: /node_modules/,
     loader: 'babel-loader',
-}, {
+},*/ {
     test: /\.css$/,
     loader: 'style-loader!css-loader!clean-css-loader',
 }, {

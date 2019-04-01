@@ -41,7 +41,8 @@ const fixture = {
     promptNoValue: readFixture('prompt-no-value'),
     alertCustomLabel: readFixture('alert-custom-label'),
     confirmCustomLabel: readFixture('confirm-custom-label'),
-    promptCustomLabel: readFixture('prompt-custom-label')
+    promptCustomLabel: readFixture('prompt-custom-label'),
+    progress: readFixture('progress'),
 };
 
 test('smalltalk: alert: innerHTML', (t, {document}) => {
@@ -1035,6 +1036,55 @@ test('smalltalk: prompt: custom label', (t, {document}) => {
     fixture.promptCustomLabel.update();
     
     t.equal(fixture.promptCustomLabel(), el.innerHTML, 'should be equal');
+    t.end();
+});
+
+test('smalltalk: progress: innerHTML', (t, {document}) => {
+    const {createElement} = document;
+    const el = create();
+    createElement.returns(el);
+    
+    smalltalk.progress('title', 'hello\nworld');
+    fixture.progress.update(el.innerHTML);
+    
+    t.equal(fixture.progress(), el.innerHTML, 'should be equal');
+    t.end();
+});
+
+test('smalltalk: progress: setProgress', (t, {document}) => {
+    const valueEl = create();
+    
+    const {createElement} = document;
+    const el = create();
+    
+    el.querySelector.returns(valueEl);
+    createElement.returns(el);
+    
+    const progress = smalltalk.progress('title', 'hello\nworld');
+    
+    progress.setProgress(10);
+    
+    t.equal();
+    t.end();
+});
+
+test('smalltalk: progress: setProgress: 100', (t, {document}) => {
+    const valueEl = create();
+    valueEl.parentElement = create();
+    
+    document.querySelector.returns(valueEl);
+    
+    const {createElement} = document;
+    const el = create();
+    
+    el.querySelector.returns(valueEl);
+    createElement.returns(el);
+    
+    const progress = smalltalk.progress('title', 'hello\nworld');
+    
+    progress.setProgress(100);
+    
+    t.equal();
     t.end();
 });
 

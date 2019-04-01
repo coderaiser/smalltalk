@@ -56,6 +56,11 @@
     background-image: url(../img/IDR_CLOSE_DIALOG_H.png);
 }
 
+.smalltalk .progress {
+    display: block;
+    width: 100%;
+}
+
 .smalltalk .page header {
     overflow: hidden;
     text-overflow: ellipsis;

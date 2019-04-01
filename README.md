@@ -88,6 +88,19 @@ smalltalk
     });
 ```
 
+## smalltalk.progress(title, message)
+
+![Progress](https://raw.githubusercontent.com/coderaiser/smalltalk/master/screen/progress.png "Progress")
+
+```js
+const progress = smalltalk.progress('Cloud Commander', 'Copy /home/coderaiser -> /home/coderaiser/2');
+
+progress.setProgress(41);
+    .catch(() => {
+        console.log('abort');
+    });
+```
+
 ## Custom label 
 
 You can use custom label passing into options param the buttons specification. For example :

@@ -11,14 +11,17 @@
   "scripts": {
     "watch": "nodemon --watch lib --watch test --exec",
     "watch:client": "redrun compile:client -- --watch",
+    "watch:client:dev": "redrun compile:client:dev -- --watch",
     "watch:test": "npm run watch -- npm test",
     "watch:lint": "npm run watch -- 'npm run lint'",
     "watch:lint:js": "npm run watch -- \"run lint:js\"",
     "watch:coverage": "redrun watch -- redrun coverage",
+    "watch:legacy": "npm run watch -- redrun compile:legacy",
     "coverage": "nyc npm test",
     "report": "nyc report --reporter=text-lcov | coveralls",
-    "compile:server": "babel -d legacy lib",
+    "compile:legacy": "babel -d legacy lib",
     "compile:client": "webpack --progress --mode production",
+    "compile:client:dev": "webpack --progress --mode development",
     "build": "redrun clean init build:*",
     "build:js": "redrun compile:* legacy:*",
     "legacy:index": "echo \"module.exports = require('./smalltalk');\" > legacy/index.js",
@@ -29,7 +32,7 @@
     "lint:js": "eslint lib test webpack.config.js",
     "lint": "redrun lint:*",
     "test": "tape 'test/**/*.js'",
-    "test:update": "UPDATE_FIXTURE=1 redrun test",
+    "test:update": "UPDATE_FIXTURE=1 npm test",
     "init": "mkdirp native"
   },
   "keywords": [
