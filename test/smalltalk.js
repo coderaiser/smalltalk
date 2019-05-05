@@ -90,42 +90,6 @@ test('smalltalk: alert: click', (t, {document}) => {
     t.end();
 });
 
-test('smalltalk: alert: close: querySelector', (t, {document}) => {
-    const {
-        createElement,
-        querySelector
-    } = document;
-    
-    const el = {
-        ...create(),
-        parentElement: create(),
-        querySelector: (a) => {
-            if (a === '[data-name="js-ok"]')
-                return ok;
-        }
-    };
-    
-    const ok = {
-        getAttribute: () => 'js-ok',
-        focus: stub(),
-        addEventListener: stub(),
-    };
-    
-    createElement.returns(el);
-    querySelector.returns(el);
-    
-    smalltalk.alert('title', 'message');
-    
-    const [, close] = ok.addEventListener.args.pop();
-    
-    close({
-        target: ok
-    });
-    
-    t.equal(querySelector.args.pop().pop(), '.smalltalk', 'should find smalltalk');
-    t.end();
-});
-
 test('smalltalk: alert: close: remove', (t, {document}) => {
     const parentElement = create();
     const {
@@ -1085,6 +1049,29 @@ test('smalltalk: progress: setProgress: 100', (t, {document}) => {
     progress.setProgress(100);
     
     t.equal();
+    t.end();
+});
+
+test('smalltalk: progress: remove', (t, {document}) => {
+    const valueEl = create();
+    valueEl.parentElement = create();
+    
+    document.querySelector.returns(valueEl);
+    
+    const {createElement} = document;
+    const el = create();
+    const removeChild = stub();
+    
+    el.querySelector.returns(valueEl);
+    createElement.returns(el);
+    el.parentElement = {};
+    el.parentElement.removeChild = removeChild;
+    
+    const progress = smalltalk.progress('title', 'hello\nworld');
+    
+    progress.remove();
+    
+    t.ok(removeChild.calledWith(el), 'should call removeChild');
     t.end();
 });
 
