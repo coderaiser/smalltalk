@@ -544,8 +544,8 @@ test('smalltalk: confirm: click on close', (t) => {
     document.querySelector.returns(el);
     
     smalltalk.confirm('title', 'message')
-        .catch(() => {
-            t.pass('should reject');
+        .catch((e) => {
+            t.ok(e, 'should reject');
             t.end();
         });
     
@@ -693,8 +693,8 @@ test('smalltalk: confirm: keydown: esc: reject', (t, {document}) => {
     querySelector.returns(el);
     
     smalltalk.confirm('title', 'message')
-        .catch(() => {
-            t.pass('should reject');
+        .catch((e) => {
+            t.ok(e, 'should reject');
             t.end();
         });
     
@@ -911,8 +911,8 @@ test('smalltalk: prompt: click on cancel', (t, {document}) => {
     querySelector.returns(el);
     
     smalltalk.prompt('title', 'message', value)
-        .catch(() => {
-            t.pass('should reject');
+        .catch((e) => {
+            t.ok(e, 'should reject');
             t.end();
         });
     
@@ -1008,8 +1008,8 @@ test('smalltalk: prompt: click on cancel: options: no cancel', (t, {document}) =
     querySelector.returns(el);
     
     smalltalk.prompt('title', 'message', value, {})
-        .catch(() => {
-            t.pass('should reject');
+        .catch((e) => {
+            t.ok(e, 'should reject');
             t.end();
         });
     

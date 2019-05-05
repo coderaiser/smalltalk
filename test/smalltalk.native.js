@@ -55,7 +55,7 @@ test('smalltalk.native: confirm: result: ok', (t) => {
         t.pass('should resolve');
         t.end();
     }).catch((e) => {
-        t.notOk(e, 'should reject');
+        t.notOk(e, 'should not reject');
         t.end();
     });
 });
@@ -68,7 +68,7 @@ test('smalltalk.native: confirm: result: cancel', (t) => {
         t.fail('should not resolve');
         t.end();
     }).catch((e) => {
-        t.notOk(e, 'should reject');
+        t.ok(e, 'should reject');
         t.end();
     });
 });
@@ -122,7 +122,7 @@ test('smalltalk.native: prompt: result: cancel', (t) => {
         t.fail('should not resolve');
         t.end();
     }).catch((e) => {
-        t.notOk(e, 'should reject');
+        t.ok(e, 'should reject');
         t.end();
     });
 });
