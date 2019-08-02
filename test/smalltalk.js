@@ -6,9 +6,8 @@ const fs = require('fs');
 require('css-modules-require-hook/preset');
 
 const autoGlobals = require('auto-globals');
-const tryTo = require('try-to-tape');
-const tape = require('tape');
-const test = autoGlobals(tryTo(tape));
+const tape = require('supertape');
+const test = autoGlobals(tape);
 const stub = require('@cloudcmd/stub');
 const currify = require('currify');
 const wraptile = require('wraptile');
@@ -29,7 +28,7 @@ const writeFixture = (name, data) => {
 
 const readFixture = (name) => {
     const fn = () => fs.readFileSync(`${fixtureDir}/${name}.html`, 'utf8');
-    fn.update = !isUpdateFixtures  ? noop : currify(writeFixture, name);
+    fn.update = !isUpdateFixtures ? noop : currify(writeFixture, name);
     return fn;
 };
 
@@ -75,7 +74,7 @@ test('smalltalk: alert: click', (t, {document}) => {
         querySelector: (a) => {
             if (a === '[data-name="js-ok"]')
                 return ok;
-        }
+        },
     };
     
     const ok = {
@@ -103,7 +102,7 @@ test('smalltalk: alert: close: remove', (t, {document}) => {
         querySelector: (a) => {
             if (a === '[data-name="js-ok"]')
                 return ok;
-        }
+        },
     };
     
     const ok = {
@@ -120,7 +119,7 @@ test('smalltalk: alert: close: remove', (t, {document}) => {
     const [, close] = ok.addEventListener.args.pop();
     
     close({
-        target: ok
+        target: ok,
     });
     
     t.equal(parentElement.removeChild.args.pop().pop(), el, 'should find smalltalk');
@@ -141,7 +140,7 @@ test('smalltalk: alert: keydown: stopPropagation', (t, {document}) => {
         querySelector: (a) => {
             if (a === '[data-name="js-ok"]')
                 return ok;
-        }
+        },
     };
     
     const ok = {
@@ -160,7 +159,7 @@ test('smalltalk: alert: keydown: stopPropagation', (t, {document}) => {
     }).pop();
     
     const event = {
-        stopPropagation: stub()
+        stopPropagation: stub(),
     };
     
     keydown(event);
@@ -231,7 +230,7 @@ test('smalltalk: alert: click: stopPropagation: called', (t, {document}) => {
         querySelector: (a) => {
             if (a === '[data-name="js-ok"]')
                 return ok;
-        }
+        },
     };
     
     const ok = {
@@ -326,7 +325,7 @@ test('smalltalk: alert: keydown: tab: active name', (t, {document}) => {
             if (a === '[data-name="js-ok"]')
                 return activeElement;
         },
-        getAttribute: () => 'js-ok'
+        getAttribute: () => 'js-ok',
     };
     
     createElement.returns(el);
@@ -370,7 +369,7 @@ test('smalltalk: alert: keydown: left: focus', (t) => {
             if (a === '[data-name="js-ok"]')
                 return ok;
         },
-        getAttribute: () => 'js-ok'
+        getAttribute: () => 'js-ok',
     };
     
     const ok = {
@@ -417,7 +416,7 @@ test('smalltalk: alert: click', (t, {document}) => {
             if (a === '[data-name="js-ok"]')
                 return ok;
         },
-        getAttribute: () => 'js-ok'
+        getAttribute: () => 'js-ok',
     };
     
     const ok = {
@@ -447,21 +446,19 @@ test('smalltalk: alert: click', (t, {document}) => {
 });
 
 test('smalltalk: alert: custom label', (t) => {
-    const {
-        createElement,
-    } = document;
+    const {createElement} = document;
     
     const el = {
         ...create(),
-        innerHTML: ''
+        innerHTML: '',
     };
     
     createElement.returns(el);
     
     const options = {
         buttons: {
-            ok: 'Ok'
-        }
+            ok: 'Ok',
+        },
     };
     
     smalltalk.alert('title', 'hello\nworld', options);
@@ -473,9 +470,7 @@ test('smalltalk: alert: custom label', (t) => {
 });
 
 test('smalltalk: confirm: innerHTML', (t) => {
-    const {
-        createElement,
-    } = document;
+    const {createElement} = document;
     
     const el = create();
     
@@ -496,7 +491,7 @@ test('smalltalk: confirm: click on close', (t) => {
         querySelector: (a) => {
             if (a === '[data-name="js-close"]')
                 return closeButton;
-        }
+        },
     };
     
     const closeButton = {
@@ -516,7 +511,7 @@ test('smalltalk: confirm: click on close', (t) => {
     const [, close] = closeButton.addEventListener.args.pop();
     
     close({
-        target: closeButton
+        target: closeButton,
     });
 });
 
@@ -538,7 +533,7 @@ test('smalltalk: confirm: keydown: left: active name', (t, {document}) => {
             if (a === '[data-name="js-ok"]')
                 return activeElement;
         },
-        getAttribute: () => 'js-ok'
+        getAttribute: () => 'js-ok',
     };
     
     activeElement.getAttribute.returns('js-ok');
@@ -592,7 +587,7 @@ test('smalltalk: confirm: keydown: left: active name: cancel', (t, {document}) =
             if (a === '[data-name="js-ok"]')
                 return ok;
         },
-        getAttribute: () => 'js-ok'
+        getAttribute: () => 'js-ok',
     };
     
     const ok = {
@@ -645,7 +640,7 @@ test('smalltalk: confirm: keydown: esc: reject', (t, {document}) => {
             if (a === '[data-name="js-ok"]')
                 return ok;
         },
-        getAttribute: () => 'js-ok'
+        getAttribute: () => 'js-ok',
     };
     
     const ok = {
@@ -692,7 +687,7 @@ test('smalltalk: confirm: keydown: enter', (t, {document}) => {
             if (a === '[data-name="js-ok"]')
                 return ok;
         },
-        getAttribute: () => 'js-ok'
+        getAttribute: () => 'js-ok',
     };
     
     const ok = {
@@ -726,9 +721,7 @@ test('smalltalk: confirm: keydown: enter', (t, {document}) => {
 });
 
 test('smalltalk: confirm: custom label', (t, {document}) => {
-    const {
-        createElement,
-    } = document;
+    const {createElement} = document;
     
     const el = create();
     
@@ -738,7 +731,7 @@ test('smalltalk: confirm: custom label', (t, {document}) => {
         buttons: {
             ok: 'Ok',
             cancel: 'Logout',
-        }
+        },
     };
     
     smalltalk.confirm('title', 'message', options);
@@ -750,9 +743,7 @@ test('smalltalk: confirm: custom label', (t, {document}) => {
 
 test('smalltalk: prompt: innerHTML', (t, {document}) => {
     const el = create();
-    const {
-        createElement,
-    } = document;
+    const {createElement} = document;
     
     createElement.returns(el);
     
@@ -765,14 +756,12 @@ test('smalltalk: prompt: innerHTML', (t, {document}) => {
 
 test('smalltalk: prompt: password', (t, {document}) => {
     const el = create();
-    const {
-        createElement,
-    } = document;
+    const {createElement} = document;
     
     createElement.returns(el);
     
     smalltalk.prompt('title', 'message', '', {
-        type: 'password'
+        type: 'password',
     });
     
     fixture.promptPassword.update(el.innerHTML);
@@ -806,7 +795,7 @@ test('smalltalk: prompt: click on ok', (t, {document}) => {
     const input = {
         ...create(),
         value,
-    }
+    };
     
     const ok = {
         ...create(),
@@ -837,7 +826,7 @@ test('smalltalk: prompt: click on ok', (t, {document}) => {
     const [, close] = ok.addEventListener.args.pop();
     
     close({
-        target: ok
+        target: ok,
     });
 });
 
@@ -883,7 +872,7 @@ test('smalltalk: prompt: click on cancel', (t, {document}) => {
     const [, close] = cancel.addEventListener.args.pop();
     
     close({
-        target: cancel
+        target: cancel,
     });
 });
 
@@ -914,7 +903,7 @@ test('smalltalk: prompt: click on cancel: cancel false', (t, {document}) => {
             
             if (a === dataName('cancel'))
                 return cancel;
-        }
+        },
     };
     
     createElement.returns(el);
@@ -927,15 +916,15 @@ test('smalltalk: prompt: click on cancel: cancel false', (t, {document}) => {
         .then(wraptile(fail, 'should not pass'))
         .catch(wraptile(fail, 'should not reject'))
         .then(end);
-     
+    
     const [, close] = cancel.addEventListener.args.pop();
     
     close({
-        target: cancel
+        target: cancel,
     });
-     
-     t.pass('should do nothing');
-     t.end();
+    
+    t.pass('should do nothing');
+    t.end();
 });
 
 test('smalltalk: prompt: click on cancel: options: no cancel', (t, {document}) => {
@@ -965,7 +954,7 @@ test('smalltalk: prompt: click on cancel: options: no cancel', (t, {document}) =
             
             if (a === dataName('cancel'))
                 return cancel;
-        }
+        },
     };
     
     createElement.returns(el);
@@ -980,7 +969,7 @@ test('smalltalk: prompt: click on cancel: options: no cancel', (t, {document}) =
     const [, close] = cancel.addEventListener.args.pop();
     
     close({
-        target: cancel
+        target: cancel,
     });
 });
 

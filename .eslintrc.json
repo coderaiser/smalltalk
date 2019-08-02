@@ -1,0 +1,16 @@
+{
+    "env": {
+        "browser": true
+    },
+    "rules": {
+        "node/no-unsupported-features/es-syntax": "off"
+    },
+    "extends": [
+        "plugin:putout/recommended",
+        "plugin:node/recommended"
+    ],
+    "plugins": [
+        "node",
+        "putout"
+    ]
+}

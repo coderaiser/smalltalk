@@ -1,6 +1,6 @@
 'use strict';
 
-const test = require('tape');
+const test = require('supertape');
 const stub = require('@cloudcmd/stub');
 
 const smalltalk = require('../lib/smalltalk.native');
@@ -132,7 +132,7 @@ test('smalltalk.native: prompt: options: cancel', (t) => {
     global.prompt = prompt;
     
     smalltalk.prompt('title', 'message', 'value', {
-        cancel: false
+        cancel: false,
     }).then(() => {
         t.fail('should not resolve');
         t.end();
