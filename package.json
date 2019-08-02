@@ -58,7 +58,7 @@
     "coveralls": "^3.0.0",
     "css-loader": "^2.0.2",
     "css-modules-require-hook": "^4.2.3",
-    "eslint": "^5.0.0",
+    "eslint": "^6.1.0",
     "nodemon": "^1.9.2",
     "nyc": "^14.1.0",
     "redrun": "^7.0.0",
