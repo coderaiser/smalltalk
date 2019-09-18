@@ -7,7 +7,7 @@
     "type": "git",
     "url": "git://github.com/coderaiser/smalltalk.git"
   },
-  "main": "lib/malltalk.js",
+  "main": "lib/smalltalk.js",
   "scripts": {
     "watch": "madrun watch",
     "watch:client": "madrun watch:client",
