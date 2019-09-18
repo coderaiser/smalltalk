@@ -76,7 +76,7 @@
     "url-loader": "^2.1.0",
     "webpack": "^4.1.0",
     "webpack-cli": "^3.0.8",
-    "wraptile": "^2.0.0"
+    "wraptile": "^3.0.0"
   },
   "dependencies": {
     "@cloudcmd/create-element": "^1.0.0",
