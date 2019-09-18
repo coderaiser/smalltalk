@@ -120,14 +120,6 @@ else
     console.log('no');
 ```
 
-## Bundlers
-
-When `webpack` `rollup` or `browserify` used, you can import `es5` version with:
-
-```js
-import smalltalk from 'smalltalk/legacy';
-```
-
 # License
 MIT
 
