@@ -1,3 +1,18 @@
+2019.09.18, v3.4.1
+
+feature:
+- (package) style-loader v1.0.0
+- (package) stylelint-config-standard v19.0.0
+- (package) stylelint v11.0.0
+- (package) wraptile v3.0.0
+- (package) rimraf v3.0.0
+- (package) fullstore v2.0.2
+- (package) clean-css-loader v2.0.0
+- (package) css-loader v3.1.0
+- (package) eslint v6.1.0
+- (package) url-loader v2.1.0
+
+
 2019.05.05, v3.4.0
 
 feature:
