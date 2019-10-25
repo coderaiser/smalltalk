@@ -12,13 +12,11 @@ module.exports = {
     'watch:coverage': () => run('watch', 'redrun coverage'),
     'coverage': () => 'nyc npm test',
     'report': () => 'nyc report --reporter=text-lcov | coveralls',
-    'build': () => run(['clean', 'init', 'build:*']),
     'lint:css': () => 'stylelint css/*.css',
     'lint:js': () => 'putout lib test madrun.js',
     'lint': () => run('lint:*'),
     'fix:lint': () => run(['lint:js', 'lint:css'], '--fix'),
     'test': () => 'tape \'test/**/*.js\'',
     'test:update': () => 'UPDATE_FIXTURE=1 npm test',
-    'init': () => 'mkdirp native',
 };
 
