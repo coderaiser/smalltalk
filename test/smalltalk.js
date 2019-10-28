@@ -1,5 +1,3 @@
-/* eslint-disable putout/putout */
-
 'use strict';
 
 const path = require('path');
@@ -204,10 +202,10 @@ test('smalltalk: alert: keydown: tab: preventDefault', (t, {document}) => {
         .filter(([event]) => event === 'keydown')
         .pop();
     
-    const TAB = 9;
+    const keyCode = 9; // TAB
     
     const event = {
-        keyCode: TAB,
+        keyCode,
         preventDefault: stub(),
         stopPropagation: stub(),
         target: el,
@@ -297,10 +295,10 @@ test('smalltalk: alert: keydown: tab: preventDefault', (t, {document}) => {
         .filter(([event]) => event === 'keydown')
         .pop();
     
-    const TAB = 9;
+    const keyCode = 9; // TAB
     
     const event = {
-        keyCode: TAB,
+        keyCode,
         preventDefault: stub(),
         stopPropagation: stub(),
         target: el,
@@ -340,10 +338,10 @@ test('smalltalk: alert: keydown: tab: active name', (t, {document}) => {
         .filter(([event]) => event === 'keydown')
         .pop();
     
-    const TAB = 9;
+    const keyCode = 9; // TAB
     
     const event = {
-        keyCode: TAB,
+        keyCode,
         shiftKey: true,
         preventDefault: stub(),
         stopPropagation: stub(),
@@ -389,10 +387,10 @@ test('smalltalk: alert: keydown: left: focus', (t) => {
         .filter(([event]) => event === 'keydown')
         .pop();
     
-    const LEFT = 37;
+    const keyCode = 37; // LEFT
     
     const event = {
-        keyCode: LEFT,
+        keyCode,
         preventDefault: stub(),
         stopPropagation: stub(),
         target: el,
@@ -554,10 +552,10 @@ test('smalltalk: confirm: keydown: left: active name', (t, {document}) => {
         .filter(([event]) => event === 'keydown')
         .pop();
     
-    const LEFT = 37;
+    const keyCode = 37; // LEFT
     
     const event = {
-        keyCode: LEFT,
+        keyCode,
         preventDefault: stub(),
         stopPropagation: stub(),
         target: el,
@@ -613,10 +611,10 @@ test('smalltalk: confirm: keydown: left: active name: cancel', (t, {document}) =
         .filter(([event]) => event === 'keydown')
         .pop();
     
-    const LEFT = 37;
+    const keyCode = 37; // LEFT
     
     const event = {
-        keyCode: LEFT,
+        keyCode,
         preventDefault: stub(),
         stopPropagation: stub(),
         target: el,
@@ -663,10 +661,10 @@ test('smalltalk: confirm: keydown: esc: reject', (t, {document}) => {
         .filter(([event]) => event === 'keydown')
         .pop();
     
-    const ESC = 27;
+    const keyCode = 27; // ESC
     
     const event = {
-        keyCode: ESC,
+        keyCode,
         preventDefault: stub(),
         stopPropagation: stub(),
         target: el,
@@ -710,10 +708,10 @@ test('smalltalk: confirm: keydown: enter', (t, {document}) => {
         .filter(([event]) => event === 'keydown')
         .pop();
     
-    const ENTER = 13;
+    const keyCode = 13; // ENTER
     
     const event = {
-        keyCode: ENTER,
+        keyCode,
         preventDefault: stub(),
         stopPropagation: stub(),
         target: el,
