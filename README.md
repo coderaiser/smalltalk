@@ -92,7 +92,8 @@ smalltalk
 ![Select](https://raw.githubusercontent.com/coderaiser/smalltalk/master/screen/select.png "Select")
 
 ```js
-smalltalk.select("Select", "Select your favourite browser!", 10, {
+smalltalk.select("Select", "Select your favourite browser!", "firefox", {
+      multiple: false,
       selectOptions: [
         {
           name: "Chrome",
