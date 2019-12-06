@@ -1,5 +1,3 @@
-/* eslint-disable putout/putout */
-
 'use strict';
 
 const path = require('path');
