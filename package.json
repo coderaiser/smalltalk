@@ -52,7 +52,7 @@
     "css-modules-require-hook": "^4.2.3",
     "eslint": "^6.1.0",
     "eslint-plugin-node": "^10.0.0",
-    "eslint-plugin-putout": "^2.0.0",
+    "eslint-plugin-putout": "^3.0.0",
     "madrun": "^4.0.0",
     "nodemon": "^1.9.2",
     "nyc": "^14.1.0",
