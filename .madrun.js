@@ -12,7 +12,7 @@ module.exports = {
     'coverage': () => 'nyc npm test',
     'report': () => 'nyc report --reporter=text-lcov | coveralls',
     'lint:css': () => 'stylelint css/*.css',
-    'lint:js': () => 'putout lib test madrun.js',
+    'lint:js': () => 'putout lib test .madrun.js',
     'lint': () => run('lint:*'),
     'fix:lint': () => run(['lint:js', 'lint:css'], '--fix'),
     'test': () => 'tape \'test/**/*.js\'',
@@ -26,6 +26,6 @@ module.exports = {
 };
 
 function upload(name) {
-    return `putasset -o coderaiser -r smalltalk -t v${version} -f ${name}`
+    return `putasset -o coderaiser -r smalltalk -t v${version} -f ${name}`;
 }
 
