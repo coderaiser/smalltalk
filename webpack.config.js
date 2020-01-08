@@ -1,6 +1,8 @@
 'use strict';
 
 const path = require('path');
+const TerserPlugin = require('terser-webpack-plugin');
+
 const dir = './lib';
 
 const dist = path.resolve(__dirname, 'dist');
@@ -14,6 +16,15 @@ const rules = [{
     loader: 'url-loader?limit=50000',
 }];
 
+const optimization = {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        extractComments: true,
+      }),
+    ],
+}
+
 const filename = `[name].min.js`;
 
 module.exports = {
@@ -22,6 +33,7 @@ module.exports = {
         'smalltalk': `${dir}/smalltalk.js`,
         'smalltalk.native': `${dir}/smalltalk.native.js`,
     },
+    optimization,
     output: {
         library: 'smalltalk',
         filename,
