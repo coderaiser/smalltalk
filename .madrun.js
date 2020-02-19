@@ -26,6 +26,6 @@ module.exports = {
 };
 
 function upload(name) {
-    return 'putasset -o coderaiser -r smalltalk -t v`version`' + `-f ${name}`;
+    return 'putasset -o coderaiser -r smalltalk -t v`version`' + ` -f ${name}`;
 }
 
