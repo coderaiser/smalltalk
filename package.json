@@ -24,6 +24,7 @@
     "test:update": "madrun test:update",
     "build": "madrun build",
     "wisdom": "madrun wisdom",
+    "wisdom:done": "madrun wisdom:done",
     "upload:main": "madrun upload:main",
     "upload:main:map": "madrun upload:main:map",
     "upload:native": "madrun upload:native",
