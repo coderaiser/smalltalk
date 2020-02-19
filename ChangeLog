@@ -1,3 +1,9 @@
+2020.02.19, v4.0.4
+
+feature:
+- (smalltalk) mv out getName
+
+
 2020.02.19, v4.0.3
 
 fix:
