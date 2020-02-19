@@ -1,7 +1,6 @@
 'use strict';
 
 const {run} = require('madrun');
-const {version} = require('./package');
 
 module.exports = {
     'watch': () => 'nodemon --watch lib --watch test --exec',
@@ -27,6 +26,6 @@ module.exports = {
 };
 
 function upload(name) {
-    return `putasset -o coderaiser -r smalltalk -t v${version} -f ${name}`;
+    return 'putasset -o coderaiser -r smalltalk -t v`version`' + `-f ${name}`;
 }
 

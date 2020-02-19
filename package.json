@@ -66,6 +66,7 @@
     "terser-webpack-plugin": "^2.3.1",
     "try-to-tape": "^1.1.0",
     "url-loader": "^3.0.0",
+    "version-io": "^3.0.0",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
     "wraptile": "^3.0.0"
