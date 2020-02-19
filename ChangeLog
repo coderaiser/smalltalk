@@ -1,3 +1,26 @@
+2020.02.19, v4.0.3
+
+fix:
+- (smalltalk) query
+
+feature:
+- (package) stylelint-config-standard v20.0.0
+- (package) stylelint v13.2.0
+- (smalltalk) add ability to strip comments from bundle (#22)
+- (package) eslint-plugin-node v11.0.0
+- (package) nyc v15.0.0
+- (madrun) wisdom: add ability to upload assets on release (#22)
+- (package) rm babel
+- (package) url-loader v3.0.0
+- (package) madrun v5.0.1
+- (package) nodemon v2.0.1
+- (package) eslint-plugin-putout v3.0.0
+- (package) putout v7.2.2
+- (package) stylelint v12.0.0
+- (package) madrun v4.0.0
+- (package) madrun v3.1.1: add ability to build on windows (#18)
+
+
 2019.09.19, v4.0.2
 
 feature:
