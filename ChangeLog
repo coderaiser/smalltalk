@@ -1,3 +1,9 @@
+2020.02.19, v4.0.5
+
+fix:
+- (npmignore) add webpack.config.js
+
+
 2020.02.19, v4.0.4
 
 feature:
