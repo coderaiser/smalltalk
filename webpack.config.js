@@ -10,10 +10,15 @@ const devtool = 'source-map';
 
 const rules = [{
     test: /\.css$/,
-    loader: 'style-loader!css-loader!clean-css-loader',
+    use: ['style-loader', 'css-loader', 'clean-css-loader'],
 }, {
     test: /\.(png|gif|svg|woff|woff2|eot|ttf)$/,
-    loader: 'url-loader?limit=50000',
+    use: [{
+        loader: 'url-loader',
+        options: {
+            limit: 50_000,
+        },
+    }],
 }];
 
 const optimization = {

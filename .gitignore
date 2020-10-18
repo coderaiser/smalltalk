@@ -5,4 +5,5 @@ npm-debug.log*
 *.swp
 yarn-error.log
 dist
+.putoutcache
 
