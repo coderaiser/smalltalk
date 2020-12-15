@@ -51,7 +51,7 @@
     "css-modules-require-hook": "^4.2.3",
     "eslint": "^7.11.0",
     "eslint-plugin-node": "^11.0.0",
-    "eslint-plugin-putout": "^5.2.0",
+    "eslint-plugin-putout": "^6.10.0",
     "madrun": "^7.0.4",
     "nodemon": "^2.0.1",
     "nyc": "^15.0.0",
