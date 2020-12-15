@@ -56,7 +56,7 @@
     "nodemon": "^2.0.1",
     "nyc": "^15.0.0",
     "putasset": "^5.0.0",
-    "putout": "^10.2.1",
+    "putout": "^12.5.0",
     "style-loader": "^2.0.0",
     "supertape": "^3.8.2",
     "terser-webpack-plugin": "^5.0.0",
