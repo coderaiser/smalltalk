@@ -26,9 +26,9 @@ In every method of `smalltalk` last parameter *options* is optional and could be
 to prevent handling of cancel event and to specify custom button label.
 
 ```js
-{
-    cancel: true /* default */
-}
+({
+    cancel: true, /* default */
+});
 ```
 
 ## smalltalk.alert(title, message [, options])
@@ -95,15 +95,16 @@ smalltalk
 ```js
 const progress = smalltalk.progress('Cloud Commander', 'Copy /home/coderaiser -> /home/coderaiser/2');
 
-progress.setProgress(41);
+progress.setProgress(41)
     .catch(() => {
         console.log('abort');
     });
 ```
 
-## Custom label 
+## Custom label
 
 You can use custom label passing into options param the buttons specification. For example :
+
 ```js
 const tryToCatch = require('try-to-catch');
 const OK = 2;
@@ -111,7 +112,7 @@ const result = await tryToCatch(smalltalk.confirm, 'Question', 'Are you sure?', 
     buttons: {
         ok: 'Ok Label',
         cancel: 'Cancel Label',
-    }
+    },
 });
 
 if (result.length === OK)
@@ -121,18 +122,16 @@ else
 ```
 
 # License
+
 MIT
 
-[NPMIMGURL]:                https://img.shields.io/npm/v/smalltalk.svg?style=flat&longCache=true
-[BuildStatusIMGURL]:        https://img.shields.io/travis/coderaiser/smalltalk/master.svg?style=flat&longCache=true
-[DependencyStatusIMGURL]:   https://img.shields.io/david/coderaiser/smalltalk.svg?style=flat&longCache=true
-[LicenseIMGURL]:            https://img.shields.io/badge/license-MIT-317BF9.svg?style=flat&longCache=true
-
-[NPMURL]:                   https://npmjs.org/package/smalltalk "npm"
-[BuildStatusURL]:           https://travis-ci.org/coderaiser/smalltalk  "Build Status"
-[DependencyStatusURL]:      https://david-dm.org/coderaiser/smalltalk "Dependency Status"
-[LicenseURL]:               https://tldrlegal.com/license/mit-license "MIT License"
-
-[CoverageURL]:              https://coveralls.io/github/coderaiser/smalltalk?branch=master
-[CoverageIMGURL]:           https://coveralls.io/repos/coderaiser/smalltalk/badge.svg?branch=master&service=github
-
+[NPMIMGURL]: https://img.shields.io/npm/v/smalltalk.svg?style=flat&longCache=true
+[BuildStatusIMGURL]: https://img.shields.io/travis/coderaiser/smalltalk/master.svg?style=flat&longCache=true
+[DependencyStatusIMGURL]: https://img.shields.io/david/coderaiser/smalltalk.svg?style=flat&longCache=true
+[LicenseIMGURL]: https://img.shields.io/badge/license-MIT-317BF9.svg?style=flat&longCache=true
+[NPMURL]: https://npmjs.org/package/smalltalk "npm"
+[BuildStatusURL]: https://travis-ci.org/coderaiser/smalltalk "Build Status"
+[DependencyStatusURL]: https://david-dm.org/coderaiser/smalltalk "Dependency Status"
+[LicenseURL]: https://tldrlegal.com/license/mit-license "MIT License"
+[CoverageURL]: https://coveralls.io/github/coderaiser/smalltalk?branch=master
+[CoverageIMGURL]: https://coveralls.io/repos/coderaiser/smalltalk/badge.svg?branch=master&service=github
