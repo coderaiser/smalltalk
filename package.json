@@ -58,7 +58,7 @@
     "putasset": "^5.0.0",
     "putout": "^12.5.0",
     "style-loader": "^2.0.0",
-    "supertape": "^3.8.2",
+    "supertape": "^4.6.0",
     "terser-webpack-plugin": "^5.0.0",
     "try-to-tape": "^1.1.0",
     "url-loader": "^4.0.0",
