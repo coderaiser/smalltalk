@@ -63,7 +63,7 @@ test('smalltalk: alert: appendChild', (t, {document}) => {
     
     smalltalk.alert('title', 'message');
     
-    t.ok(document.body.appendChild.calledWith(el), 'should append el');
+    t.calledWith(document.body.appendChild, [el], 'should append el');
     t.end();
 });
 
@@ -1060,7 +1060,7 @@ test('smalltalk: progress: remove', (t, {document}) => {
     
     progress.remove();
     
-    t.ok(removeChild.calledWith(el), 'should call removeChild');
+    t.calledWith(removeChild, [el], 'should call removeChild');
     t.end();
 });
 

@@ -1,8 +1,6 @@
-'use strict';
+import {run} from 'madrun';
 
-const {run} = require('madrun');
-
-module.exports = {
+export default {
     'watch': () => 'nodemon --watch lib --watch test --exec',
     'watch:test': () => run('watch', 'npm test'),
     'watch:lint': () => run('watch', '\'npm run lint\''),
@@ -11,6 +9,8 @@ module.exports = {
     'coverage': () => 'nyc npm test',
     'report': () => 'nyc report --reporter=text-lcov | coveralls',
     'lint': () => 'putout .',
+    'fresh:lint': () => run('lint', '--fresh'),
+    'lint:fresh': () => run('lint', '--fresh'),
     'fix:lint': () => run('lint', '--fix'),
     'test': () => 'tape \'test/**/*.js\'',
     'test:update': () => 'UPDATE_FIXTURE=1 npm test',

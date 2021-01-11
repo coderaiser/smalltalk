@@ -19,7 +19,7 @@ test('smalltalk.native: alert', (t) => {
     global.alert = alert;
     
     smalltalk.alert('title', 'message');
-    t.ok(alert.calledWith('message'), 'alert should have been called with message');
+    t.calledWith(alert, ['message'], 'alert should have been called with message');
     t.end();
 });
 
@@ -42,7 +42,7 @@ test('smalltalk.native: confirm', (t) => {
     
     smalltalk.confirm('title', 'message')
         .catch(() => {
-            t.ok(confirm.calledWith('message'), 'confirm should have been called with message');
+            t.calledWith(confirm, ['message'], 'confirm should have been called with message');
             t.end();
         });
 });
@@ -97,7 +97,7 @@ test('smalltalk.native: prompt', (t) => {
     global.prompt = prompt;
     
     smalltalk.prompt('title', 'message', 'value');
-    t.ok(prompt.calledWith('message', 'value'), 'prompt should have been called with message');
+    t.calledWith(prompt, ['message', 'value'], 'prompt should have been called with message');
     t.end();
 });
 
