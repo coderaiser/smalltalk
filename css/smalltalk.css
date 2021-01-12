@@ -131,7 +131,7 @@ button {
     margin-left: 10px;
 }
 
-.smalltalk input {
+.smalltalk input, .smalltalk select {
     width: 100%;
     border: 1px solid #bfbfbf;
     border-radius: 2px;

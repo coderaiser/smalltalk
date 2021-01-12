@@ -88,6 +88,43 @@ smalltalk
     });
 ```
 
+## smalltalk.select(title, message, preSelectValue, options)
+![Select](https://raw.githubusercontent.com/coderaiser/smalltalk/master/screen/select.png "Select")
+
+```js
+smalltalk.select("Select", "Select your favourite browser!", "firefox", {
+      multiple: false,
+      selectOptions: [
+        {
+          name: "Chrome",
+          value: "chrome",
+        },
+        {
+          name: "Firefox",
+          value: "firefox",
+        },
+        {
+          name: "Internet Explorer",
+          value: "IE",
+        },
+        {
+          name: "Edge",
+          value: "edge",
+        },
+        {
+          name: "Safari",
+          value: "safari",
+        },
+      ],
+    })
+    .then((value) => {
+        console.log(value);
+    })
+    .catch(() => {
+        console.log('cancel');
+    });
+```
+
 ## smalltalk.progress(title, message)
 
 ![Progress](https://raw.githubusercontent.com/coderaiser/smalltalk/master/screen/progress.png "Progress")
