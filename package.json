@@ -60,7 +60,7 @@
     "eslint-plugin-putout": "^15.8.0",
     "madrun": "^9.0.5",
     "nodemon": "^2.0.1",
-    "putasset": "^5.0.0",
+    "putasset": "^6.0.0",
     "putout": "^26.24.0",
     "style-loader": "^2.0.0",
     "supertape": "^7.6.0",
