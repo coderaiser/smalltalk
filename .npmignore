@@ -2,6 +2,5 @@ screen
 .*
 test
 yarn-error.log
-dist
 webpack.config.js
 
