@@ -169,55 +169,6 @@ test('smalltalk: alert: keydown: stopPropagation', (t, {document}) => {
     t.end();
 });
 
-test('smalltalk: alert: keydown: tab: preventDefault', (t, {document}) => {
-    const parentElement = create();
-    const {
-        createElement,
-        querySelector,
-        activeElement,
-    } = document;
-    
-    const el = {
-        ...create(),
-        parentElement,
-        querySelector: (a) => {
-            if (a === '[data-name="js-ok"]')
-                return ok;
-        },
-    };
-    
-    activeElement.getAttribute.returns('js-ok');
-    
-    const ok = {
-        getAttribute: () => 'js-ok',
-        focus: stub(),
-        addEventListener: stub(),
-    };
-    
-    createElement.returns(el);
-    querySelector.returns(el);
-    
-    smalltalk.alert('title', 'message');
-    
-    const [, keydown] = el.addEventListener.args
-        .filter(([event]) => event === 'keydown')
-        .pop();
-    
-    const TAB = 9;
-    
-    const event = {
-        keyCode: TAB,
-        preventDefault: stub(),
-        stopPropagation: stub(),
-        target: el,
-    };
-    
-    keydown(event);
-    
-    t.ok(event.preventDefault.called, 'should call preventDefault');
-    t.end();
-});
-
 test('smalltalk: alert: click: stopPropagation: called', (t, {document}) => {
     const {
         createElement,
@@ -403,7 +354,7 @@ test('smalltalk: alert: keydown: left: focus', (t) => {
     t.end();
 });
 
-test('smalltalk: alert: click', (t, {document}) => {
+test('smalltalk: alert: click: focus', (t, {document}) => {
     const {
         createElement,
         querySelector,

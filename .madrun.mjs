@@ -12,7 +12,7 @@ export default {
     'fresh:lint': () => run('lint', '--fresh'),
     'lint:fresh': () => run('lint', '--fresh'),
     'fix:lint': () => run('lint', '--fix'),
-    'test': () => `tape 'test/**/*.js'`,
+    'test': () => `tape --no-check-scopes 'test/**/*.js'`,
     'test:update': () => 'UPDATE_FIXTURE=1 npm test',
     'build': () => 'webpack --progress --mode production',
     'wisdom': () => run('build'),
