@@ -1,4 +1,4 @@
-# Smalltalk [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Coverage][CoverageIMGURL]][CoverageURL]
+# Smalltalk [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Coverage][CoverageIMGURL]][CoverageURL]
 
 Simple [Promise](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise)-based replacement of native Alert, Confirm and Prompt.
 
@@ -20,6 +20,13 @@ You can also use native version with:
 
 ```js
 const smalltalk = require('smalltalk/native');
+```
+
+When you need a bundled verseion use
+
+
+```js
+import smalltalk from 'smalltalk/bundle';
 ```
 
 In every method of `smalltalk` last parameter *options* is optional and could be used
@@ -127,11 +134,9 @@ MIT
 
 [NPMIMGURL]: https://img.shields.io/npm/v/smalltalk.svg?style=flat&longCache=true
 [BuildStatusIMGURL]: https://img.shields.io/travis/coderaiser/smalltalk/master.svg?style=flat&longCache=true
-[DependencyStatusIMGURL]: https://img.shields.io/david/coderaiser/smalltalk.svg?style=flat&longCache=true
 [LicenseIMGURL]: https://img.shields.io/badge/license-MIT-317BF9.svg?style=flat&longCache=true
 [NPMURL]: https://npmjs.org/package/smalltalk "npm"
 [BuildStatusURL]: https://travis-ci.org/coderaiser/smalltalk "Build Status"
-[DependencyStatusURL]: https://david-dm.org/coderaiser/smalltalk "Dependency Status"
 [LicenseURL]: https://tldrlegal.com/license/mit-license "MIT License"
 [CoverageURL]: https://coveralls.io/github/coderaiser/smalltalk?branch=master
 [CoverageIMGURL]: https://coveralls.io/repos/coderaiser/smalltalk/badge.svg?branch=master&service=github

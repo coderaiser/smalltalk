@@ -1,6 +1,8 @@
 {
   "name": "smalltalk",
   "version": "4.0.7",
+  "type": "commonjs",
+  "commitType": "colon",
   "description": "Promise-based Alert, Confirm and Prompt replacement",
   "homepage": "http://github.com/coderaiser/smalltalk",
   "repository": {
@@ -10,7 +12,7 @@
   "main": "lib/smalltalk.js",
   "exports": {
     ".": "lib/smalltalk",
-    "dist": "dist/smalltalk.min.js"
+    "bundle": "bundle/smalltalk.min.js"
   },
   "scripts": {
     "watch": "madrun watch",
@@ -46,9 +48,9 @@
     "url": "https://github.com/coderaiser/smalltalk/issues"
   },
   "devDependencies": {
-    "@cloudcmd/stub": "^3.1.0",
     "auto-globals": "^2.0.0",
     "autoprefixer": "^10.0.1",
+    "c8": "^7.11.3",
     "clean-css-loader": "^2.0.0",
     "coveralls": "^3.0.0",
     "css-loader": "^5.0.0",
@@ -58,7 +60,6 @@
     "eslint-plugin-putout": "^15.8.0",
     "madrun": "^9.0.5",
     "nodemon": "^2.0.1",
-    "nyc": "^15.0.0",
     "putasset": "^5.0.0",
     "putout": "^26.24.0",
     "style-loader": "^2.0.0",
