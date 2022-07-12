@@ -1,6 +1,6 @@
 {
   "name": "smalltalk",
-  "version": "4.0.7",
+  "version": "4.1.0",
   "type": "commonjs",
   "commitType": "colon",
   "description": "Promise-based Alert, Confirm and Prompt replacement",
