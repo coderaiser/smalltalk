@@ -11,8 +11,8 @@
   },
   "main": "lib/smalltalk.js",
   "exports": {
-    ".": "lib/smalltalk",
-    "bundle": "bundle/smalltalk.min.js"
+    ".": "./lib/smalltalk",
+    "./bundle": "./dist/smalltalk.min.js"
   },
   "scripts": {
     "watch": "madrun watch",
