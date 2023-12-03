@@ -1,3 +1,20 @@
+2023.12.03, v4.1.2
+
+fix:
+- 64f0fc8 export
+
+feature:
+- 13ca47e smalltalk: eslint-plugin-n v16.3.1
+- d4c8994 smalltalk: postcss v8.4.32
+- 6c4b74a drop coveralls
+- 0e0345f smalltalk: nodemon v3.0.2
+- cb46477 smalltalk: webpack-cli v5.1.4
+- 924db6f smalltalk: eslint-plugin-putout v21.0.2
+- acc397f smalltalk: putout v33.13.3
+- f7041ab smalltalk: supertape v8.8.0
+- 383d124 smalltalk: c8 v8.0.1
+- 337c31a smalltalk: auto-globals v3.0.0
+
 2022.07.13, v4.1.1
 
 fix:
