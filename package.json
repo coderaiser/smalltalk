@@ -52,7 +52,6 @@
     "autoprefixer": "^10.0.1",
     "c8": "^8.0.1",
     "clean-css-loader": "^4.1.1",
-    "coveralls": "^3.0.0",
     "css-loader": "^6.7.1",
     "css-modules-require-hook": "^4.2.3",
     "eslint": "^8.19.0",
