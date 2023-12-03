@@ -2,7 +2,6 @@
   "name": "smalltalk",
   "version": "4.1.1",
   "type": "commonjs",
-  "commitType": "colon",
   "description": "Promise-based Alert, Confirm and Prompt replacement",
   "homepage": "http://github.com/coderaiser/smalltalk",
   "repository": {
@@ -59,6 +58,7 @@
     "eslint-plugin-putout": "^21.0.2",
     "madrun": "^9.0.5",
     "nodemon": "^3.0.2",
+    "postcss": "^8.4.32",
     "putasset": "^6.0.0",
     "putout": "^33.13.3",
     "style-loader": "^3.3.1",
