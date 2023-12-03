@@ -59,7 +59,7 @@
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-putout": "^21.0.2",
     "madrun": "^9.0.5",
-    "nodemon": "^2.0.1",
+    "nodemon": "^3.0.2",
     "putasset": "^6.0.0",
     "putout": "^33.13.3",
     "style-loader": "^3.3.1",
