@@ -11,7 +11,7 @@
   },
   "main": "lib/smalltalk.js",
   "exports": {
-    ".": "./lib/smalltalk",
+    ".": "./lib/smalltalk.js",
     "./bundle": "./dist/smalltalk.min.js"
   },
   "scripts": {
