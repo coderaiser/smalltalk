@@ -26,4 +26,3 @@ export default {
 function upload(name) {
     return 'putasset -o coderaiser -r smalltalk -t v`version`' + ` -f ${name}`;
 }
-

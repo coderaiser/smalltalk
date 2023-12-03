@@ -7,13 +7,10 @@
     
     transition: 200ms opacity;
     
-    bottom: 0;
-    left: 0;
+    inset: 0;
     overflow: auto;
     padding: 20px;
     position: fixed;
-    right: 0;
-    top: 0;
     
     z-index: 100;
 }
@@ -33,7 +30,7 @@
     z-index: 0;
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (width <= 500px) {
     .smalltalk .page {
         min-width: 0;
     }

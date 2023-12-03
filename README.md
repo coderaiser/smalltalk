@@ -24,7 +24,6 @@ const smalltalk = require('smalltalk/native');
 
 When you need a bundled verseion use
 
-
 ```js
 import smalltalk from 'smalltalk/bundle';
 ```
@@ -102,7 +101,8 @@ smalltalk
 ```js
 const progress = smalltalk.progress('Cloud Commander', 'Copy /home/coderaiser -> /home/coderaiser/2');
 
-progress.setProgress(41)
+progress
+    .setProgress(41)
     .catch(() => {
         console.log('abort');
     });

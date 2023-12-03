@@ -1,10 +1,8 @@
 'use strict';
 
-const {
-    test,
-    stub,
-} = require('supertape');
+require('css-modules-require-hook/preset');
 
+const {test, stub} = require('supertape');
 const smalltalk = require('../lib/smalltalk.native');
 
 global.window = {};
@@ -19,6 +17,7 @@ test('smalltalk.native: Promise', (t) => {
 
 test('smalltalk.native: alert', (t) => {
     const alert = stub();
+    
     global.alert = alert;
     
     smalltalk.alert('title', 'message');
@@ -30,10 +29,12 @@ test('smalltalk.native: alert', (t) => {
 test('smalltalk.native: alert: result', (t) => {
     global.alert = stub();
     
-    smalltalk.alert('title', 'message').then(() => {
-        t.pass('promise should have been resolved');
-        t.end();
-    })
+    smalltalk
+        .alert('title', 'message')
+        .then(() => {
+            t.pass('promise should have been resolved');
+            t.end();
+        })
         .catch((e) => {
             t.fail(`should not reject ${e.message}`);
         });
@@ -41,9 +42,11 @@ test('smalltalk.native: alert: result', (t) => {
 
 test('smalltalk.native: confirm', (t) => {
     const confirm = stub().returns(false);
+    
     global.confirm = confirm;
     
-    smalltalk.confirm('title', 'message')
+    smalltalk
+        .confirm('title', 'message')
         .catch(() => {
             t.calledWith(confirm, ['message'], 'confirm should have been called with message');
             t.end();
@@ -53,10 +56,12 @@ test('smalltalk.native: confirm', (t) => {
 test('smalltalk.native: confirm: result: ok', (t) => {
     global.confirm = stub().returns(true);
     
-    smalltalk.confirm('title', 'message').then(() => {
-        t.pass('should resolve');
-        t.end();
-    })
+    smalltalk
+        .confirm('title', 'message')
+        .then(() => {
+            t.pass('should resolve');
+            t.end();
+        })
         .catch((e) => {
             t.notOk(e, 'should not reject');
         });
@@ -65,10 +70,12 @@ test('smalltalk.native: confirm: result: ok', (t) => {
 test('smalltalk.native: confirm: result: cancel', (t) => {
     global.confirm = stub().returns(false);
     
-    smalltalk.confirm('title', 'message').then(() => {
-        t.fail('should not resolve');
-        t.end();
-    })
+    smalltalk
+        .confirm('title', 'message')
+        .then(() => {
+            t.fail('should not resolve');
+            t.end();
+        })
         .catch((e) => {
             t.ok(e, 'should reject');
         });
@@ -79,10 +86,14 @@ test('smalltalk.native: confirm: options: cancel', (t) => {
     
     const cancel = false;
     
-    smalltalk.confirm('title', 'message', {cancel}).then(() => {
-        t.fail('should not resolve');
-        t.end();
-    })
+    smalltalk
+        .confirm('title', 'message', {
+            cancel,
+        })
+        .then(() => {
+            t.fail('should not resolve');
+            t.end();
+        })
         .catch(() => {
             t.fail('should not reject');
         });
@@ -92,6 +103,7 @@ test('smalltalk.native: confirm: options: cancel', (t) => {
 
 test('smalltalk.native: prompt', (t) => {
     const prompt = stub();
+    
     global.prompt = prompt;
     
     smalltalk.prompt('title', 'message', 'value');
@@ -103,10 +115,12 @@ test('smalltalk.native: prompt', (t) => {
 test('smalltalk.native: prompt: result: ok', (t) => {
     global.prompt = stub().returns('hello');
     
-    smalltalk.prompt('title', 'message', 'value').then((value) => {
-        t.equal(value, 'hello', 'should resolve value');
-        t.end();
-    })
+    smalltalk
+        .prompt('title', 'message', 'value')
+        .then((value) => {
+            t.equal(value, 'hello', 'should resolve value');
+            t.end();
+        })
         .catch((e) => {
             t.fail(`should not reject ${e.message}`);
         });
@@ -115,10 +129,12 @@ test('smalltalk.native: prompt: result: ok', (t) => {
 test('smalltalk.native: prompt: result: cancel', (t) => {
     global.prompt = stub().returns(null);
     
-    smalltalk.prompt('title', 'message', 'value').then(() => {
-        t.fail('should not resolve');
-        t.end();
-    })
+    smalltalk
+        .prompt('title', 'message', 'value')
+        .then(() => {
+            t.fail('should not resolve');
+            t.end();
+        })
         .catch((e) => {
             t.ok(e, 'should reject');
         });
@@ -127,12 +143,14 @@ test('smalltalk.native: prompt: result: cancel', (t) => {
 test('smalltalk.native: prompt: options: cancel', (t) => {
     global.prompt = stub().returns(null);
     
-    smalltalk.prompt('title', 'message', 'value', {
-        cancel: false,
-    }).then(() => {
-        t.fail('should not resolve');
-        t.end();
-    })
+    smalltalk
+        .prompt('title', 'message', 'value', {
+            cancel: false,
+        })
+        .then(() => {
+            t.fail('should not resolve');
+            t.end();
+        })
         .catch((e) => {
             t.fail(`should not reject ${e.message}`);
         });

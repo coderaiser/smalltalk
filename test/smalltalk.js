@@ -1,26 +1,26 @@
 'use strict';
 
-const path = require('path');
+const {join} = require('node:path');
+const process = require('node:process');
 const fs = require('fs');
 
 require('css-modules-require-hook/preset');
 
 const autoGlobals = require('auto-globals');
 const tape = require('supertape');
-const stub = require('@cloudcmd/stub');
 const currify = require('currify');
 const wraptile = require('wraptile');
 
 global.window = {};
 
-const {UPDATE_FIXTURE} = process.env;
-
 const smalltalk = require('../lib/smalltalk');
+const {UPDATE_FIXTURE} = process.env;
 const noop = () => {};
 const isUpdateFixtures = UPDATE_FIXTURE === 'true' || UPDATE_FIXTURE === '1';
 const {create} = autoGlobals;
 const test = autoGlobals(tape);
-const fixtureDir = path.join(__dirname, 'fixture');
+const fixtureDir = join(__dirname, 'fixture');
+const {stub} = tape;
 
 const writeFixture = (name, data) => {
     return fs.writeFileSync(`${fixtureDir}/${name}.html`, data);
@@ -28,6 +28,7 @@ const writeFixture = (name, data) => {
 
 const readFixture = (name) => {
     const fn = () => fs.readFileSync(`${fixtureDir}/${name}.html`, 'utf8');
+    
     fn.update = !isUpdateFixtures ? noop : currify(writeFixture, name);
     
     return fn;
@@ -88,16 +89,18 @@ test('smalltalk: alert: click', (t, {document}) => {
     createElement.returns(el);
     smalltalk.alert('title', 'message');
     
-    t.equal(ok.addEventListener.args.pop()[0], 'click', 'should set click listener');
+    const result = ok
+        .addEventListener
+        .args
+        .pop()[0];
+    
+    t.equal(result, 'click', 'should set click listener');
     t.end();
 });
 
 test('smalltalk: alert: close: remove', (t, {document}) => {
     const parentElement = create();
-    const {
-        createElement,
-        querySelector,
-    } = document;
+    const {createElement, querySelector} = document;
     
     const el = {
         ...create(),
@@ -125,15 +128,16 @@ test('smalltalk: alert: close: remove', (t, {document}) => {
         target: ok,
     });
     
-    t.equal(parentElement.removeChild.args.pop().pop(), el, 'should find smalltalk');
+    t.equal(parentElement
+        .removeChild
+        .args
+        .pop()
+        .pop(), el, 'should find smalltalk');
     t.end();
 });
 
 test('smalltalk: alert: keydown: stopPropagation', (t, {document}) => {
-    const {
-        createElement,
-        querySelector,
-    } = document;
+    const {createElement, querySelector} = document;
     
     const parentElement = create();
     
@@ -157,7 +161,11 @@ test('smalltalk: alert: keydown: stopPropagation', (t, {document}) => {
     
     smalltalk.alert('title', 'message');
     
-    const [, keydown] = el.addEventListener.args.filter(([event]) => event === 'keydown').pop();
+    const [, keydown] = el
+        .addEventListener
+        .args
+        .filter(([event]) => event === 'keydown')
+        .pop();
     
     const event = {
         stopPropagation: stub(),
@@ -170,10 +178,7 @@ test('smalltalk: alert: keydown: stopPropagation', (t, {document}) => {
 });
 
 test('smalltalk: alert: click: stopPropagation: called', (t, {document}) => {
-    const {
-        createElement,
-        querySelector,
-    } = document;
+    const {createElement, querySelector} = document;
     
     const parentElement = create();
     const el = {
@@ -196,10 +201,14 @@ test('smalltalk: alert: click: stopPropagation: called', (t, {document}) => {
     
     smalltalk.alert('title', 'message');
     
-    const [, click] = el.addEventListener.args.filter((a) => {
-        const [event] = a;
-        return event === 'click';
-    }).pop();
+    const [, click] = el
+        .addEventListener
+        .args
+        .filter((a) => {
+            const [event] = a;
+            return event === 'click';
+        })
+        .pop();
     
     const event = {
         stopPropagation: stub(),
@@ -243,7 +252,9 @@ test('smalltalk: alert: keydown: tab: preventDefault', (t, {document}) => {
     
     smalltalk.alert('title', 'message');
     
-    const [, keydown] = el.addEventListener.args
+    const [, keydown] = el
+        .addEventListener
+        .args
         .filter(([event]) => event === 'keydown')
         .pop();
     
@@ -286,7 +297,9 @@ test('smalltalk: alert: keydown: tab: active name', (t, {document}) => {
     
     smalltalk.alert('title', 'message');
     
-    const [, keydown] = el.addEventListener.args
+    const [, keydown] = el
+        .addEventListener
+        .args
         .filter(([event]) => event === 'keydown')
         .pop();
     
@@ -335,7 +348,9 @@ test('smalltalk: alert: keydown: left: focus', (t) => {
     
     smalltalk.alert('title', 'message');
     
-    const [, keydown] = el.addEventListener.args
+    const [, keydown] = el
+        .addEventListener
+        .args
         .filter(([event]) => event === 'keydown')
         .pop();
     
@@ -355,10 +370,7 @@ test('smalltalk: alert: keydown: left: focus', (t) => {
 });
 
 test('smalltalk: alert: click: focus', (t, {document}) => {
-    const {
-        createElement,
-        querySelector,
-    } = document;
+    const {createElement, querySelector} = document;
     
     const parentElement = create();
     const el = {
@@ -381,7 +393,9 @@ test('smalltalk: alert: click: focus', (t, {document}) => {
     
     smalltalk.alert('title', 'message');
     
-    const [, keydown] = el.addEventListener.args
+    const [, keydown] = el
+        .addEventListener
+        .args
         .filter(([event]) => event === 'click')
         .pop();
     
@@ -454,7 +468,8 @@ test('smalltalk: confirm: click on close', (t) => {
     document.createElement.returns(el);
     document.querySelector.returns(el);
     
-    smalltalk.confirm('title', 'message')
+    smalltalk
+        .confirm('title', 'message')
         .catch((e) => {
             t.ok(e, 'should reject');
             t.end();
@@ -500,7 +515,9 @@ test('smalltalk: confirm: keydown: left: active name', (t, {document}) => {
     
     smalltalk.confirm('title', 'message');
     
-    const [, keydown] = el.addEventListener.args
+    const [, keydown] = el
+        .addEventListener
+        .args
         .filter(([event]) => event === 'keydown')
         .pop();
     
@@ -559,7 +576,9 @@ test('smalltalk: confirm: keydown: left: active name: cancel', (t, {document}) =
     
     smalltalk.confirm('title', 'message');
     
-    const [, keydown] = el.addEventListener.args
+    const [, keydown] = el
+        .addEventListener
+        .args
         .filter(([event]) => event === 'keydown')
         .pop();
     
@@ -580,10 +599,7 @@ test('smalltalk: confirm: keydown: left: active name: cancel', (t, {document}) =
 
 test('smalltalk: confirm: keydown: esc: reject', (t, {document}) => {
     const parentElement = create();
-    const {
-        createElement,
-        querySelector,
-    } = document;
+    const {createElement, querySelector} = document;
     
     const el = {
         ...create(),
@@ -603,13 +619,16 @@ test('smalltalk: confirm: keydown: esc: reject', (t, {document}) => {
     createElement.returns(el);
     querySelector.returns(el);
     
-    smalltalk.confirm('title', 'message')
+    smalltalk
+        .confirm('title', 'message')
         .catch((e) => {
             t.ok(e, 'should reject');
             t.end();
         });
     
-    const [, keydown] = el.addEventListener.args
+    const [, keydown] = el
+        .addEventListener
+        .args
         .filter(([event]) => event === 'keydown')
         .pop();
     
@@ -627,10 +646,7 @@ test('smalltalk: confirm: keydown: esc: reject', (t, {document}) => {
 
 test('smalltalk: confirm: keydown: enter', (t, {document}) => {
     const parentElement = create();
-    const {
-        createElement,
-        querySelector,
-    } = document;
+    const {createElement, querySelector} = document;
     
     const el = {
         ...create(),
@@ -650,13 +666,16 @@ test('smalltalk: confirm: keydown: enter', (t, {document}) => {
     createElement.returns(el);
     querySelector.returns(el);
     
-    smalltalk.confirm('title', 'message')
+    smalltalk
+        .confirm('title', 'message')
         .then(() => {
             t.pass('should resolve');
             t.end();
         });
     
-    const [, keydown] = el.addEventListener.args
+    const [, keydown] = el
+        .addEventListener
+        .args
         .filter(([event]) => event === 'keydown')
         .pop();
     
@@ -736,10 +755,7 @@ test('smalltalk: prompt: no value', (t, {document}) => {
 });
 
 test('smalltalk: prompt: click on ok', (t, {document}) => {
-    const {
-        createElement,
-        querySelector,
-    } = document;
+    const {createElement, querySelector} = document;
     
     const dataName = (a) => `[data-name="js-${a}"]`;
     
@@ -769,7 +785,8 @@ test('smalltalk: prompt: click on ok', (t, {document}) => {
     createElement.returns(el);
     querySelector.returns(el);
     
-    smalltalk.prompt('title', 'message', value)
+    smalltalk
+        .prompt('title', 'message', value)
         .then((result) => {
             t.equal(result, value, 'should return value');
             t.end();
@@ -784,12 +801,10 @@ test('smalltalk: prompt: click on ok', (t, {document}) => {
 
 test('smalltalk: prompt: click on cancel', (t, {document}) => {
     const dataName = (a) => `[data-name="js-${a}"]`;
-    const {
-        createElement,
-        querySelector,
-    } = document;
+    const {createElement, querySelector} = document;
     
     const value = 'hello';
+    
     const input = {
         ...create(),
         value,
@@ -815,7 +830,8 @@ test('smalltalk: prompt: click on cancel', (t, {document}) => {
     createElement.returns(el);
     querySelector.returns(el);
     
-    smalltalk.prompt('title', 'message', value)
+    smalltalk
+        .prompt('title', 'message', value)
         .catch((e) => {
             t.ok(e, 'should reject');
             t.end();
@@ -830,12 +846,10 @@ test('smalltalk: prompt: click on cancel', (t, {document}) => {
 
 test('smalltalk: prompt: click on cancel: cancel false', (t, {document}) => {
     const dataName = (a) => `[data-name="js-${a}"]`;
-    const {
-        createElement,
-        querySelector,
-    } = document;
+    const {createElement, querySelector} = document;
     
     const value = 'hello';
+    
     const input = {
         ...create(),
         value,
@@ -864,7 +878,10 @@ test('smalltalk: prompt: click on cancel: cancel false', (t, {document}) => {
     const fail = t.fail.bind(t);
     const end = t.end.bind(t);
     
-    smalltalk.prompt('title', 'message', value, {cancel: false})
+    smalltalk
+        .prompt('title', 'message', value, {
+            cancel: false,
+        })
         .then(wraptile(fail, 'should not pass'))
         .catch(wraptile(fail, 'should not reject'))
         .then(end);
@@ -881,12 +898,10 @@ test('smalltalk: prompt: click on cancel: cancel false', (t, {document}) => {
 
 test('smalltalk: prompt: click on cancel: options: no cancel', (t, {document}) => {
     const dataName = (a) => `[data-name="js-${a}"]`;
-    const {
-        createElement,
-        querySelector,
-    } = document;
+    const {createElement, querySelector} = document;
     
     const value = 'hello';
+    
     const input = {
         ...create(),
         value,
@@ -912,7 +927,8 @@ test('smalltalk: prompt: click on cancel: options: no cancel', (t, {document}) =
     createElement.returns(el);
     querySelector.returns(el);
     
-    smalltalk.prompt('title', 'message', value, {})
+    smalltalk
+        .prompt('title', 'message', value, {})
         .catch((e) => {
             t.ok(e, 'should reject');
             t.end();
@@ -976,6 +992,7 @@ test('smalltalk: progress: setProgress', (t, {document}) => {
 
 test('smalltalk: progress: setProgress: 100', (t, {document}) => {
     const valueEl = create();
+    
     valueEl.parentElement = create();
     
     document.querySelector.returns(valueEl);
@@ -996,6 +1013,7 @@ test('smalltalk: progress: setProgress: 100', (t, {document}) => {
 
 test('smalltalk: progress: remove', (t, {document}) => {
     const valueEl = create();
+    
     valueEl.parentElement = create();
     
     document.querySelector.returns(valueEl);
@@ -1016,4 +1034,3 @@ test('smalltalk: progress: remove', (t, {document}) => {
     t.calledWith(removeChild, [el], 'should call removeChild');
     t.end();
 });
-
