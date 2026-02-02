@@ -1,3 +1,22 @@
+2026.02.02, v5.0.0
+
+feature:
+- db1594d smalltalk: migrate to ESM
+- b340642 smalltalk: webpack-cli v6.0.1
+- 003ca38 smalltalk: version-io v5.0.0
+- 59102e9 smalltalk: supertape v12.2.0
+- 3e11e61 smalltalk: style-loader v4.0.0
+- ccbd0ed smalltalk: putout v41.16.0
+- a74682d smalltalk: putasset v7.0.0
+- 7f3e9d1 smalltalk: madrun v12.1.3
+- 3eefd4c smalltalk: fullstore v4.0.0
+- fb12497 smalltalk: eslint-plugin-putout v30.0.2
+- 4db84bc smalltalk: eslint-plugin-n v17.23.2
+- effc8c1 smalltalk: eslint v9.39.2
+- 0424c0d smalltalk: css-loader v7.1.3
+- 78b993b smalltalk: c8 v10.1.3
+- c53349a smalltalk: auto-globals v4.0.1
+
 2023.12.03, v4.1.2
 
 fix:
