@@ -47,7 +47,7 @@
     "url": "https://github.com/coderaiser/smalltalk/issues"
   },
   "devDependencies": {
-    "auto-globals": "^3.0.0",
+    "auto-globals": "^4.0.1",
     "autoprefixer": "^10.0.1",
     "c8": "^8.0.1",
     "clean-css-loader": "^4.1.1",
