@@ -1,4 +1,9 @@
-import {run} from 'madrun';
+import {run, cutEnv} from 'madrun';
+import {defineEnv} from 'supertape/env';
+
+const env = defineEnv({
+    css: true,
+});
 
 export default {
     'watch': () => 'nodemon --watch lib --watch test --exec',
@@ -6,14 +11,17 @@ export default {
     'watch:lint': async () => await run('watch', `'npm run lint'`),
     'watch:lint:js': () => run('watch', '"run lint:js"'),
     'watch:coverage': () => run('watch', 'redrun coverage'),
-    'coverage': () => 'c8 npm test',
+    'coverage': async () => [env, `c8 ${await cutEnv('test')}`],
     'report': () => 'c8 report --reporter=lcov',
     'lint': () => 'putout .',
     'fresh:lint': () => run('lint', '--fresh'),
     'lint:fresh': () => run('lint', '--fresh'),
     'fix:lint': () => run('lint', '--fix'),
-    'test': () => `tape --no-check-scopes 'test/**/*.js'`,
-    'test:update': () => 'UPDATE_FIXTURE=1 npm test',
+    'test': () => [env, `tape --no-check-scopes 'test/**/*.js'`],
+    'test:update': async () => [`await cutEnv('test')`, {
+            UPDATE_FIXTURE: 1,
+            ...env,
+        }],
     'build': () => 'webpack --progress --mode production',
     'wisdom': () => run('build'),
     'wisdom:done': () => run('upload:*'),

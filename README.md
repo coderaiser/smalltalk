@@ -13,13 +13,13 @@ npm i smalltalk
 First things first, require `smalltalk` with:
 
 ```js
-const smalltalk = require('smalltalk');
+import * as smalltalk from 'smalltalk';
 ```
 
 You can also use native version with:
 
 ```js
-const smalltalk = require('smalltalk/native');
+import * as smalltalk from 'smalltalk/native';
 ```
 
 When you need a bundled verseion use

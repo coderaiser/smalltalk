@@ -1,25 +1,18 @@
-'use strict';
-
-const {join} = require('node:path');
-const process = require('node:process');
-const fs = require('node:fs');
-
-require('css-modules-require-hook/preset');
-
-const autoGlobals = require('auto-globals');
-const {test: tape} = require('supertape');
-const currify = require('currify');
-const wraptile = require('wraptile');
+import process from 'node:process';
+import fs from 'node:fs';
+import autoGlobals from 'auto-globals';
+import {test as tape} from 'supertape';
+import currify from 'currify';
+import wraptile from 'wraptile';
+import * as smalltalk from '../lib/smalltalk.js';
 
 globalThis.window = {};
-
-const smalltalk = require('../lib/smalltalk');
 const {UPDATE_FIXTURE} = process.env;
 const noop = () => {};
 const isUpdateFixtures = UPDATE_FIXTURE === 'true' || UPDATE_FIXTURE === '1';
 const {create} = autoGlobals;
 const test = autoGlobals(tape);
-const fixtureDir = join(__dirname, 'fixture');
+const fixtureDir = new URL('fixture', import.meta.url).pathname;
 const {stub} = tape;
 
 const writeFixture = (name, data) => {

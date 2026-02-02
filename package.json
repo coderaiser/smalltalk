@@ -1,7 +1,7 @@
 {
   "name": "smalltalk",
   "version": "4.1.2",
-  "type": "commonjs",
+  "type": "module",
   "description": "Promise-based Alert, Confirm and Prompt replacement",
   "homepage": "http://github.com/coderaiser/smalltalk",
   "repository": {
@@ -10,8 +10,7 @@
   },
   "main": "lib/smalltalk.js",
   "exports": {
-    ".": "./lib/smalltalk.js",
-    "./bundle": "./dist/smalltalk.min.js"
+    ".": "./lib/smalltalk.js"
   },
   "scripts": {
     "watch": "madrun watch",
