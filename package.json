@@ -6,7 +6,7 @@
   "homepage": "http://github.com/coderaiser/smalltalk",
   "repository": {
     "type": "git",
-    "url": "git://github.com/coderaiser/smalltalk.git"
+    "url": "git+https://github.com/coderaiser/smalltalk.git"
   },
   "main": "lib/smalltalk.js",
   "exports": {

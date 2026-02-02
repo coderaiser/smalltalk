@@ -12,8 +12,5 @@
         "plugin:n/recommended",
         "plugin:putout/recommended"
     ],
-    "plugins": [
-        "n",
-        "putout"
-    ]
+    "plugins": ["n", "putout"]
 }

@@ -1,0 +1,5 @@
+{
+    "rules": {
+        "tape/add-t-end": "off"
+    }
+}

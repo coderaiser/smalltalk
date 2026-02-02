@@ -2,16 +2,16 @@
 
 const {join} = require('node:path');
 const process = require('node:process');
-const fs = require('fs');
+const fs = require('node:fs');
 
 require('css-modules-require-hook/preset');
 
 const autoGlobals = require('auto-globals');
-const tape = require('supertape');
+const {test: tape} = require('supertape');
 const currify = require('currify');
 const wraptile = require('wraptile');
 
-global.window = {};
+globalThis.window = {};
 
 const smalltalk = require('../lib/smalltalk');
 const {UPDATE_FIXTURE} = process.env;
@@ -89,10 +89,7 @@ test('smalltalk: alert: click', (t, {document}) => {
     createElement.returns(el);
     smalltalk.alert('title', 'message');
     
-    const result = ok
-        .addEventListener
-        .args
-        .pop()[0];
+    const [result] = ok.addEventListener.args.pop();
     
     t.equal(result, 'click', 'should set click listener');
     t.end();
@@ -205,9 +202,9 @@ test('smalltalk: alert: click: stopPropagation: called', (t, {document}) => {
         .addEventListener
         .args
         .filter((a) => {
-            const [event] = a;
-            return event === 'click';
-        })
+        const [event] = a;
+        return event === 'click';
+    })
         .pop();
     
     const event = {

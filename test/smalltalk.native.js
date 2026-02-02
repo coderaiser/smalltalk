@@ -5,10 +5,10 @@ require('css-modules-require-hook/preset');
 const {test, stub} = require('supertape');
 const smalltalk = require('../lib/smalltalk.native');
 
-global.window = {};
+globalThis.window = {};
 
 test('smalltalk.native: Promise', (t) => {
-    global.window.Promise = null;
+    globalThis.window.Promise = null;
     reload();
     
     t.pass('load with no Promise support');
@@ -18,7 +18,7 @@ test('smalltalk.native: Promise', (t) => {
 test('smalltalk.native: alert', (t) => {
     const alert = stub();
     
-    global.alert = alert;
+    globalThis.alert = alert;
     
     smalltalk.alert('title', 'message');
     
@@ -27,7 +27,7 @@ test('smalltalk.native: alert', (t) => {
 });
 
 test('smalltalk.native: alert: result', (t) => {
-    global.alert = stub();
+    globalThis.alert = stub();
     
     smalltalk
         .alert('title', 'message')
@@ -43,7 +43,7 @@ test('smalltalk.native: alert: result', (t) => {
 test('smalltalk.native: confirm', (t) => {
     const confirm = stub().returns(false);
     
-    global.confirm = confirm;
+    globalThis.confirm = confirm;
     
     smalltalk
         .confirm('title', 'message')
@@ -54,7 +54,7 @@ test('smalltalk.native: confirm', (t) => {
 });
 
 test('smalltalk.native: confirm: result: ok', (t) => {
-    global.confirm = stub().returns(true);
+    globalThis.confirm = stub().returns(true);
     
     smalltalk
         .confirm('title', 'message')
@@ -68,7 +68,7 @@ test('smalltalk.native: confirm: result: ok', (t) => {
 });
 
 test('smalltalk.native: confirm: result: cancel', (t) => {
-    global.confirm = stub().returns(false);
+    globalThis.confirm = stub().returns(false);
     
     smalltalk
         .confirm('title', 'message')
@@ -82,7 +82,7 @@ test('smalltalk.native: confirm: result: cancel', (t) => {
 });
 
 test('smalltalk.native: confirm: options: cancel', (t) => {
-    global.confirm = stub().returns(false);
+    globalThis.confirm = stub().returns(false);
     
     const cancel = false;
     
@@ -104,7 +104,7 @@ test('smalltalk.native: confirm: options: cancel', (t) => {
 test('smalltalk.native: prompt', (t) => {
     const prompt = stub();
     
-    global.prompt = prompt;
+    globalThis.prompt = prompt;
     
     smalltalk.prompt('title', 'message', 'value');
     
@@ -113,7 +113,7 @@ test('smalltalk.native: prompt', (t) => {
 });
 
 test('smalltalk.native: prompt: result: ok', (t) => {
-    global.prompt = stub().returns('hello');
+    globalThis.prompt = stub().returns('hello');
     
     smalltalk
         .prompt('title', 'message', 'value')
@@ -127,7 +127,7 @@ test('smalltalk.native: prompt: result: ok', (t) => {
 });
 
 test('smalltalk.native: prompt: result: cancel', (t) => {
-    global.prompt = stub().returns(null);
+    globalThis.prompt = stub().returns(null);
     
     smalltalk
         .prompt('title', 'message', 'value')
@@ -141,7 +141,7 @@ test('smalltalk.native: prompt: result: cancel', (t) => {
 });
 
 test('smalltalk.native: prompt: options: cancel', (t) => {
-    global.prompt = stub().returns(null);
+    globalThis.prompt = stub().returns(null);
     
     smalltalk
         .prompt('title', 'message', 'value', {
