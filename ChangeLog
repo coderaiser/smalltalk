@@ -1,3 +1,14 @@
+2026.03.19, v5.0.1
+
+feature:
+- 492c630 smalltalk: webpack-cli v7.0.2
+- 2e80306 smalltalk: version-io v6.1.2
+- e41b6da smalltalk: putout v42.2.3
+- fefed49 smalltalk: madrun v13.0.1
+- 0439d8f smalltalk: eslint-plugin-putout v31.1.1
+- 954f062 smalltalk: eslint v10.0.3
+- a28f0fa smalltalk: superc8 v12.3.1
+
 2026.02.02, v5.0.0
 
 feature:
