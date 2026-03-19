@@ -271,6 +271,7 @@ test('smalltalk: alert: keydown: tab: active name', (t, {document}) => {
     } = document;
     
     const parentElement = create();
+    
     const el = {
         ...create(),
         parentElement,
@@ -317,6 +318,7 @@ test('smalltalk: alert: keydown: left: focus', (t) => {
     } = document;
     
     const parentElement = create();
+    
     const el = {
         ...create(),
         parentElement,

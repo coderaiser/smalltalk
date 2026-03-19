@@ -115,6 +115,7 @@ You can use custom label passing into options param the buttons specification. F
 ```js
 const {tryToCatch} = require('try-to-catch');
 const OK = 2;
+
 const result = await tryToCatch(smalltalk.confirm, 'Question', 'Are you sure?', {
     buttons: {
         ok: 'Ok Label',

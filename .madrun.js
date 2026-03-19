@@ -19,9 +19,9 @@ export default {
     'fix:lint': () => run('lint', '--fix'),
     'test': () => [env, `tape --no-check-scopes 'test/**/*.js'`],
     'test:update': async () => [`await cutEnv('test')`, {
-            UPDATE_FIXTURE: 1,
-            ...env,
-        }],
+        UPDATE_FIXTURE: 1,
+        ...env,
+    }],
     'build': () => 'webpack --progress --mode production',
     'wisdom': () => run('build'),
     'wisdom:done': () => run('upload:*'),
