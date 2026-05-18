@@ -21,7 +21,7 @@ const rules = [{
     use: [{
         loader: 'url-loader',
         options: {
-            limit: 50_000,
+            limit: Infinity,
         },
     }],
 }];
